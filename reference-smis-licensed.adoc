@@ -1,0 +1,45 @@
+---
+permalink: reference-smis-licensed.html 
+sidebar: sidebar 
+keywords: smis licensed, command, lists, licensed, storage systems 
+summary: O comando smis licenciado lista os recursos licenciados para sistemas de armazenamento. 
+---
+= smis licenciados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+O `smis licensed` comando lista os recursos licenciados para sistemas de armazenamento.
+
+.Sintaxe
+smis licenciados
+
+`[-t {*http* | *https*}]`
+
+.Localização
+`C:\Program Files (x86)\NetApp\smis\pegasus\bin`
+
+.Nível de privilégio
+Um utilizador com um nome de utilizador e uma palavra-passe válidos
+
+.Parâmetros
+* `*[-t {http | https}]*`
++
+Protocolo a ser usado: HTTPS (padrão) ou HTTP
+
+
+
+.Exemplo
+O `smis licensed` comando e sua saída abreviada:
+
+[listing]
+----
+smis licensed
+ONTAP_SoftwareIdentity.InstanceID="ONTAP:0084259609:cifs"
+ONTAP_SoftwareIdentity.InstanceID="ONTAP:0084259609:cluster"
+ONTAP_SoftwareIdentity.InstanceID="ONTAP:0084259609:fcp"
+ONTAP_SoftwareIdentity.InstanceID="ONTAP:0084259609:iscsi"
+ONTAP_SoftwareIdentity.InstanceID="ONTAP:0084259609:nfs"
+----

@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+  <block id="cae8cb812f6ca7ff0b4fffd3fee9e6ac" category="summary">Você pode usar o comando cimuser para adicionar, excluir e listar usuários do servidor CIM, bem como gerenciar suas senhas.</block>
+  <block id="b5bbdbd9dee3d1247c9c2eb9b98ef095" category="doc">Comandos do utilizador CIM</block>
+  <block id="fbff7af17f480cbd21f54875668b8a27" category="paragraph">Você pode usar o<block ref="b07eb8a32f2cf3bb81c70d37e7d0aaba" prefix=" " category="inline-code"></block> comando para adicionar, excluir e listar usuários do servidor CIM, bem como gerenciar suas senhas.</block>
+  <block id="5e2b9472b02f4f2b851fb3977ff17b84" category="summary">Você deve ter uma licença FlexClone para que o Fornecedor SMI-S crie clones de LUN.</block>
+  <block id="df08bacfdfa0f59296d2b2a817363f77" category="doc">Tecnologia clone usada no SMI-S Provider</block>
+  <block id="510d66d307c0496d6ba81658c7a5b619" category="paragraph">O fornecedor SMI-S cria clones de LUN nesse sistema de storage usando apenas a tecnologia FlexClone. Se você não tiver uma licença FlexClone, o Fornecedor SMI-S não gera clones usando a tecnologia de clone LUN e gera a seguinte mensagem de erro:</block>
+  <block id="d1da6127cf9130c3e6cbddab213daefb" category="paragraph"><block ref="8b4b67edf81c2ae95f92901ea8b1a9b2" prefix="" category="inline-code"></block></block>
+  <block id="ddd332cc6425680fe389737022cab8af" category="paragraph">Se você tiver clones de LUN que foram criados usando a tecnologia de clone de LUN e a versão do Data ONTAP for atualizada para 7.3.1 ou posterior, não será possível usar o Fornecedor SMI-S para dividir esses clones. Eles devem ser gerenciados pelo administrador do sistema de storage.</block>
+  <block id="55843a00fdaf57b905dd3ba051deb6d5" category="summary">Depois de adicionar um sistema de armazenamento gerenciado, você deve confirmar que você pode ver todos os objetos lógicos e físicos importantes no provedor NetApp SMI-S.</block>
+  <block id="493f5a2c964a2ae41d8b304e4124f7b5" category="doc">Confirme a visibilidade de objetos importantes</block>
+  <block id="29539de2349a0b046366e6908d8fa691" category="paragraph">Você pode usar o<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comando para ver os objetos que estão no repositório CIMOM do provedor NetApp SMI-S. Por exemplo,<block ref="83d793b4ffc76972ddb8695c302c33bf" prefix=" " category="inline-code"></block> use para exibir sistemas de armazenamento adicionados e use<block ref="ecb4091a0d7fe12a01800c4c519c074d" prefix=" " category="inline-code"></block> para exibir informações de LUN.</block>
+  <block id="42c81e79f364b151f80c02c552b5850d" category="summary">Antes de gerenciar e monitorar seus sistemas de storage usando o SMI-S Provider, você deve instalar o software SMI-S Provider e validar sua configuração preliminar.</block>
+  <block id="ab3ccb0be518e752d20f706d36d252c9" category="doc">Fluxo de trabalho de implantação</block>
+  <block id="04c2ee750a71bee087a7164fa9418c8b" category="image-alt">fluxo de trabalho do fornecedor smi</block>
+  <block id="37735049e65188a885df4388c67153a4" category="summary">Quando um aplicativo cliente em um host descobre o servidor CIMOM usando SLP (codificação CIM-XML em HTTP), o cliente então consulta o CIMOM para objetos compartilhados (objetos modelados na linguagem CIM). O CIMOM carrega objetos compartilhados e consulta o sistema de armazenamento usando APIs específicas do dispositivo para as informações solicitadas.</block>
+  <block id="9016abb1e0944872fd232fd72ca5bc80" category="doc">Como o provedor NetApp SMI-S interage com um host</block>
+  <block id="14f75c43461428b4df3f6d3980b25d02" category="paragraph">A ilustração a seguir mostra como o provedor NetApp SMI-S interage com um cliente de gerenciamento WBEM quando o provedor SMI-S recebe uma consulta ou comando.</block>
+  <block id="707facb1331bad235d191a85d3686ab2" category="image-alt">interação do agente e do host do smi</block>
+  <block id="24eff5a139d4097bd815d006e9a0d9ff" category="summary">Você pode configurar como o SMI-S Provider gerencia arquivos de log e rastreamento, como especificar os níveis de mensagens a serem registradas e o diretório para o qual os logs são salvos. Você também especifica os componentes a serem rastreados, o destino para o qual as mensagens de rastreamento são escritas, o nível de rastreamento e a localização do arquivo de rastreamento.</block>
+  <block id="3b878279a04dc47d60932cb294d96259" category="doc">Visão geral</block>
+  <block id="4f7eb33e0173b575543f5ee3f5f22d4c" category="summary">O serviço SLP transmite os serviços WBEM. Quando o serviço SLP está ativado, os aplicativos clientes podem descobrir o servidor CIMOM. Você também pode especificar as configurações SLP usando o arquivo slp.conf.</block>
+  <block id="65032cd61cc49eeb6b42b865ec92f41a" category="paragraph">O serviço SLP transmite os serviços WBEM. Quando o serviço SLP está ativado, os aplicativos clientes podem descobrir o servidor CIMOM. Você também pode especificar as configurações SLP usando o<block ref="cd8fa2e8a9ca8395c90e6d05c6dd4df4" prefix=" " category="inline-code"></block> arquivo.</block>
+  <block id="52e2b316a698c2d06e88f1a6b5cd1321" category="paragraph">Se o serviço SLP ainda não estiver ativado, você poderá iniciar o serviço SLP usando o<block ref="450a38e28cf516b5bb4bc26a760829c4" prefix=" " category="inline-code"></block> comando. Para parar o serviço SLP, use o<block ref="4e4c607125fbd93418e4d748f56f1a61" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="1cedcb17c92a3535c2610261b466714a" category="summary">Você pode gerenciar configurações avançadas para SMI-S Provider, como especificar o intervalo de atualização do cache SMI-S, tempo limite ONTAPI e número máximo de threads por fila de serviço de mensagens.</block>
+  <block id="4ca8f8dc1b36b9c411697fcb2f505c44" category="summary">Você pode configurar como o SMI-S Provider gerencia arquivos de rastreamento, como especificar os componentes a serem rastreados, o destino para o qual as mensagens de rastreamento são escritas, o nível de rastreamento e a localização do arquivo de rastreamento.</block>
+  <block id="ff33a03ec388f99378211d1528ffde50" category="doc">Gerenciar rastreamento</block>
+  <block id="24293140a3816d75c19d74064899984b" category="summary">O Fornecedor NetApp SMI-S 5.2.5 permite-lhe gerir e monitorizar sistemas de armazenamento e gerir LUNs e volumes de sistemas de armazenamento, definições de configuração CIMOM e utilizadores de servidores CIM.</block>
+  <block id="c79b9638e429df89a219f67e64877677" category="paragraph">NetApp SMI-S Provider é uma interface baseada em comando que deteta e gerencia plataformas que executam o software ONTAP. O SMI-S Provider usa protocolos WBEM (Enterprise Management) baseados na Web, que permitem gerenciar, monitorar e relatar elementos de armazenamento.</block>
+  <block id="a316d32069744858b73bc2472339bb1d" category="paragraph">O provedor NetApp SMI-S segue esquemas padronizados por duas organizações:</block>
+  <block id="ffb373b0246b03d37058c9917311f9ba" category="inline-link">Força-tarefa de gerenciamento distribuído (DMTF)</block>
+  <block id="3196a1e76b7eb51b7ff2baa784e99b4f" category="list-text"><block ref="3196a1e76b7eb51b7ff2baa784e99b4f" category="inline-link-rx"></block></block>
+  <block id="b3973a38d43f2f1fe906a50cc9911f34" category="inline-link">Associação da indústria de redes de armazenamento (SNIA)</block>
+  <block id="6406ef7be2956ab22d718f61a164ac48" category="list-text"><block ref="6406ef7be2956ab22d718f61a164ac48" category="inline-link-rx"></block></block>
+  <block id="6409b577d21cd98c3caae687888555d6" category="paragraph">O SMI-S Provider substitui o uso de vários modelos, protocolos e transportes de objetos gerenciados por um único modelo orientado a objetos para todos os componentes em uma rede de storage.</block>
+  <block id="6e1e06b9c119062f2ede1998cc7b9468" category="summary">Antes de utilizar o SMI-S Provider pela primeira vez, tem de validar a sua configuração preliminar.</block>
+  <block id="29944d7af445a05d44714ef748be90ac" category="paragraph">Execute as seguintes tarefas antes de usar o SMI-S Provider:</block>
+  <block id="b856d55ad330a5df7fa9ba7e17ff436c" category="list-text">A partir do Fornecedor NetApp SMI-S, verifique se o servidor CIM foi iniciado.</block>
+  <block id="979599cef27365d55cce847bb7cdb1cf" category="list-text">Adicionar um utilizador do servidor CIM.</block>
+  <block id="99c567f7cf0aab2dcea271bea1f6658f" category="list-text">Verifique o gerenciamento do sistema de armazenamento adicionando pelo menos um sistema de armazenamento para o Fornecedor SMI-S.</block>
+  <block id="10cd97be66aefff3103667d3f8ac3c6f" category="list-text">*Opcional:* gerar um certificado autoassinado para o CIMOM.</block>
+  <block id="6270237a9076186973431ea76de9f106" category="paragraph">Por padrão, a autenticação está ativada para o Fornecedor SMI-S.</block>
+  <block id="f7531e8856965a9e9423683a715b9a00" category="paragraph">Depois de executar essa validação com êxito, você pode começar a gerenciar seus sistemas de storage usando o Fornecedor NetApp SMI-S.</block>
+  <block id="060f57a6a9e42af240800090a97dbbc2" category="summary">Antes de implantar o provedor NetApp SMI-S, você deve verificar se tem um sistema operacional e uma plataforma compatíveis, se tem as licenças necessárias e se seus hosts atendem aos requisitos mínimos.</block>
+  <block id="ff534e215c49794ee3d0d5e05049dcd4" category="summary">Ao usar arquivos (compartilhamentos CIFS) no Windows, o volume no qual o fileshare é criado deve ser um volume somente NTFS.</block>
+  <block id="67b404f9c9cd4ad8132819e162fa0801" category="doc">Requisito para usar arquivos no Windows</block>
+  <block id="224259077c913ae9e3aafcc643cf3e85" category="paragraph">Se você quiser criar um fileshare e usá-lo no Windows, o volume em que o fileshare é criado deve ser um volume somente NTFS. Isso é para evitar problemas com as credenciais que acessam o fileshare.</block>
+  <block id="d22643507b9ae556d3eb1f90adc143e7" category="paragraph">A partir do System Center 2016 Virtual Machine Manager (SCVMM), você pode criar máquinas virtuais (VMs) apenas em arquivos criados em volumes apenas NTFS. Volumes mistos e de estilo UNIX não são suportados.</block>
+  <block id="7ce49ed6789cc13128b60ca9dde1cddc" category="section-title">Criando um volume a ser usado para compartilhamentos CIFS e SCVMM</block>
+  <block id="c0be971f28173e3439500ec62e8960fe" category="paragraph">Ao criar um volume a ser usado para compartilhamentos CIFS e o System Center Virtual Machine Manager (SCVMM), o volume deve ser do tipo NTFS. Para criar o volume com NTFS, introduza o seguinte:<block ref="d851ddc7f4ba006e7c30fb11bc777b42" prefix=" " category="inline-code"></block></block>
+  <block id="b886cf1c3a6918153903f50d9cd8b0c0" category="summary">SMI-S Provider usa perfis e subperfis que estão em conformidade com SMI-S v1,7. Para obter informações sobre o SMI-S v1,7, consulte a página SNIA: Padrões de tecnologia e Software.</block>
+  <block id="ee4bd44ef670d8bf5a572249fcb21352" category="doc">Perfis SMI-S.</block>
+  <block id="27c5899c7f7c11410721efccbf3a8f48" category="summary">Você pode usar os comandos smis para gerenciar sistemas de armazenamento e exibir informações sobre o gerenciador de objetos CIM.</block>
+  <block id="337c6d03c71e412eabb31031c965b155" category="paragraph">Pode utilizar os<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comandos para gerir sistemas de armazenamento e para apresentar informações sobre o gestor de objetos CIM.</block>
+  <block id="7ed05529165de8dd21dd5335d6583157" category="paragraph">A ajuda está disponível para o<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comando usando a<block ref="f599cc506e0eddc851eb7ebdb18a6143" prefix=" " category="inline-code"></block> opção.</block>
+  <block id="289ef019924b7013900809be97f4d115" category="list-text">* smis<block ref="f599cc506e0eddc851eb7ebdb18a6143" prefix=" " category="inline-code"></block>*</block>
+  <block id="d495f1ffa8481764d22093a114f61296" category="paragraph">Exibe um resumo do comando.</block>
+  <block id="05feeefaeda5694102081bacc2705690" category="list-text">*exemplos de smis<block ref="f599cc506e0eddc851eb7ebdb18a6143" prefix=" " category="inline-code"></block>*</block>
+  <block id="5b6431d35a9c3d0995ce988f0b570b34" category="paragraph">Apresenta exemplos de utilização.</block>
+  <block id="d2b8ae3b0159d7c9e176b2a9f01c43a5" category="list-text">* smis<block ref="e39d6ad0b5daf0dd9bb474b9d659e8c3" prefix=" " category="inline-code"></block>*</block>
+  <block id="302a77012450f9d81c51deeec5a10fd5" category="paragraph">Exibe a ajuda para o subcomando especificado.</block>
+  <block id="2e0328b56b7df525664960879f95f5d1" category="paragraph">O valor de tempo limite padrão para a ferramenta smis é de 180 segundos.</block>
+  <block id="ef23db5e5a3a16df609d1db8b2ff882c" category="summary">Você pode editar o arquivo de configuração slp.conf para gerenciar o serviço Service location Protocol daemon (SLPD).</block>
+  <block id="e1cd17773638b5c6ba6a33ec0efa8bed" category="doc">Especifique as opções de configuração SLP</block>
+  <block id="c520045e753333a3e19361a8bcc5accb" category="paragraph">Você pode editar o<block ref="cd8fa2e8a9ca8395c90e6d05c6dd4df4" prefix=" " category="inline-code"></block> arquivo de configuração para gerenciar o serviço Service location Protocol daemon (SLPD).</block>
+  <block id="ce12ed3777878dc751489d09e13cb3e8" category="summary">Se você encontrar um problema com o provedor NetApp SMI-S, você deve usar quaisquer mensagens de erro que você receber para ajudar na solução de problemas.</block>
+  <block id="c3cb8bf1ed7183e77f46d5e7e662b2c1" category="summary">Descreve como instalar e gerenciar o NetApp SMI-S Provider, uma interface baseada em comandos que deteta e gerencia sistemas de storage NetApp.</block>
+  <block id="b51493aaf7964eeecd1d7dfd7e847d13" category="doc">Documentação do Fornecedor NetApp SMI-S</block>
+  <block id="3222e2c38626bc2823512833cc493f15" category="paragraph">Bem-vindo à Biblioteca de informações do Fornecedor NetApp SMI-S. Aqui você encontrará a documentação do software NetApp SMI-S Provider, incluindo como instalar e gerenciar NetApp SMI-S Provider, uma interface baseada em comandos que deteta e gerencia sistemas de armazenamento NetApp.</block>
+  <block id="9d2169c1c2855b78a7aeaa4f42d27dc7" category="inline-link">Site de suporte da NetApp</block>
+  <block id="1456d67be31dd1251336fefc3219f261" category="paragraph">A documentação para versões anteriores do provedor NetApp SMI-S está disponível no<block ref="c1cc34bfdb0a4a31c8960c236e9f731a" category="inline-link-rx"></block>.</block>
+  <block id="2f46f994932279267adf63af53ef8631" category="summary">Problemas encontrados com o provedor NetApp SMI-S.</block>
+  <block id="7379ebb6b8630c14b864b4d46e315c94" category="doc">Erro de acesso negado</block>
+  <block id="2dd9a9fa1ac0d7911deb623eb2417bf4" category="list-text">*Mensagem*</block>
+  <block id="3330b82e78f9fa2566cd61f87d85e1eb" category="paragraph"><block ref="140e45486daa741980d7078a91e4d763" prefix="" category="inline-code"></block></block>
+  <block id="f14c276c07197ebef1394a5a219087a1" category="list-text">*Descrição*</block>
+  <block id="acc86bed5a3cbee4c10612afddcbd9b8" category="paragraph">Esta mensagem ocorre em duas situações possíveis:</block>
+  <block id="524e454803a7d0bafc27c9f8070d4590" category="list-text">Se você não estiver conetado como Administrador ao acessar o SMI-S Provider no atalho do menu Iniciar</block>
+  <block id="88b9251d27bb29763aadf0feaa033d3c" category="list-text">Se o diretório Fornecedor SMI-S não estiver a apontar<block ref="fb994b3598c5992113148fe767cdc573" prefix=" " category="inline-code"></block></block>
+  <block id="9bcbf7a68cf7f81d5bf448a2e12ab26a" category="list-text">*Ações corretivas*</block>
+  <block id="de1eea833bb1fa644c57d5d047cc5af7" category="paragraph">Complete a ação que corresponde à situação:</block>
+  <block id="162b410b000aa710281fb5f8adedc818" category="list-text">Inicie sessão com o Privileges de nível de administrador e reabra o Fornecedor SMI-S no menu Iniciar ou clique com o botão direito do rato e selecione *Executar como administrador*.</block>
+  <block id="8dbf896c4a2bdf9598521ada5abaae3d" category="list-text">Inicie sessão com o Privileges de nível de administrador e altere manualmente o diretório para<block ref="fb994b3598c5992113148fe767cdc573" prefix=" " category="inline-code"></block>.</block>
+  <block id="fb44665cf49d63acda1cdb213857d17b" category="doc">Não é possível adicionar um sistema de armazenamento usando uma porta HTTP ou HTTPS não padrão</block>
+  <block id="9ff702207c5c34d0a659bd2093b21d08" category="list-text">*Emissão*</block>
+  <block id="a1324d13680ad51ed3e3b999a3eca7f8" category="paragraph">Você não pode adicionar um sistema de armazenamento executando HTTP ou HTTPS em uma porta não padrão.</block>
+  <block id="3bef6104c92bf17bdfdf66c9a257bbfc" category="list-text">*Causa*</block>
+  <block id="23757d70053ecf2d608bdbac79c40aea" category="paragraph">Por padrão, o provedor NetApp SMI-S usa a porta 80 para se comunicar com sistemas de armazenamento via HTTP e a porta 443 para se comunicar por HTTPS.</block>
+  <block id="89e405c285e86048a6f405ef514df892" category="paragraph">Use o seguinte comando para adicionar um sistema de armazenamento que usa uma porta diferente de 80 para tráfego HTTP ou porta 443 para tráfego HTTPS:</block>
+  <block id="faebd45231096c3ebde760d214e010d6" category="paragraph"><block ref="d2d07f9b779c1320686fd93973f3efb3" prefix="" category="inline-code"></block></block>
+  <block id="dab3f43fc6e9009edb6f8d30d88f536d" category="paragraph"><block ref="874e080502787f148888ca8b609114a6" prefix="" category="inline-code"></block><block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block>, , ,<block ref="269889131ee4793a82191b78a2eb60e3" prefix=" " category="inline-code"></block> e<block ref="406381251d2d4637ebfac7f24cc49c6f" prefix=" " category="inline-code"></block> são parâmetros opcionais.</block>
+  <block id="4c2f5b5cc7006ed56789fcfec26a070b" category="section-title">Adicionando um sistema de armazenamento que usa a porta 8000 para o tráfego HTTP</block>
+  <block id="5224d2dafede32800eae18bf750c83eb" category="paragraph"><block ref="7d7c86cfc9a05b7241d45766c429ef11" prefix="" category="inline-code"></block></block>
+  <block id="9280dd1549bc07bba9817582d2b6288f" category="doc">Não é possível ligar ao localhost:5988</block>
+  <block id="24f18f75923b26cdb12b920517712556" category="paragraph"><block ref="ec1def7278c368ae36a797fe33ac182e" prefix="" category="inline-code"></block></block>
+  <block id="acd465815840c7454befc06f12a142b7" category="paragraph">Esta mensagem ocorre quando as ligações HTTPS estão desativadas ou a porta HTTPS não está definida como 5988, ou se o fornecedor parou de funcionar e permanece num estado de suspensão.</block>
+  <block id="01ee3cc9148ee09987b7b4f7702f7588" category="paragraph">Verifique se os valores de<block ref="465d71d357205d7790b573e4338db5c0" prefix=" " category="inline-code"></block> e<block ref="aeafd441f156d8b6be4602109e5cf753" prefix=" " category="inline-code"></block> estão corretos:</block>
+  <block id="58d08e1d82d361b99536cfa44f149071" category="paragraph"><block ref="c6a34b3e7d5e1ccae6f1c620c5eccf10" prefix="" category="inline-code"></block></block>
+  <block id="3e929c060e464a0e6307f7e53081f70a" category="paragraph"><block ref="04ebf2277015bb1c4edd70dfc32b86e6" prefix="" category="inline-code"></block></block>
+  <block id="cbd7f81531872331c59ceea7cf0e317f" category="paragraph"><block ref="0eeaed1ace4208472f8ee1db41f4c26a" prefix="" category="inline-code"></block></block>
+  <block id="e4a8d153bf5febb975e968932ffcc085" category="paragraph"><block ref="13e1cd63a60ab543270979e415a00364" prefix="" category="inline-code"></block></block>
+  <block id="ce213e75a7f75f712f4be7e16112d770" category="paragraph">Se<block ref="bb977d556a62ff767d6b9da74229b752" prefix=" " category="inline-code"></block> ou<block ref="465d71d357205d7790b573e4338db5c0" prefix=" " category="inline-code"></block> não estiver definido como<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>, introduza os seguintes comandos:</block>
+  <block id="009569960b50be05ba080ec543734b9e" category="paragraph"><block ref="f8766f32b8dfad372ae70108a04b6163" prefix="" category="inline-code"></block></block>
+  <block id="78af1ec33901fcba23650f6cdf8fa047" category="paragraph"><block ref="1f675258b010b1fb1452f155258011f1" prefix="" category="inline-code"></block></block>
+  <block id="85a868f1991485654cbd5a04da48a9b3" category="paragraph">Se<block ref="3986210c6d376e43415d5b0beed955ee" prefix=" " category="inline-code"></block> não estiver definido como 5988, introduza os seguintes comandos:</block>
+  <block id="d4e81f1c3845585320720d915738b5e1" category="paragraph"><block ref="c7802dcadf33327a006d231f8bff3c26" prefix="" category="inline-code"></block></block>
+  <block id="8ba2aeabfaeefcb034351a0847a41488" category="paragraph">Se o provedor parou de funcionar e permanecer em um estado suspenso, abra o Gerenciador de tarefas e termine o processo e reinicie o provedor.</block>
+  <block id="a276b571413c6c0fe3cdc0eb1cca1726" category="doc">Não é possível ligar ao localhost:5989</block>
+  <block id="827b9bc4b32550f8d2723db104129cfc" category="paragraph"><block ref="cf94edf4ec762c6f89083fb4ce6795b0" prefix="" category="inline-code"></block></block>
+  <block id="f0387aea6f47f0a81ccd8cd4a09d5f2b" category="paragraph">Esta mensagem ocorre quando as ligações HTTPS estão desativadas ou a porta HTTPS não está definida como 5989, ou se o fornecedor parou de funcionar e permanece num estado de suspensão.</block>
+  <block id="61c8a62a6bea3fc3f3efa8e10430c1e4" category="paragraph">Se<block ref="465d71d357205d7790b573e4338db5c0" prefix=" " category="inline-code"></block> não estiver definido como "'true'", digite os seguintes comandos:</block>
+  <block id="87975c2d3b51afd3b76c0ef66be0fd89" category="paragraph"><block ref="358a8d413c21989536f539f4e1507ec6" prefix="" category="inline-code"></block></block>
+  <block id="39886d4eb2e3e0df0226ae521aff498d" category="paragraph">Se<block ref="aeafd441f156d8b6be4602109e5cf753" prefix=" " category="inline-code"></block> não estiver definido como 5989, introduza os seguintes comandos:</block>
+  <block id="a844ae38553a46283a09852e419c1e3b" category="paragraph"><block ref="13e2a3ac5a1ba3b7adb1cf8d23333c39" prefix="" category="inline-code"></block></block>
+  <block id="1c8b1ceffcc2e5c41818948735527a7f" category="summary">Você pode usar o comando cimconfig para gerenciar as configurações do CIMOM. Depois de inserir o comando cimconfig ou criar uma variável de ambiente para o valor de configuração do provedor NetApp SMI-S, você deve reiniciar o servidor CIM usando o comando smis cimserver restart.</block>
+  <block id="95cdbdc16fcdaafb435475409dea8c94" category="doc">cimconfig</block>
+  <block id="7944dd24fa0a41aefb89e769af345698" category="paragraph">Você pode usar o<block ref="95cdbdc16fcdaafb435475409dea8c94" prefix=" " category="inline-code"></block> comando para configurar as configurações do CIMOM, como ativar e desativar HTTP e HTTPS e alterar os números de portas HTTP e HTTPS. Depois de inserir o<block ref="95cdbdc16fcdaafb435475409dea8c94" prefix=" " category="inline-code"></block> comando ou criar uma variável de ambiente para o valor de configuração do provedor NetApp SMI-S, você deve reiniciar o servidor CIM usando o<block ref="1f675258b010b1fb1452f155258011f1" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="92e9d6227d5534e7afc27a11179c808e" category="paragraph-title">Sintaxe</block>
+  <block id="ef64b539714bc207f3683e87baca5652" category="paragraph"><block ref="5693bb03c7700f299511a693c0434c7d" prefix="" category="inline-code"></block></block>
+  <block id="ce5bf551379459c1c61d2a204061c455" category="paragraph-title">Localização</block>
+  <block id="cd6755b2c9f54bad96cb3bc8b5a98590" category="paragraph"><block ref="fb994b3598c5992113148fe767cdc573" prefix="" category="inline-code"></block></block>
+  <block id="916e2ff82dbb18426a464d80b54d1291" category="paragraph-title">Nível de privilégio</block>
+  <block id="eb569f08830457ab3c7049a3b391c4b6" category="paragraph">Administrador (Windows)</block>
+  <block id="dae8ace18bdcbcc6ae5aece263e14fe8" category="list-title">Opções</block>
+  <block id="b00916f5307aa32dbca536f03d14c7ff" category="list-text">*-c*</block>
+  <block id="1c31447f2eb1c48c57a46f3a61518e99" category="paragraph">Especifica que a configuração se aplica à configuração CIMOM atual.</block>
+  <block id="3596befb239babb43d61b0d1d6e13246" category="list-text">*-d*</block>
+  <block id="fa40973fd93c512d13a6a1b6da4f489f" category="paragraph">Especifica que a configuração se aplica à configuração padrão do CIMOM.</block>
+  <block id="0b780b7e828595da22483355654404e0" category="list-text">*-g*</block>
+  <block id="e691af7c4ee7d01230cf805d206758ef" category="paragraph">Obtém o valor de uma propriedade de configuração especificada.</block>
+  <block id="72bf4945e9f5ad48e98b8a86e61be5ec" category="list-text">*-h, --help*</block>
+  <block id="e3cfaac0d3377c6c896832368910130b" category="paragraph">Exibe a ajuda para o<block ref="95cdbdc16fcdaafb435475409dea8c94" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="19bdfe66b2e730fdec9300e2aab67acd" category="list-text">*-l*</block>
+  <block id="df12ebb64d9b76df31938810dd27a569" category="paragraph">Lista todas as propriedades de configuração do CIMOM.</block>
+  <block id="045736a4d72d21b72d7778e61d9fd110" category="list-text">*-p*</block>
+  <block id="177603cfb13c45d563d1bc16904f084e" category="paragraph">Especifica que a configuração é aplicada quando o servidor CIM é iniciado pela próxima vez.</block>
+  <block id="4e94e09878d0d8b8c202138d2e5ee71d" category="list-text">*-s*</block>
+  <block id="33ffba2cd5bc02af414ee632e22fadf2" category="paragraph">Define o valor da propriedade de configuração especificado.</block>
+  <block id="a54c2c1c20d7ee39ebf2b69ccef598be" category="list-text">*-u*</block>
+  <block id="95b4c5d9e5ef6af33824e05b7ea2e5be" category="paragraph">Redefine a propriedade de configuração para seu valor padrão.</block>
+  <block id="28acac94ac9a552a494172af4f078a18" category="list-text">*--versão*</block>
+  <block id="188c6e396a6269f7d0955f2cb23fc967" category="paragraph">Apresenta a versão do servidor CIM.</block>
+  <block id="0a52730597fb4ffa01fc117d9e71e3a9" category="paragraph-title">Exemplo</block>
+  <block id="14717f61d23f11c85970c509d3ce68de" category="paragraph">Altere o tamanho máximo do arquivo de log para 15000 KB:</block>
+  <block id="18ee0f99deeb67b9b7a6ef5a3679a09d" category="summary">Você pode usar as opções cimuser para adicionar, remover, modificar e listar usuários do servidor CIM.</block>
+  <block id="b07eb8a32f2cf3bb81c70d37e7d0aaba" category="doc">cimuser</block>
+  <block id="5a70b73b0330c1b99f99d9417a0348a0" category="paragraph">Você pode usar o<block ref="b07eb8a32f2cf3bb81c70d37e7d0aaba" prefix=" " category="inline-code"></block> comando para adicionar, remover, excluir, modificar e listar usuários do servidor CIM, bem como gerenciar suas senhas.</block>
+  <block id="9552caf388402734ab598332ecd8156b" category="paragraph"><block ref="c425bda6d540a4611a9cbb46427d2d30" prefix="" category="inline-code"></block></block>
+  <block id="53c04e8ac52d6bd33683c9dbf79535ac" category="list-text">*-a*</block>
+  <block id="88553736fbb741bf0629274dee170888" category="paragraph">Adiciona um utilizador CIM.</block>
+  <block id="df226aab2a5f4773107a98185d4df812" category="paragraph">Exibe a ajuda para o<block ref="b07eb8a32f2cf3bb81c70d37e7d0aaba" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="c58450c085069315fdcdc932127ea1da" category="paragraph">Lista os utilizadores do CIM.</block>
+  <block id="366b7d52fe189c2f2a9685595e258d52" category="list-text">*-m*</block>
+  <block id="f11218e14da099365f5c4d12ed55d147" category="paragraph">Modifica a palavra-passe de um utilizador CIM. A senha pode ter entre 4 e 32 carateres.</block>
+  <block id="74aa310e918089bd2b7b43ef52918065" category="list-text">*-n*</block>
+  <block id="b4868d506c4565aeff541aa867e6a9dc" category="paragraph">Cria uma nova senha para o usuário especificado. A senha pode ter entre 4 e 32 carateres.</block>
+  <block id="eef69bfef1d377d2939407214f8e0670" category="list-text">*-r*</block>
+  <block id="5e2eee8218b8e5df74d6942632a9f6d5" category="paragraph">Remove um utilizador CIM especificado.</block>
+  <block id="94dee2df9c611ec270bccaa83239df08" category="paragraph">Especifica um nome de usuário do CIM.</block>
+  <block id="9b7ed744183c5809967cae82003fd53b" category="list-text">*-w*</block>
+  <block id="819a823f6306b9bc4da7b85ec4faacc1" category="paragraph">Especifica a senha para o usuário especificado.</block>
+  <block id="16aba3c6b0ae11e31224bc8fb95fe52f" category="paragraph">Crie um usuário CIM chamado sydney com uma senha de password1:</block>
+  <block id="d5669bc7c911b2b3c8f75b894a919008" category="doc">Operações de clone/Snapshot não são permitidas</block>
+  <block id="9cbc1225817bd939d40c0d42c4c6415d" category="paragraph"><block ref="0384924c12861b02ef0dcda0de59389d" prefix="" category="inline-code"></block></block>
+  <block id="db024fb93861c1136e5beea60c5e05ac" category="paragraph">Esse erro ocorre se você tentar executar operações de Snapshot durante uma divisão de clone de LUN. Você não pode executar operações de Snapshot em um volume em que um LUN está sendo dividido, se esse divisão de clone de LUN estiver sendo executado em segundo plano.</block>
+  <block id="4cf5c508c533fc55ad0aa127819488aa" category="paragraph">Tente suas operações de snapshot após o LUN ser dividido.</block>
+  <block id="1867e4a765d502c76e2b022504c37d92" category="doc">Ligação recusada</block>
+  <block id="920b035c5ab2970e46128a7f6cc797c7" category="paragraph"><block ref="1867e4a765d502c76e2b022504c37d92" prefix="" category="inline-code"></block></block>
+  <block id="57347b2e0c66cf6ffb2c25aac5a87de9" category="paragraph">O servidor CIM não foi iniciado.</block>
+  <block id="bd70cb560e9ec26601210f1e704aeb59" category="paragraph">Navegue até o<block ref="c1111bd512b29e821b120b86446026b8" prefix=" " category="inline-code"></block> diretório no diretório no qual você instalou o provedor NetApp SMI-S e digite o seguinte comando para verificar se o servidor CIM foi iniciado:</block>
+  <block id="1c69ee2e288e61e1354a1d861818c578" category="paragraph"><block ref="abbf89c1cb7e0702618958ef993ac074" prefix="" category="inline-code"></block></block>
+  <block id="f1b3104927a39ddfe1ceaf661f5f4d7d" category="paragraph">Se o servidor CIM não estiver em execução, introduza o seguinte comando:</block>
+  <block id="155f23a4622d9e88b8c1a5c1526d3e64" category="paragraph"><block ref="d9ad9639917b14a2da8c6d384ef434df" prefix="" category="inline-code"></block></block>
+  <block id="e3ce7c8c3021c118f3dfe9d75afa6298" category="summary">O provedor NetApp SMI-S consiste em três componentes que permitem gerenciar e monitorar sistemas de armazenamento: CIMOM, objetos de provedor e um repositório.</block>
+  <block id="e6282555dbe26beec21e6f94534905cb" category="doc">Componentes do Fornecedor NetApp SMI-S.</block>
+  <block id="8512ff4c63fa0cb1d46797308e63207a" category="list-text">*CIMOM*</block>
+  <block id="c53e4b32a007cea3eaa5f9d5a584715c" category="paragraph">Esta é a base para o Fornecedor NetApp SMI-S. O CIMOM coleta, valida e autentica cada solicitação de aplicativo e, em seguida, responde ao aplicativo. Ele se torna um canal para cada solicitação, invocando o provedor apropriado para lidar com cada solicitação.</block>
+  <block id="8a40db527a57c944b52c2561d0af6e10" category="list-text">* Objetos do provedor*</block>
+  <block id="986f0ce9f55be91d5e813f0f836d88d8" category="paragraph">Quando um host emite um comando ou consulta ao Fornecedor SMI-S, o CIMOM carrega um objeto de biblioteca compartilhada, invoca-o para lidar com uma solicitação e retorna as informações resultantes para o host.</block>
+  <block id="2c96e436c5e94803429d2f4e4d88dbbe" category="paragraph">Os hosts do Windows usam objetos DLL.</block>
+  <block id="fc40b7fff3f4b2fa5c40de69bea91ed4" category="list-text">*Repositório*</block>
+  <block id="827530584f2cab62a19560ffb2b26ad2" category="paragraph">O CIMOM usa um banco de dados de arquivo plano para seu repositório. Ele armazena dados persistentes necessários no nível CIM.</block>
+  <block id="c7e3ba666a2f84cc0cf01f10a8dd110d" category="summary">O provedor NetApp SMI-S usa codificação CIM-XML em HTTPS e protocolo de localização de serviço (SLP).</block>
+  <block id="5f679677ad933bf6dbfb7a4ea7cbe348" category="doc">Protocolos do Fornecedor NetApp SMI-S.</block>
+  <block id="8c41eec09b97759e1f05ced5c48f938d" category="list-text">*Codificação CIM-XML por HTTPS*</block>
+  <block id="671231622b5198a3c9cab2694fb3db1f" category="paragraph">Protocolo que troca informações entre um cliente de gerenciamento habilitado para WBEM (Enterprise Management) baseado na Web e o servidor CIMOM. A codificação CIM-XML em HTTPS utiliza o protocolo CIM como carga útil e HTTPS como transporte. HTTP também é suportado.</block>
+  <block id="809f9effc42a2255e739eac5634eb1f7" category="list-text">*SLP*</block>
+  <block id="17c0a045d5a0558e3dcdadc5941a7ecb" category="paragraph">Protocolo de descoberta que deteta serviços WBEM dentro de uma LAN.</block>
+  <block id="31275bcc2d5db0fe6bf063d9eb9bee90" category="summary">O arquivo de configuração slp.conf fornece opções adicionais que permitem gerenciar um servidor SLPD (Service location Protocol daemon).</block>
+  <block id="2b8ebb70af929508181247896882c9bd" category="doc">gerenciamento de arquivos slp.conf</block>
+  <block id="835376d40913a770b6afbedee870d08d" category="paragraph">O<block ref="cd8fa2e8a9ca8395c90e6d05c6dd4df4" prefix=" " category="inline-code"></block> arquivo de configuração fornece opções adicionais que permitem gerenciar um servidor SLPD (Service location Protocol daemon).</block>
+  <block id="d09e7ed0d3d5bcf9b4d891eb75068566" category="paragraph"><block ref="d7bfcf794780fcefaeafa8a22adb6739" prefix="" category="inline-code"></block></block>
+  <block id="59ce60cbfbc99e9cb8dc6496fa7b9c6f" category="paragraph">Um utilizador com um nome de utilizador e uma palavra-passe válidos</block>
+  <block id="b5a7adde1af5c87d7fd797b6245c2a39" category="section-title">Descrição</block>
+  <block id="c27013a5a91be7a7f811990b4c345c0c" category="paragraph">O<block ref="cd8fa2e8a9ca8395c90e6d05c6dd4df4" prefix=" " category="inline-code"></block> arquivo de configuração permite alterar o número de interfaces que um host escuta para solicitações SLP e o número de endereços IP que um host usa para multicast.</block>
+  <block id="8a89bc88abd7f83c0aa84b1d5d0d605d" category="paragraph">Use um editor de texto para abrir o<block ref="cd8fa2e8a9ca8395c90e6d05c6dd4df4" prefix=" " category="inline-code"></block>.</block>
+  <block id="3225a10b07f1580f10dee4abc3779e6c" category="list-title">Parâmetros</block>
+  <block id="a49a968397d3eea3b27de92643158cbc" category="list-text"><block ref="ad63a35ea2ac8a42233e5ac6cb325d34" prefix="*" category="inline-code"></block>*</block>
+  <block id="e14a37b48112f37a804ec03c140c064a" category="paragraph">Especifica o número máximo de endereços IP que um host pode ouvir para solicitações SLP.</block>
+  <block id="8423702607bab52f36dd74e369cc82b7" category="list-text"><block ref="6087b5325467bcd38d27ab67ec7e7861" prefix="*" category="inline-code"></block>*</block>
+  <block id="46d96f3ede6f7349de4d8b75869e8e02" category="paragraph">Especifica o número máximo de endereços IP que um host pode usar para multicast. Use este parâmetro ao configurar interfaces para tráfego multicast SLP em sistemas multihomed.</block>
+  <block id="403f2c456f1a4a103a84452b3b49b561" category="list-text"><block ref="d7dc92575588556fa517aad1adfe1dfd" prefix="*" category="inline-code"></block>*</block>
+  <block id="30c27cffa11c90b50aca6aadb75ca1bd" category="paragraph">Força o uso da opção broadcast, em vez de usar a opção multicast, ao enviar mensagens por SLP.</block>
+  <block id="4394c1c9677b993b84d961f7bb18bf5f" category="list-text"><block ref="224ad2b629d91ab05d786799ad174419" prefix="*" category="inline-code"></block>*</block>
+  <block id="3dfb3bf4c92bfb4c88b522eeda68f2ee" category="paragraph">Ativa a segurança para URLs e listas de atributos recebidos.</block>
+  <block id="f1481b88ec73ef72260ea756192ce7d8" category="paragraph">O seguinte é um exemplo abreviado do<block ref="cd8fa2e8a9ca8395c90e6d05c6dd4df4" prefix=" " category="inline-code"></block> arquivo de configuração:</block>
+  <block id="75689bc80badc11e91de5ed6dc4cb19f" category="doc">Problema ao inserir senhas contendo carateres especiais</block>
+  <block id="afcc8cf3e739ed38537061abd7b4b2ee" category="paragraph">Em sistemas operacionais em inglês, usar uma senha que contenha carateres especiais com o<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comando não funciona em um ambiente Windows. Este problema não foi testado com sistemas operativos não ingleses.</block>
+  <block id="88f8f973bf3ba54f3d05c0b8d01247c0" category="paragraph">No Windows, os seguintes carateres, além de quaisquer espaços, são considerados carateres especiais e causam falha na entrada de senha se a senha não estiver entre aspas:</block>
+  <block id="9ac98bbf4f8ec840aa64d2034f1e5e3a" category="paragraph">, &amp; ' &gt; ; |</block>
+  <block id="18cecf738083c90194a2e37fde9866b9" category="paragraph">Se uma senha contiver espaços ou carateres especiais, coloque-a em aspas duplas (" ") quando usá-la no<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comando. Note que o caractere de citação (") é um caractere especial e nunca deve ser usado em sua senha.</block>
+  <block id="8b5bff5c198642f24c6523cc9d279890" category="section-title">Emissão de senhas com carateres especiais</block>
+  <block id="dd5e79a97efb4f2ad3d7d60c6014519d" category="paragraph"><block ref="18b1c7a9f2e794c0535c233b4f523ffb" prefix="" category="inline-code"></block></block>
+  <block id="649cbaa5aee6f0411518757a4f958cae" category="paragraph"><block ref="f96f77408d93f1bd73bd917cd6593540" prefix="" category="inline-code"></block></block>
+  <block id="80ebd8dee32968bebb7d5a51679db8f5" category="doc">SMI-S Provider falha no Windows</block>
+  <block id="342fd6c29fdd9dd514e7fd4690cbc90d" category="paragraph">SMI-S Provider falha no Windows.</block>
+  <block id="0a2c3bdd5983f50c1522b87fa95d6fef" category="paragraph">Este problema ocorre por uma variedade de razões, documentadas em arquivos gerados no momento da falha.</block>
+  <block id="d49bf7e76461d91a9a1388d385c1a69f" category="paragraph">Reinicie o fornecedor e envie as seguintes informações para o suporte técnico para análise posterior:</block>
+  <block id="10d1916e04da5c4fe60b5810d0316af6" category="list-text">Dump arquivo do<block ref="b02178e24d97ca60fca3608de8995ab2" prefix=" " category="inline-code"></block> diretório</block>
+  <block id="6071cace65e5d652f39bce9199d4447d" category="list-text">Arquivos de log do<block ref="b02178e24d97ca60fca3608de8995ab2" prefix=" " category="inline-code"></block> diretório</block>
+  <block id="9f07400d8d3b856c5d45db70d4c187e4" category="list-text">Rastrear arquivos do<block ref="3c24b1cbe692de51475d3d3f610ecf6b" prefix=" " category="inline-code"></block> diretório</block>
+  <block id="c591b8621288fd3a42bf9fc261c5cb47" category="paragraph">Mensagens semelhantes às seguintes também aparecem no arquivo de rastreamento:</block>
+  <block id="ba4c6b5dc5d2d22d4113efc5fd6db700" category="paragraph"><block ref="fa86bf1028653f8f66e789d9d6581f6c" prefix="" category="inline-code"></block></block>
+  <block id="ca5d7f0d97eb2429c595e8fc571625c0" category="paragraph"><block ref="1f1ee0c453a6daeada58830c632e9ce7" prefix="" category="inline-code"></block></block>
+  <block id="cf02a49a7c0c924dc2fbcbe6d9a21d40" category="list-text">Os ficheiros<block ref="5fb01c6f8b54d96c62af3415c51ffad3" prefix=" " category="inline-code"></block> e<block ref="e432fd20de5655ab6f3a11a97eea7bfd" prefix=" " category="inline-code"></block> a partir do<block ref="c8840fca5229ef4b37a31eaf8e0fd692" prefix=" " category="inline-code"></block> diretório</block>
+  <block id="e38d94f7236a9cd1aa0f08ef175b7ae8" category="summary">Você deve verificar se o host do Windows atende aos requisitos mínimos de hardware antes de instalar o provedor NetApp SMI-S.</block>
+  <block id="47dee50ad0138b8f5ca70e40e86e6c04" category="doc">Requisitos de hardware</block>
+  <block id="3c02a379965ab0dfcd77b1c484450433" category="cell">Hardware</block>
+  <block id="5a2ebfb8baa378cfcfcba58bbb1380c2" category="cell">Requisitos</block>
+  <block id="d41d8cd98f00b204e9800998ecf8427e" category="doc"></block>
+  <block id="4789f23283b3a61f858b641a1bef19a3" category="paragraph">Memória</block>
+  <block id="7d4da39aca0b1169b071f2ece726e556" category="list-text">4 GB de RAM (mínimo)</block>
+  <block id="ada14ec0a3b00b29e7277c85d56c4c7f" category="list-text">8 GB de RAM (recomendado)</block>
+  <block id="1a293e95d688041d801d7d1b909552e0" category="paragraph">Espaço em disco</block>
+  <block id="0be26e07039553a01cfe68a859c33da7" category="list-text">1 GB (mínimo)</block>
+  <block id="379e19dfc4d216d9c5bdeca782d70bdb" category="list-text">4 GB (recomendado)</block>
+  <block id="e4b6c8b6dd56698332d99eab0c90a8b8" category="paragraph">A ativação do registo e do rastreio requer espaço adicional em disco de até 1 GB, dependendo das definições de rotação do ficheiro de registo e rastreio.</block>
+  <block id="b88815f1d93e640a9cdb707e48bc455e" category="paragraph">Você deve ter 100 MB de espaço em disco temporário disponível para instalação.</block>
+  <block id="2b55387dd066c5bac646ac61543d152d" category="paragraph">CPU</block>
+  <block id="63408377049cbbaa1bc998e2029a1bc3" category="list-text">Dual-core de 2,0 GHz (mínimo)</block>
+  <block id="220470fc2859d320a88f1acb91fd5bcf" category="list-text">Quad-core de 2,0 GHz (recomendado)</block>
+  <block id="483fa710d6223ec73718131f768d782a" category="doc">HostAgentAccessDenied (ID: 26263)</block>
+  <block id="4c2a8fe7eaf24721cc7a9f0175115bd4" category="section-title">Mensagem</block>
+  <block id="607e31cb929ef6a163ec4dbf21bfdbee" category="paragraph"><block ref="f9daccf5a3a43d201f7dea41ecfb15ea" prefix="" category="inline-code"></block></block>
+  <block id="1e1e7d06673c88d70b37bc5092141ba6" category="paragraph">Esta mensagem ocorre quando um usuário é especificado no SCVMM para se conetar ao Fornecedor SMI-S, mas não faz parte do armazenamento de confiança SMIS.</block>
+  <block id="21cfb63a3f6a7a3d0031a76216b98271" category="paragraph">Para ativar a comunicação entre o SCVMM e o Fornecedor SMI-S, um utilizador CIM válido (utilizador Administrador local ou utilizador de domínio do grupo Administradores local) deve ser adicionado ao armazenamento de confiança SMIS utilizando o<block ref="b07eb8a32f2cf3bb81c70d37e7d0aaba" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="57b854162d6caadf0053934ab77436cd" category="section-title">Ação corretiva</block>
+  <block id="161701d31e909a77707f021b655fa91a" category="paragraph">Adicione o usuário Administrador local (na máquina SMI-S Provider) ao banco de dados do servidor CIM usando o<block ref="b07eb8a32f2cf3bb81c70d37e7d0aaba" prefix=" " category="inline-code"></block> comando:<block ref="6f31d4556e3106d613f16fe05a09d7c5" prefix=" " category="inline-code"></block>. Em seguida, você deve usar esse usuário administrativo ao adicionar o provedor NetApp SMI-S ao SCVMM.</block>
+  <block id="a12ab6105e92354ffa8bc9958ebd1630" category="paragraph">Se o controlador de domínio demorar muito tempo para autenticar o usuário do domínio, você deve usar o usuário Administrador local na máquina SMI-S Provider.</block>
+  <block id="bb97fad3a386d6d7da3985a0b72f83e2" category="paragraph">Se o erro persistir, você pode desativar a autenticação no SMI-S Provider.</block>
+  <block id="e9c44bbfd795a5d63d74c6a77afee70d" category="summary">Avisos legais fornecem acesso a declarações de direitos autorais, marcas registradas, patentes e muito mais.</block>
+  <block id="30d965eef5ba25c6b9998ae38270b43e" category="doc">Avisos legais</block>
+  <block id="6016a2b341113bf496b719905398ecd2" category="section-title">Direitos de autor</block>
+  <block id="09e95b77ffe81fe465a83ba99efad5c8" category="paragraph"><block ref="09e95b77ffe81fe465a83ba99efad5c8" category="inline-link-rx"></block></block>
+  <block id="126a02652da6de02962cf1b654fd6376" category="section-title">Marcas comerciais</block>
+  <block id="c4ce4761e466527d26b3e3d5ed1006fd" category="paragraph">NetApp, o logotipo DA NetApp e as marcas listadas na página de marcas comerciais da NetApp são marcas comerciais da NetApp, Inc. Outros nomes de produtos e empresas podem ser marcas comerciais de seus respetivos proprietários.</block>
+  <block id="7aa531e9acfe2b98e34d2c92fe9846ff" category="paragraph"><block ref="7aa531e9acfe2b98e34d2c92fe9846ff" category="inline-link-rx"></block></block>
+  <block id="be89498d2f8a22ce47c02ba9795fe2af" category="section-title">Patentes</block>
+  <block id="d0b19d36be2c5f16e9aef46c8a452d3d" category="paragraph">Uma lista atual de patentes de propriedade da NetApp pode ser encontrada em:</block>
+  <block id="d7f1fbcf9ce4e42f705add574d262b2c" category="paragraph"><block ref="d7f1fbcf9ce4e42f705add574d262b2c" category="inline-link-rx"></block></block>
+  <block id="56c34c6410dd45c5cec44149ad0ce037" category="section-title">Política de privacidade</block>
+  <block id="fc248f74f5e36542f7f5627b8610e9a3" category="paragraph"><block ref="fc248f74f5e36542f7f5627b8610e9a3" category="inline-link-rx"></block></block>
+  <block id="24efa7ee4511563b16144f39706d594f" category="section-title">Aviso</block>
+  <block id="9b73989307c1975dfa4d5e1581e4afe8" category="paragraph">Os arquivos de aviso fornecem informações sobre direitos autorais de terceiros e licenças usadas no software NetApp.</block>
+  <block id="e746749730e661dd557a1c067c4dbe7d" category="inline-link">Aviso para o Fornecedor NetApp SMI-S.</block>
+  <block id="de70f78d604c1f59e6de2a196d7084c8" category="paragraph"><block ref="de70f78d604c1f59e6de2a196d7084c8" category="inline-link-rx"></block></block>
+  <block id="84d19bb0bac8dc1170a89ce09efbcc16" category="summary">Você pode especificar os tipos de mensagens registradas (por exemplo, deseja que apenas as mensagens fatais do sistema sejam registradas).</block>
+  <block id="d7fe94a97701791841b519021d6eb8b7" category="doc">Níveis de registo</block>
+  <block id="516f888b3f6d9fd9b210883c0298e11e" category="paragraph">Pode configurar o nível de registo para uma das seguintes opções:</block>
+  <block id="d276f73244d895db812ec23e2685caca" category="list-text">*TRACE*</block>
+  <block id="ad5ddf6d9cf8190347986bf098d3c215" category="paragraph">Salva mensagens de rastreamento no log cimserver_standard.</block>
+  <block id="b36f044cf79f9ec0bbefe2c840fcbbe7" category="list-text">*INFORMAÇÕES*</block>
+  <block id="4e81926677a1b0cb964215701fccaec7" category="paragraph">Regista todas as mensagens do sistema (informativas, de aviso, graves e fatais).</block>
+  <block id="c1ee2a5bb3aaa6a978640bbafe313fb7" category="list-text">*AVISO*</block>
+  <block id="4da7c4dccb8c85cfed2d1e994a8fc6af" category="paragraph">Regista mensagens de aviso, graves e fatais do sistema.</block>
+  <block id="1e9b7964a8845d69fe33ed3d223a3670" category="list-text">*GRAVE*</block>
+  <block id="f387191bc275b97c2237486aacf692ab" category="paragraph">Regista mensagens graves e fatais do sistema</block>
+  <block id="98d0f8524669b090e9dab037437a4f95" category="list-text">*FATAL*</block>
+  <block id="32c22d2c31069b202fd8280ee7a064ea" category="paragraph">Regista apenas mensagens fatais do sistema.</block>
+  <block id="35671582279b0a1d59acf722bbd8bdf6" category="doc">Caminho de rede não encontrado</block>
+  <block id="720e5e50ac2535c888ad67280e6a1be2" category="paragraph"><block ref="35671582279b0a1d59acf722bbd8bdf6" prefix="" category="inline-code"></block></block>
+  <block id="178d8aae262f8d9ddc44d48c4e4c6d08" category="paragraph">Esta mensagem reflete um problema de DNS e ocorre durante a implantação de VM em um compartilhamento SMB quando o host não tem um Registro no servidor DNS.</block>
+  <block id="2b7eb82612c80702139b0208e1335e20" category="paragraph">Normalmente, o servidor DNS do domínio deve atualizar automaticamente o Registro do host dentro de 24 a 48 horas quando um novo host é configurado no domínio. No entanto, essa atualização nem sempre acontece automaticamente.</block>
+  <block id="5f67fee45257fdf425111301595cefd7" category="list-text">Se você for um administrador de domínio, atualize manualmente o Registro do host DNS.</block>
+  <block id="3da95846f2c2e8688baa4512b1bf8227" category="list-text">Se você não for um administrador de domínio, atualize o arquivo host <block ref="803976de87f6862821bd3c4d94e0ff2b" prefix="(" category="inline-code"></block>).</block>
+  <block id="cd1d6fce4cd9d7a94e7850303787e1e8" category="paragraph">O arquivo host não tem uma extensão de <block ref="be4117b0c842c4be8f9960294bdc2cd1" prefix="(" category="inline-code"></block>arquivo ).</block>
+  <block id="928c1baab03e0230f3715e3de77b083f" category="summary">Novidades nesta versão</block>
+  <block id="bd94701c8c3439968ac328f6961957c3" category="list-text">Não há nenhum caminho de atualização disponível para SMI-S Provider 5,2.5.</block>
+  <block id="c55ff83f0b706c2e4f6784a3eea0d431" category="list-text">Você deve implantar o SMI-S Provider 5.2.5 como uma nova instalação.</block>
+  <block id="4dcc4ed93f208d25fc9635019b96fb17" category="paragraph">*Para usuários do Windows:*</block>
+  <block id="3073a5fe9dd6b21d2236fe4d631b4b80" category="list-text">Esta versão não é compatível com o Windows Server 2012 ou o System Center Virtual Machine Manager (SCVMM) 2012.</block>
+  <block id="0ccb5ab6332965b00555d89124eca6f4" category="list-text">SMI-S Provider 5.2.5 suporta Windows Server 2016, Windows Server 2019, SCVMM 2016 e SCVMM 2019.</block>
+  <block id="7e58f3c32490291520a1a61221da598d" category="doc">Retorno do arquivador: Nenhum elemento ONTAP em resposta</block>
+  <block id="6e2039d962c6e75488fd40f9c951c19a" category="paragraph"><block ref="7e58f3c32490291520a1a61221da598d" prefix="" category="inline-code"></block>.</block>
+  <block id="e229a1324a21093601dc13ac94ed1e4b" category="paragraph">Esta mensagem ocorre quando a API ONTAPI expira. O tempo limite padrão da API ONTAPI é de 60 segundos, o que pode ser muito curto em alguns cenários.</block>
+  <block id="520c461e0dad01779322190a189497d5" category="paragraph">Altere o tempo limite da API ONTAPI para um valor superior a 60 segundos definindo a variável de ambiente<block ref="5ecfd3e48a727110bc36d7f3790545a9" prefix=" " category="inline-code"></block> e reinicie o provedor SMI-S.</block>
+  <block id="cdc5bec35b6b527de3bb89d808a6b920" category="doc">Nenhuma resposta do servidor</block>
+  <block id="7b3163c824f7a65178f51c1d770a6dcf" category="paragraph">O servidor não responde quando consultado.</block>
+  <block id="b0f666288ecdd5fb35524a7351e9770b" category="paragraph">Esse problema ocorre quando não há nenhum sistema de armazenamento adicionado ao repositório CIMOM.</block>
+  <block id="cfbe94ce24390f967f038c2a8a4f3eb9" category="paragraph">Digite o seguinte comando para verificar se um sistema de armazenamento foi adicionado:</block>
+  <block id="4a3fca40fa5a1c3b4515f86bb09c53e3" category="paragraph"><block ref="83d793b4ffc76972ddb8695c302c33bf" prefix="" category="inline-code"></block></block>
+  <block id="c71b0ed70c00ba663f567339f428950f" category="paragraph">Se não houver nenhum sistema de armazenamento listado, adicione um sistema de armazenamento digitando o seguinte comando:</block>
+  <block id="e13e3bccf278bd5d68b7b6d9a515143c" category="paragraph"><block ref="16ef71d072d1a8f5172f24d23f3690ea" prefix="" category="inline-code"></block></block>
+  <block id="2d1e9e9f04a42d01a160053c1a2e23b3" category="doc">Firewalls não padrão devem ter portas adicionadas manualmente como exceções</block>
+  <block id="d72daabf8627a25a9288cb90a2cd5716" category="paragraph">Se você estiver usando um firewall diferente do firewall padrão do Windows, poderá ter os seguintes problemas:</block>
+  <block id="15af186fb800e41ac88aadacefe052d3" category="list-text">O Fornecedor SMI-S não consegue comunicar com um cliente SMI-S removido.</block>
+  <block id="bedbf316c4e9c42cb19e2e057e09844a" category="list-text">O cliente SMI-S não consegue receber indicações do Fornecedor SMI-S.</block>
+  <block id="ed484e3a89e7fe3bb50364a4369a35a6" category="paragraph">Esse problema ocorre quando você usa um firewall diferente do firewall padrão do Windows sem primeiro adicionar manualmente as portas necessárias como exceções.</block>
+  <block id="852512112e45567ec54871b9e051498c" category="paragraph">Adicione as portas 427, 5988 e 5989 como exceções ao seu firewall.</block>
+  <block id="5bd3f03785e49f0f092f2bf6dbe62ea2" category="doc">Possíveis erros ao carregar bibliotecas compartilhadas</block>
+  <block id="051be6f17b1853fd1a87bd720d73057b" category="list-text">*Mensagens*</block>
+  <block id="38ef4b7ecaa487ef2bde97774ea59f55" category="paragraph"><block ref="c7e2b46ee6814ba3e16932689e3f8835" prefix="" category="inline-code"></block></block>
+  <block id="8b11f32a54f16340f5c60cee225aad48" category="paragraph">O<block ref="539dd095e3626609596c19bb68975d4b" prefix=" " category="inline-code"></block> status mostra que o cimserver está sendo executado corretamente, mas todos os outros<block ref="5f0692b99e9a03c57f505f2c1705318d" prefix=" " category="inline-code"></block> comandos mostram várias mensagens de falha.</block>
+  <block id="792bce0a2470411b2f4a407fe625d8dc" category="paragraph">Por exemplo, você pode receber a mensagem<block ref="3702eabdb6bc2f05fafad40db9246515" prefix=" " category="inline-code"></block> ao executar o<block ref="d1c698d61b0dbbe5ba681e4c77d651ca" prefix=" " category="inline-code"></block>, ou você pode receber a mensagem<block ref="265025db726c5f01574be2946f748df8" prefix=" " category="inline-code"></block> ao executar o cimcli. Estes exemplos não são tudo inclusivos.</block>
+  <block id="d244e47c8474d383d7a5d714e98cb1bf" category="paragraph">Esta mensagem (e mensagens semelhantes) ocorre quando o<block ref="ac0c73db156afe6ec49da741344b799a" prefix=" " category="inline-code"></block> ambiente não está definido para o diretório de instalação.</block>
+  <block id="5ae7ad3dc9474323c80b449e3123ec91" category="paragraph">Digite um dos seguintes comandos para definir a<block ref="ac0c73db156afe6ec49da741344b799a" prefix=" " category="inline-code"></block> variável de ambiente para o diretório de instalação:</block>
+  <block id="ca58ccb134c33eb9f401d3d5c3cc6d5d" category="paragraph"><block ref="88c684d4dcb370b9af4647d8da94103d" prefix="" category="inline-code"></block></block>
+  <block id="0f98c6be5bd8d1cf4b80b32c02a49dc9" category="paragraph"><block ref="03b78f2617f6efa3934ec29c6b8744d6" prefix="" category="inline-code"></block></block>
+  <block id="c95a373760253d51b1cf803ea80f5ddf" category="summary">Para utilizar o Fornecedor NetApp SMI-S, tem de ter as licenças necessárias.</block>
+  <block id="085f5df3ea322139c5a71aed9fd908cd" category="doc">Licenças necessárias</block>
+  <block id="69b6c0623415c79e8aa2a026499ac1b6" category="paragraph">As seguintes licenças são necessárias para o Fornecedor NetApp SMI-S:</block>
+  <block id="db23482f99b63c4ef9cf1643a9ae9106" category="list-text">As licenças FCP, iSCSI ou FCP e iSCSI são necessárias para a criação de LUNs nos sistemas de storage.</block>
+  <block id="65c1894015ea81f45bb83087acb7b218" category="list-text">É necessária uma licença CIFS para a criação de compartilhamentos de arquivos em sistemas de storage ONTAP compatíveis.</block>
+  <block id="8c9c3d3838f74f32786ae4b71a80bd0a" category="list-text">É necessária uma licença do FlexClone para criar clones de LUN em sistemas de storage em cluster que executam versões compatíveis do ONTAP.</block>
+  <block id="3e24f09af977e3a1af1e1cc6f13f637c" category="doc">Problemas na biblioteca de tempo de execução</block>
+  <block id="dc1ea37bf28d57aab9a40d7069475d46" category="paragraph">Você encontra problemas de biblioteca de tempo de execução.</block>
+  <block id="8f0d9a411b41d0b986920c85c2535cd2" category="paragraph">Instale o Microsoft Visual C [pp] 2010 Redistributable Package (x86) a partir de www.microsoft.com.</block>
+  <block id="aeedef3ee0a5af62ec32d9683a92b534" category="doc">A operação de redigitalização SCVMM falhou ao localizar ou se comunicar com o Fornecedor SMI-S.</block>
+  <block id="9a2320278c975e09624eeb12c0ed80dd" category="paragraph">Em casos raros, o SCVMM não consegue localizar o Fornecedor SMI-S.</block>
+  <block id="7cad355a706b81e0e0fa33d6480aa45f" category="paragraph">Esse problema pode ocorrer se a infraestrutura de segurança for atualizada com novos GPOs. Quando eles entram em vigor após a reinicialização do host do provedor SMI-S, o host SCVMM pode não confiar no provedor SMI-S ou no host.</block>
+  <block id="4cd0860930e09cd27dfcee8471ac354b" category="list-text">Desinstale o SMI-S Provider e instale-o novamente.</block>
+  <block id="f77f4c33944f06bd53375ca2dde35154" category="list-text">Execute a operação de redigitalização no SCVMM para o Fornecedor SMI-S.</block>
+  <block id="15edb1059f99e2228e68e3675566c5dd" category="summary">Você pode usar essas opções com o comando slptool.</block>
+  <block id="782cf12ad9621d4dbedc43983800f6e7" category="doc">ferramenta de corte</block>
+  <block id="44875d713d6680857ff840765882108e" category="paragraph">Você pode usar o<block ref="782cf12ad9621d4dbedc43983800f6e7" prefix=" " category="inline-code"></block> comando para exibir informações sobre os serviços WBEM.</block>
+  <block id="4842f8fa99c29d1241eea4652830125e" category="paragraph"><block ref="a0e61537f6e379308613fb020254b330" prefix="" category="inline-code"></block></block>
+  <block id="c8d42e70f0c04701557a2f55998b89c4" category="list-text">*-i*</block>
+  <block id="ba5f3a961b76734c0de9fadefea37630" category="paragraph">Especifica uma ou mais interfaces.</block>
+  <block id="0e5e3c6017ad094538f03467f046aae2" category="paragraph">Especifica uma etiqueta de idioma.</block>
+  <block id="bdf7f3055a02bb504553d4a142bdab6e" category="paragraph">Especifica uma lista de escopos (separados por vírgulas).</block>
+  <block id="3409d1fd2b59a21419fcf39d2c4ed451" category="paragraph">Especifica uma interface.</block>
+  <block id="5d1a2e253b3e1015078e73b9612048ff" category="list-text">*-v*</block>
+  <block id="bffde628bf79cfe9c51d3916acaf8a9d" category="paragraph">Exibe a versão do<block ref="782cf12ad9621d4dbedc43983800f6e7" prefix=" " category="inline-code"></block> e do OpenSLP.</block>
+  <block id="d4bf895ddfa9ebbc5c3915e4cbd3583e" category="summary">O comando slptool findattrs encontra atributos WBEM que são executados em uma rede.</block>
+  <block id="3fc3c27aeb289e637225a3268d7ae21d" category="doc">slptool findattrs</block>
+  <block id="61362266f14322b3344151c0503f45dd" category="paragraph">O<block ref="3fc3c27aeb289e637225a3268d7ae21d" prefix=" " category="inline-code"></block> comando localiza atributos WBEM que são executados em uma rede.</block>
+  <block id="0172466b88a10651a0bc826057b3e072" category="paragraph"><block ref="7b2920daeefa2e24d8623b17ca6db7d1" prefix="" category="inline-code"></block></block>
+  <block id="f6bc858e3262647738db6ac68ccd76ed" category="list-text"><block ref="4484f6cca800a8a4488af5f18108cf00" prefix="" category="inline-code"></block></block>
+  <block id="3a97942f85eafc36eb848eea69fc7304" category="paragraph">Especifica o tipo de serviço.</block>
+  <block id="44f79575ca42f3951f78c8d876c9b0c1" category="paragraph">O<block ref="3fc3c27aeb289e637225a3268d7ae21d" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="ed67849ee15b777c5b7b016e5e4edb51" category="summary">O comando slptool findsrvs encontra serviços WBEM executados em uma rede.</block>
+  <block id="c1a36cc2047b34255648f6b817e6b410" category="doc">slptool findsrvs</block>
+  <block id="bc02f9666a54c5705e9d339c88ac2f1d" category="paragraph">O<block ref="c1a36cc2047b34255648f6b817e6b410" prefix=" " category="inline-code"></block> comando localiza serviços WBEM executados em uma rede.</block>
+  <block id="e82b24b843a7ce5035507ad1d1431751" category="paragraph"><block ref="fa511ec8dfd00809c99dff3a92449738" prefix="" category="inline-code"></block></block>
+  <block id="2d790894df6a0ea67608206684cfd014" category="paragraph">O<block ref="c1a36cc2047b34255648f6b817e6b410" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="58c8d351ba9d95afd9752aa88bf6e0f7" category="doc">Tamanho de compartilhamento SMB caindo para 0 no SCVMM</block>
+  <block id="d19b0ea77723113b53c5f3b5bcfc71cb" category="paragraph">O tamanho de compartilhamento SMB 3,0 novo ou existente pode cair para 0 no System Center Virtual Machine Manager (SCVMM).</block>
+  <block id="286cd1d6f9ece4f567a343b0e19efe60" category="paragraph">Esse problema ocorre quando a reinicialização da cota leva muito tempo no Data ONTAP devido a e/S pesado, o tamanho de compartilhamento SMB 3,0 novo ou existente pode cair para 0 no SCVMM. Devido a isso, novas VMs não podem ser provisionadas nos compartilhamentos SMB 3,0 novos ou existentes.</block>
+  <block id="cc5ade6a333e0665a7013fb0305400d6" category="list-text">Desligue as cotas.</block>
+  <block id="448805fdc8b90fe55f76dbffe9cd446f" category="list-text">Adicione uma regra de cota padrão do tipo "árvore" em cada volume que hospeda compartilhamentos SMB.</block>
+  <block id="4d2cce1528ba318942044838d5da6b76" category="list-text">Ative as cotas para os volumes aos quais você adicionou uma regra de cota padrão e reinicie o provedor SMI-S.</block>
+  <block id="80feca2aef5bfe7af61ecef2104515dc" category="summary">Conhecer o número máximo de sistemas gerenciados pelo Fornecedor SMI-S da NetApp ajuda você a entender suas capacidades de desempenho.</block>
+  <block id="8df995b0877455c8e157e1650dc377d4" category="doc">Dimensionamento e desempenho do fornecedor NetApp SMI-S</block>
+  <block id="98bc8ee199ee6b2e16fe0a72065bc977" category="paragraph">*Dimensionamento*</block>
+  <block id="7b5949a309ff956607ccd7a05549a643" category="paragraph">O provedor NetApp SMI-S pode gerenciar até o seguinte número de objetos no Clustered Data ONTAP:</block>
+  <block id="be3aa891f1e256500ac418272b5eba57" category="list-text">100 máquinas virtuais de armazenamento (SVMs) (sem indicações)</block>
+  <block id="6d566731c48802fe3821e33a4c29bfb3" category="list-text">10 máquinas virtuais de armazenamento (com indicações)</block>
+  <block id="5e21a9906ddd54cf24a9de122b49eeb1" category="list-text">1.500 LUNs (por FlexVol volume)</block>
+  <block id="aa8573942cd1ed77a581b629e3ba2237" category="list-text">200 compartilhamentos de arquivo CIFS (por FlexVol volume)</block>
+  <block id="ee001510f4b124ecdffc864a0edba76b" category="paragraph">Se o FlexVol contiver qtrees e volumes, o qtrees aparecerá como diretórios. Você deve ter cuidado para não excluir o qtrees acidentalmente ao excluir volumes.</block>
+  <block id="b398798c87974373edd5b73dfab3f17f" category="paragraph">*Aviso de desempenho*</block>
+  <block id="9e610f9507134287d0d568bdb80b8571" category="paragraph">Para configurações com 5.000 volumes FlexVol ou 300.000 cópias Snapshot, é possível que você tenha problemas de performance com os seguintes<block ref="1dada79604b4da9c86704cf68645dee9" prefix=" " category="inline-code"></block> comandos:</block>
+  <block id="85a8c1b8c7516ef09e21236cc0d93c18" category="list-text"><block ref="29b4ab40bab9696d45ff0f4533f8ebbf" prefix="" category="inline-code"></block></block>
+  <block id="7d32bfbdae2be0b0adf753b53b3e22b2" category="list-text"><block ref="4db9ce362c9d1fda6951300f5577e186" prefix="" category="inline-code"></block></block>
+  <block id="007a98733bd428042445fb37fbf65c12" category="list-text"><block ref="e1eddc218ccda0b146afc6a79de67b4d" prefix="" category="inline-code"></block></block>
+  <block id="855fc18e477e5e46b721d02214086805" category="paragraph">A ferramenta de Matriz de interoperabilidade (IMT) contém as informações mais recentes sobre dimensionamento e desempenho.</block>
+  <block id="11db62ef1b82524e398ad3812618f7ea" category="doc">O provedor NetApp SMI-S leva muito tempo para começar</block>
+  <block id="a3519a79e1fa4e9109ec373b28d1609d" category="paragraph">Em sistemas Windows, com sistemas de armazenamento que já estão sob gerenciamento, quando você inicia o NetApp SMI-S Provider usando o<block ref="539dd095e3626609596c19bb68975d4b" prefix=" " category="inline-code"></block> comando, o comando não retorna até que o cache local do provedor seja preenchido. Ele espera um máximo de 15 minutos enquanto o cache é preenchido, e você não pode usar o NetApp SMI-S Provider até que ele retorne.</block>
+  <block id="f9ac0617143317e28bbf839b5d2db80a" category="paragraph">Usar o<block ref="539dd095e3626609596c19bb68975d4b" prefix=" " category="inline-code"></block> comando é o método recomendado para iniciar o NetApp SMI-S Provider.</block>
+  <block id="614714555eebe379fefeaf79263f3919" category="summary">O comando smis add adiciona um sistema de armazenamento com uma conexão HTTP à sua configuração para permitir que você gerencie e monitore o dispositivo. A menos que seja necessário, você deve usar smis addsecure em vez de smis add.</block>
+  <block id="8645387467d22d196cc56c467878c801" category="doc">smis add</block>
+  <block id="0cccb7d63e81e909a5116d63ff5fad22" category="paragraph">O<block ref="8645387467d22d196cc56c467878c801" prefix=" " category="inline-code"></block> comando adiciona um sistema de armazenamento com uma conexão HTTP à sua configuração para permitir que você gerencie e monitore o dispositivo. A menos que seja necessário, você deve usar<block ref="3d8405e7c1d5f02ba446d1a50e9f20d1" prefix=" " category="inline-code"></block> em vez<block ref="8645387467d22d196cc56c467878c801" prefix=" " category="inline-code"></block> de .</block>
+  <block id="4c32ad2d0f781d8300c3c0ace5573542" category="paragraph"><block ref="8645387467d22d196cc56c467878c801" prefix="" category="inline-code"></block></block>
+  <block id="fd4584b3f82c019d620b7a6fcda2d3ba" category="paragraph"><block ref="5e2abf932a1ed76b74d11b3741d08648" prefix="" category="inline-code"></block> E<block ref="702b93aa7b9e81a514ff7a43467a8499" prefix=" " category="inline-code"></block></block>
+  <block id="f3a819b7972171226d19607a440c063b" category="paragraph">Os sistemas operacionais que usam idiomas diferentes do inglês dos EUA não podem usar o<block ref="34ec78fcc91ffb1e54cd85e4a0924332" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="2d96be9b2363a30b3a05f05eaa92f13f" category="list-text"><block ref="52e44649c34ad2bb9da228a76f2669e1" prefix="" category="inline-code"></block></block>
+  <block id="10fe7c8109501e37d414ef63bb9cb32e" category="paragraph">Nome ou endereço IP do sistema de armazenamento que você está adicionando</block>
+  <block id="edc907a1885716130a1f3549ae6717ff" category="paragraph">Se você estiver especificando o endereço IP, você pode usar IPv4 ou IPv6. São suportados endereços IPv6 compatados e completos, por<block ref="e781d9e9fc2a4301494e7b73af7983dd" prefix=" " category="inline-code"></block> exemplo ou<block ref="3ccb720e55d3051514ae303fec9935aa" prefix=" " category="inline-code"></block>.</block>
+  <block id="4a99e32179670d244ad470fbf4f5b921" category="list-text"><block ref="de2d8083a4a64e9efa224ec4d9716cb3" prefix="" category="inline-code"></block></block>
+  <block id="032a1eeda63d365ea5e8310a70caaafd" category="paragraph">Nome de usuário do administrador que gerencia o sistema de armazenamento que você está adicionando</block>
+  <block id="127e24c4124d253ca995aea7f8f6c8d2" category="list-text"><block ref="88f55a628fcecbb735e7954d5706bda6" prefix="" category="inline-code"></block></block>
+  <block id="86107286d99ae2ea068920c9348ed0e2" category="paragraph">Opcional: Senha do administrador que gerencia o sistema de armazenamento que você está adicionando</block>
+  <block id="b6409054275b25ac4a2a18cd9da3b34b" category="paragraph">Como prática recomendada, não use este parâmetro por motivos de segurança. Este parâmetro é fornecido apenas para automação e compatibilidade com versões anteriores.</block>
+  <block id="7bd03536986773d36c70ec1b56ba369b" category="list-text"><block ref="98eec4d1cf5b9cd5789a65f7caf2f688" prefix="" category="inline-code"></block></block>
+  <block id="cf5409b8ffde932c63f101760e4f30c1" category="paragraph">Protocolo a ser usado: HTTPS (padrão) ou HTTP</block>
+  <block id="c12c5aa52b7c2cd66b46b90196265ef8" category="section-title">Sistema de storage-agente e protocolo agente-cliente</block>
+  <block id="aa65b8c8fa31c5c3baff46c6fcb37f72" category="paragraph">Os<block ref="8645387467d22d196cc56c467878c801" prefix=" " category="inline-code"></block> comandos e<block ref="3d8405e7c1d5f02ba446d1a50e9f20d1" prefix=" " category="inline-code"></block> determinam o protocolo utilizado entre o sistema de armazenamento e o fornecedor. O<block ref="702b93aa7b9e81a514ff7a43467a8499" prefix=" " category="inline-code"></block> parâmetro determina o protocolo usado entre o provedor e o cliente.</block>
+  <block id="8ad73dfc4c57d7019c1491a7584b3e1d" category="paragraph">O<block ref="3d8405e7c1d5f02ba446d1a50e9f20d1" prefix=" " category="inline-code"></block> comando e o<block ref="98087adfd75f1bd6d31e109c48056840" prefix=" " category="inline-code"></block> parâmetro se conetam usando criptografia SSL, e o tráfego não criptografado não é permitido. O<block ref="8645387467d22d196cc56c467878c801" prefix=" " category="inline-code"></block> comando e o<block ref="75d6a789cfa2cc189b9d51802c360f51" prefix=" " category="inline-code"></block> parâmetro se conetam sem usar criptografia SSL, e o tráfego não criptografado é permitido.</block>
+  <block id="8fcf8b2db24000917ad33d28cbe83309" category="paragraph">Você deve considerar as necessidades de segurança do seu ambiente antes de desativar as conexões criptografadas por SSL.</block>
+  <block id="4a9485793f5d4b5d5d14e45c388d9ed8" category="paragraph">Adicione um sistema de armazenamento usando IPv4 com um endereço IP de 10.32.1.4 sobre HTTP:</block>
+  <block id="f6a7f54d7c484a28262cd0daf880ef10" category="paragraph">É apresentada uma mensagem de confirmação de que o sistema de armazenamento foi adicionado com êxito. Se ocorreu um erro, é apresentada uma mensagem de erro.</block>
+  <block id="81b3dca7aa8cd7cc37f0ac28818db216" category="paragraph">Adicione um sistema de armazenamento usando IPv6 em HTTP:</block>
+  <block id="a1487ab3029c50caa0f2e79e20ab56df" category="paragraph">Adicione um sistema de armazenamento com um endereço IP de 10.32.1.4 por HTTP em um sistema que não seja inglês:</block>
+  <block id="9b33f1a516dd355a272be3f15b6e0bd6" category="summary">O comando addsecure smis adiciona um sistema de armazenamento com uma conexão HTTPS à sua configuração para permitir que você gerencie e monitore o dispositivo. A menos que seja necessário, você deve usar smis addsecure em vez de smis add.</block>
+  <block id="3d8405e7c1d5f02ba446d1a50e9f20d1" category="doc">smis addsecure</block>
+  <block id="7982281010af1e5d6aae114f5b025693" category="paragraph">O<block ref="3d8405e7c1d5f02ba446d1a50e9f20d1" prefix=" " category="inline-code"></block> comando adiciona um sistema de armazenamento com uma conexão HTTPS à sua configuração para permitir que você gerencie e monitore o dispositivo. A menos que seja necessário, você deve usar<block ref="3d8405e7c1d5f02ba446d1a50e9f20d1" prefix=" " category="inline-code"></block> em vez<block ref="8645387467d22d196cc56c467878c801" prefix=" " category="inline-code"></block> de .</block>
+  <block id="23449bcc34f3e21c05e26cd130624d11" category="paragraph"><block ref="3d8405e7c1d5f02ba446d1a50e9f20d1" prefix="" category="inline-code"></block></block>
+  <block id="3dfb26dbcdb47dafbe49b2b0fd66a2a2" category="paragraph"><block ref="5e2abf932a1ed76b74d11b3741d08648" prefix="" category="inline-code"></block> E <block ref="702b93aa7b9e81a514ff7a43467a8499" prefix=" " category="inline-code"></block></block>
+  <block id="af625fdeacba296380d450557c4b2893" category="paragraph">Os sistemas operacionais que usam idiomas diferentes do inglês dos EUA não podem usar o<block ref="758ba3b792d92be216d918415cd3dad4" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="120eb40bdca64cb45bb214fc1a160f30" category="paragraph">Se você estiver especificando o endereço IP, você pode usar IPv4 ou IPv6. São suportados endereços IPv6 compatados e completos, por<block ref="2b0262ffc98b97996d8a98f8c96fadcc" prefix=" " category="inline-code"></block> exemplo ou<block ref="31d2456ca21556a3eca31cebdd880a4f" prefix=" " category="inline-code"></block>.</block>
+  <block id="cf383d582978ebcce1c9ccb44e977fbf" category="paragraph">Adicione um sistema de armazenamento usando IPv4 com um endereço IP de 10.32.1.4 em HTTPS:</block>
+  <block id="e26b9b1c6faf12ff6d58c8270f6e49ae" category="paragraph">Adicionar um sistema de storage usando o IPv6 em HTTPS:</block>
+  <block id="0cff628aebe5a638bdcbe3cc4bd8a03a" category="paragraph">Adicione um sistema de armazenamento com um endereço IP de 10.32.1.4 por HTTPS em um sistema que não seja inglês:</block>
+  <block id="0736d5e8d4330a3c6b848d8060b08979" category="summary">O comando smis cimom descreve o gerenciador de objetos CIM.</block>
+  <block id="010b8a6f4de24501fdfcdd9022d7bed3" category="doc">cimom smis</block>
+  <block id="fba396a24b568c4db4fb55d41b66afc3" category="paragraph">O<block ref="010b8a6f4de24501fdfcdd9022d7bed3" prefix=" " category="inline-code"></block> comando descreve o gerenciador de objetos CIM.</block>
+  <block id="958eb208a0881863ee089c6cd7dd4755" category="paragraph">cimom smis <block ref="702b93aa7b9e81a514ff7a43467a8499" prefix=" " category="inline-code"></block></block>
+  <block id="5bac2206531e3a846f26add59d5a7c54" category="paragraph">O<block ref="010b8a6f4de24501fdfcdd9022d7bed3" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="cca585701df6f93e0f1325f6f499e5f5" category="summary">O comando cimserver smis inicia, pára, reinicia ou obtém o status do servidor CIM.</block>
+  <block id="539dd095e3626609596c19bb68975d4b" category="doc">smis cimserver</block>
+  <block id="63ce1cdf8f985b7dac88e1164a97a0b7" category="paragraph">O<block ref="539dd095e3626609596c19bb68975d4b" prefix=" " category="inline-code"></block> comando inicia, pára, reinicia ou obtém o status do servidor CIM.</block>
+  <block id="5a5e2ea5a2afb6a0676da3eebd28949f" category="paragraph"><block ref="539dd095e3626609596c19bb68975d4b" prefix="" category="inline-code"></block></block>
+  <block id="170363bebc0d578ed9e2e3f36b801efd" category="paragraph"><block ref="5febfaa7e85605787e6545e309fa55be" prefix="" category="inline-code"></block></block>
+  <block id="c1c6041919f05fc514a14999b56de47c" category="list-text">* iniciar*</block>
+  <block id="90f4ddc942b1044393e89f486cd3a453" category="paragraph">Inicie o servidor CIM.</block>
+  <block id="32c782efd785a5f2274071338f7345dd" category="list-text">*stop*</block>
+  <block id="b9c33a774f7af05771c2ccb241a4b340" category="paragraph">Pare o servidor CIM.</block>
+  <block id="3a78eb520041f9ba7469ccbe33fb92a6" category="list-text">* reiniciar*</block>
+  <block id="2404e95dd016724f713868519e1ef7ce" category="paragraph">Reinicie o servidor CIM.</block>
+  <block id="ca405589dcd974768e24cc65b8a0eb5f" category="list-text">*status*</block>
+  <block id="e3e3ed21d218d78f0b06fa5e0fad5c74" category="paragraph">Obtenha o status do servidor CIM.</block>
+  <block id="1eea025a2f056d31c6125d173c58f586" category="summary">O comando classe smis lista informações sobre uma classe especificada ou todas as classes.</block>
+  <block id="41baa3319f8fe6190c1bd12ca98cef92" category="doc">classe smis</block>
+  <block id="a0a3d55677c45b15e04f3e3060b58b90" category="paragraph">O<block ref="41baa3319f8fe6190c1bd12ca98cef92" prefix=" " category="inline-code"></block> comando lista informações sobre uma classe especificada ou todas as classes.</block>
+  <block id="3599706a1331cd991db06e8979ec894e" category="paragraph"><block ref="41baa3319f8fe6190c1bd12ca98cef92" prefix="" category="inline-code"></block></block>
+  <block id="4d73a1c8df04167c17eeda931e5fe34d" category="paragraph"><block ref="6895751be1a40ce73dd6af25a3f7583c" prefix="" category="inline-code"></block></block>
+  <block id="0103a4ca85a3fb03c5a96dac8edad2e2" category="list-text"><block ref="e53bd8a9f7dfce8e076786123ec4357b" prefix="" category="inline-code"></block></block>
+  <block id="13e56ff4fe92971b0b42a20723ca7e10" category="paragraph">Espaço de nomes suportado pelo CIMOM</block>
+  <block id="e05ae9668c4f501686eefa33d6cf0d85" category="list-text">*niall*</block>
+  <block id="f90964c06de0551bddeba08d6e3c85a7" category="paragraph">Enumerar todos os nomes de instância</block>
+  <block id="b50b3c25f8403e6743fe7e576ca163f1" category="list-text">*ei*</block>
+  <block id="b8271965d1aa3474bb36063b64ce97e0" category="paragraph">Enumerar instâncias para uma classe</block>
+  <block id="7c6c312ef61d70abe32852f2d8e0a6a2" category="list-text">*ni*</block>
+  <block id="79ee3dc4aa6b8eca399d7cfff9a0de77" category="paragraph">Enumerar nomes de instâncias para uma classe</block>
+  <block id="544d04037d81be7bbc6be2aba7e3f864" category="list-text">*gi*</block>
+  <block id="133c9efda171df31e1a560c213a257dd" category="paragraph">Obtenha instâncias para uma classe</block>
+  <block id="0e51f67d4920274b0fe227413b69ac26" category="list-text">*gc*</block>
+  <block id="3a7d7cfb4c1735fede1565b1a84d12aa" category="paragraph">Obter classe para um nome de classe</block>
+  <block id="d10e609c9f10971c9ad9a9e63ddc2439" category="list-text"><block ref="a17f982b9160cdf34c7049a017b28544" prefix="" category="inline-code"></block></block>
+  <block id="655546f65ee5fb9186411efa5747bec4" category="paragraph">Nome da classe para a qual você deseja informações</block>
+  <block id="c807c0fac735539610e5b517945b000e" category="paragraph">O<block ref="41baa3319f8fe6190c1bd12ca98cef92" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="7355cc449407ca50aff22e50da5ca918" category="summary">O comando smis config show lista as informações atuais de configuração do servidor CIM.</block>
+  <block id="7e83e52e854ff8058176500bc4ad34d0" category="doc">show de configuração smis</block>
+  <block id="2648540719848b041df79e729eb23829" category="paragraph">O<block ref="7e83e52e854ff8058176500bc4ad34d0" prefix=" " category="inline-code"></block> comando lista as informações atuais de configuração do servidor CIM.</block>
+  <block id="7ebbcaa199bd513217c822dd7063d75b" category="paragraph"><block ref="7e83e52e854ff8058176500bc4ad34d0" prefix="" category="inline-code"></block></block>
+  <block id="64c64b170c567596739e79f28df4a5e8" category="paragraph">O<block ref="7e83e52e854ff8058176500bc4ad34d0" prefix=" " category="inline-code"></block> e sua saída:</block>
+  <block id="fe419fa3a5c24e1ad318d60e15e01d31" category="summary">O comando crp smis descreve os perfis registrados pelo CIM suportados pelo Fornecedor SMI-S da NetApp, incluindo os perfis do Fornecedor SMI-S. da NetApp.</block>
+  <block id="3511331323e2467f659c7701860dfcce" category="doc">smis crp</block>
+  <block id="dfc5700a5f8a123c6cb251019e112215" category="paragraph">O<block ref="3511331323e2467f659c7701860dfcce" prefix=" " category="inline-code"></block> comando descreve os perfis registrados pelo CIM suportados pelo Fornecedor SMI-S da NetApp, incluindo os perfis de Fornecedor do NetApp SMI-S.</block>
+  <block id="156f23c674849579c407d5cecbca0755" category="paragraph"><block ref="702b93aa7b9e81a514ff7a43467a8499" prefix="" category="inline-code"></block></block>
+  <block id="d6c91fd45a3f72b697c88257bcd8a911" category="paragraph">O<block ref="3511331323e2467f659c7701860dfcce" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="7db03bcd1252d3fa4d71f3f8e29b2598" category="summary">O comando smis crsp descreve subperfis registrados pelo CIM suportados pelo Fornecedor SMI-S do NetApp, incluindo subperfis do Fornecedor SMI-S. do NetApp.</block>
+  <block id="b5bb2f5a9485d0416f2f19fb6737effd" category="doc">smis crsp</block>
+  <block id="db8f341d1b161950274e0d2006fee127" category="paragraph">O<block ref="b5bb2f5a9485d0416f2f19fb6737effd" prefix=" " category="inline-code"></block> comando descreve os subperfis registrados pelo CIM suportados pelo Fornecedor SMI-S do NetApp, incluindo os subperfis do Fornecedor SMI-S. do NetApp.</block>
+  <block id="1d8e4598ce16f8b7b28609e34b9e7847" category="paragraph">O<block ref="b5bb2f5a9485d0416f2f19fb6737effd" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="583c4d073cc3317c5b46f6634c9d3aa5" category="summary">O comando smis DELETE exclui um sistema de armazenamento.</block>
+  <block id="4626aae750bda7d774fce094fd95bfa9" category="doc">eliminar smis</block>
+  <block id="04ee2ab63171bb9c6e32e8c20ad19aa0" category="paragraph">O<block ref="4626aae750bda7d774fce094fd95bfa9" prefix=" " category="inline-code"></block> comando exclui um sistema de armazenamento.</block>
+  <block id="35d73d5c8283c2ca26c11f2557e37117" category="paragraph"><block ref="4626aae750bda7d774fce094fd95bfa9" prefix="" category="inline-code"></block></block>
+  <block id="4030de93f608cf4bf29f0f3cce172cd3" category="paragraph"><block ref="b72557ef81e237b010279ba3aaa77e1a" prefix="" category="inline-code"></block></block>
+  <block id="94356b1930203a1c97fd0c20651e6079" category="paragraph">Nome ou endereço IP do sistema de armazenamento que você está adicionando</block>
+  <block id="e7fd075d5a29ee2639c769e84ed366d6" category="paragraph">Excluir um sistema de armazenamento rotulado mgt-1:</block>
+  <block id="bb0064a365e0e5fa58dc065c696055f2" category="paragraph"><block ref="d7d7290bd1dd4fe42ca80a1bed4d1e01" prefix="" category="inline-code"></block></block>
+  <block id="bb290eb2165b820851730c836c287af8" category="paragraph">Se nenhuma mensagem de erro for exibida, o sistema de armazenamento foi excluído com êxito.</block>
+  <block id="f7f67a4b989755c831e2703c64ac314b" category="summary">O comando Thesmis disks exibe informações de disco para sistemas de armazenamento. Os discos smis só funcionam quando usados com controladores Data ONTAP 7-Mode.</block>
+  <block id="001e1f541b1e42bd39ea2ea40c19ea63" category="doc">discos smis</block>
+  <block id="d21c1931b01f62c3b9c02c100019a202" category="paragraph">O<block ref="001e1f541b1e42bd39ea2ea40c19ea63" prefix="" category="inline-code"></block> comando exibe informações de disco para sistemas de armazenamento.<block ref="001e1f541b1e42bd39ea2ea40c19ea63" prefix=" " category="inline-code"></block> Só funciona quando usado com controladores Data ONTAP 7-Mode.</block>
+  <block id="1ac1bc188887b49a916919759fa511f6" category="paragraph">O<block ref="001e1f541b1e42bd39ea2ea40c19ea63" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="f82d8520c4ff1fabe883e81ff945126f" category="summary">O comando smis exports exibe exportações de armazenamento anexado à rede (nas) para sistemas de armazenamento.</block>
+  <block id="0e9399f4b71116079d9243ed16264d69" category="doc">exportações smis</block>
+  <block id="141339cbccc89afa9496752732fa16d1" category="paragraph">O<block ref="0e9399f4b71116079d9243ed16264d69" prefix=" " category="inline-code"></block> comando exibe exportações de armazenamento conetado à rede (nas) para sistemas de armazenamento.</block>
+  <block id="dfca38e26098a8c39e2f08466a92c941" category="paragraph">exportações smis<block ref="702b93aa7b9e81a514ff7a43467a8499" prefix=" " category="inline-code"></block></block>
+  <block id="c903d8f52838546de2a64817a9f29020" category="paragraph">O<block ref="0e9399f4b71116079d9243ed16264d69" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="180678484046c8a3ab98f0203e6e9339" category="summary">O comando smis Initiators exibe informações de portas Fibre Channel e iSCSI para sistemas de armazenamento.</block>
+  <block id="16ff291e6d6d13f763ca86e4e8eb8ba4" category="doc">iniciadores smis</block>
+  <block id="1587d4e99e358031eaea1724b454fbaa" category="paragraph">O<block ref="16ff291e6d6d13f763ca86e4e8eb8ba4" prefix=" " category="inline-code"></block> comando exibe informações de portas Fibre Channel e iSCSI para sistemas de armazenamento.</block>
+  <block id="676405883234ee0a42883953471df3fa" category="paragraph">O<block ref="16ff291e6d6d13f763ca86e4e8eb8ba4" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="f8c2df449febf0b15707a09fd604e537" category="summary">O comando smis licenciado lista os recursos licenciados para sistemas de armazenamento.</block>
+  <block id="78a2498ace60e14c1d0b09368a648f49" category="doc">smis licenciados</block>
+  <block id="b7176b7af7596fbcc148db69f476bd3d" category="paragraph">O<block ref="78a2498ace60e14c1d0b09368a648f49" prefix=" " category="inline-code"></block> comando lista os recursos licenciados para sistemas de armazenamento.</block>
+  <block id="fd3c7c36ef880bba3bf94c0d0c419a93" category="paragraph">O<block ref="78a2498ace60e14c1d0b09368a648f49" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="3e3944372596c51dc61c2fe5a9f8063d" category="summary">O comando smis list exibe os sistemas de armazenamento que são adicionados.</block>
+  <block id="83d793b4ffc76972ddb8695c302c33bf" category="doc">lista smis</block>
+  <block id="a8ae413db4c3acedc05683a8bc1b559b" category="paragraph">O<block ref="83d793b4ffc76972ddb8695c302c33bf" prefix=" " category="inline-code"></block> comando exibe os sistemas de armazenamento que são adicionados.</block>
+  <block id="dbf1cd6747595ed9cb8894d9eed535a6" category="paragraph">O<block ref="83d793b4ffc76972ddb8695c302c33bf" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="e805a7074bd5f3f2f6002db7b0f11fd5" category="summary">O comando smis luns exibe informações LUN para sistemas de armazenamento.</block>
+  <block id="ecb4091a0d7fe12a01800c4c519c074d" category="doc">luns smis</block>
+  <block id="1b955e277f0738f3bdd0b7a18e1a7ecd" category="paragraph">O<block ref="ecb4091a0d7fe12a01800c4c519c074d" prefix=" " category="inline-code"></block> comando exibe informações LUN para sistemas de armazenamento.</block>
+  <block id="d1a0d4852e62844a3ab6d7da1573e44b" category="paragraph">O<block ref="ecb4091a0d7fe12a01800c4c519c074d" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="d75bbf95db11e5456ff088adc74cf683" category="summary">O comando namespaces smis lista os namespaces registrados para o CIMOM.</block>
+  <block id="493501184a8d3a037d64ec48d949f535" category="doc">namespaces smis</block>
+  <block id="1467d24f125021abfcc1130828b1ade9" category="paragraph">O<block ref="493501184a8d3a037d64ec48d949f535" prefix=" " category="inline-code"></block> comando lista os namespaces registrados para o CIMOM.</block>
+  <block id="4f069805909c8ccacabb7c24b45deb05" category="list-text">Windows:<block ref="fb994b3598c5992113148fe767cdc573" prefix=" " category="inline-code"></block></block>
+  <block id="f3ccba9faf98a36122387d46ef40de77" category="paragraph">O<block ref="493501184a8d3a037d64ec48d949f535" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="3deb3409d8a2d7ecc43a7b6cde93dd79" category="summary">O comando smis Pools lista os pools de armazenamento para sistemas de armazenamento.</block>
+  <block id="9f0928f5c491149e0d68d561ecf558bc" category="doc">piscinas smis</block>
+  <block id="e55ce96d304db611d57e6232a6ce3daa" category="paragraph">O<block ref="9f0928f5c491149e0d68d561ecf558bc" prefix=" " category="inline-code"></block> comando lista os pools de armazenamento para sistemas de armazenamento.</block>
+  <block id="7364533b754121bf41370be42b4bb25b" category="paragraph"><block ref="9f0928f5c491149e0d68d561ecf558bc" prefix="" category="inline-code"></block></block>
+  <block id="f226424578973a3c629f8591092096b5" category="paragraph">O<block ref="9f0928f5c491149e0d68d561ecf558bc" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="f39d1a39fc0a0e5513a2c05bd34a0f7e" category="summary">Por padrão, o SMI-S Provider obtém automaticamente informações dos sistemas de armazenamento a cada 60 minutos (3600 segundos). Você pode usar o comando smis refresh para atualizar manualmente um determinado sistema de armazenamento.</block>
+  <block id="7503a9cf231b36274482a1a1cb7865aa" category="doc">atualização de smis</block>
+  <block id="5d97149f962e031041e77009bc0a4e59" category="paragraph">Por padrão, o SMI-S Provider obtém automaticamente informações dos sistemas de armazenamento a cada 60 minutos (3600 segundos). Você pode usar o<block ref="7503a9cf231b36274482a1a1cb7865aa" prefix=" " category="inline-code"></block> comando para atualizar manualmente um sistema de armazenamento específico.</block>
+  <block id="9a615249527c86774ee60394f1de01ef" category="paragraph"><block ref="cad4b461745a829208c510ed8981ae87" prefix="" category="inline-code"></block></block>
+  <block id="4f83d07fa2f72d87eb94f8decfc3feb6" category="list-text"><block ref="e5202bfe567aeb9bd1633b3e7be36f6a" prefix="" category="inline-code"></block></block>
+  <block id="78e5b58b72164e4963a654d0c6d9ddae" category="paragraph">Atualiza um sistema de storage específico.</block>
+  <block id="b4f1fdb71abf5ae7ab189aabe2cc6068" category="paragraph">O<block ref="7503a9cf231b36274482a1a1cb7865aa" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="66a3289f96876f734ca77db9ba9f9495" category="summary">O comando smis slpd inicia ou pára o daemon SLP.</block>
+  <block id="c602cda1d95d79b42121b73cb7b8e14f" category="doc">smis slpd</block>
+  <block id="10a6036c2ece582c0c5dbea89b90e059" category="paragraph">O<block ref="c602cda1d95d79b42121b73cb7b8e14f" prefix=" " category="inline-code"></block> comando inicia ou pára o daemon SLP.</block>
+  <block id="d7ffbe6aa82f17f6c494b8a2c5abdaec" category="paragraph"><block ref="c602cda1d95d79b42121b73cb7b8e14f" prefix="" category="inline-code"></block></block>
+  <block id="e4648605cc721eb86095a823e23484a6" category="paragraph"><block ref="a4996a0bcff17bfd1d8213e3fa2853d7" prefix="" category="inline-code"></block></block>
+  <block id="c62f38414344f92700e5e28c2e01987f" category="paragraph">Inicie o daemon SLP:</block>
+  <block id="ab95c496c880e8dee57a3717606a9348" category="paragraph">Parar o daemon SLP:</block>
+  <block id="98b75b1855a58db6fc5fc919ae7581df" category="summary">O comando versão smis exibe a versão do provedor NetApp SMI-S.</block>
+  <block id="c2c12b46946042a5bfafc346500e9c6b" category="doc">versão smis</block>
+  <block id="96f117305cce12a9a31c4596adf8ab21" category="paragraph">O<block ref="c2c12b46946042a5bfafc346500e9c6b" prefix=" " category="inline-code"></block> comando exibe a versão do NetApp SMI-S Provider.</block>
+  <block id="e230a22a7483625764443d5c5092c438" category="paragraph"><block ref="c2c12b46946042a5bfafc346500e9c6b" prefix="" category="inline-code"></block></block>
+  <block id="ae4e335dc900c8ff8a6d3fdb715fd988" category="paragraph">O<block ref="c2c12b46946042a5bfafc346500e9c6b" prefix=" " category="inline-code"></block> comando e sua saída:</block>
+  <block id="f4c8242274a5433176fc6575733f6559" category="summary">O comando smis volumes lista os volumes tradicionais e flexíveis para sistemas de armazenamento.</block>
+  <block id="0f44b667bbfb5498165b4f0f5ca52339" category="doc">volumes smis</block>
+  <block id="b78d25f27659bc706823fea082d9eb72" category="paragraph">O<block ref="0f44b667bbfb5498165b4f0f5ca52339" prefix=" " category="inline-code"></block> comando lista os volumes tradicionais e flexíveis para sistemas de armazenamento.</block>
+  <block id="72191377bb33379ad51587a7a17190c6" category="paragraph"><block ref="0f44b667bbfb5498165b4f0f5ca52339" prefix="" category="inline-code"></block></block>
+  <block id="30789a6a7e76c03ee51006ffbbdd390c" category="paragraph">Para o Clustered Data ONTAP, você deve usar o<block ref="9f0928f5c491149e0d68d561ecf558bc" prefix=" " category="inline-code"></block> comando em vez<block ref="0f44b667bbfb5498165b4f0f5ca52339" prefix=" " category="inline-code"></block> do comando.</block>
+  <block id="0f2d51f976100876529d8e039c4b9c36" category="paragraph">O<block ref="0f44b667bbfb5498165b4f0f5ca52339" prefix=" " category="inline-code"></block> comando e sua saída abreviada:</block>
+  <block id="44f8fbce4489a6c5b317b3f8b2f2121a" category="summary">Antes de instalar o SMI-S Provider, você deve verificar se o host do Windows está executando um sistema operacional suportado.</block>
+  <block id="8a83ea3699cafca0e6d30e8c5ffb9259" category="doc">Versões suportadas do sistema operativo</block>
+  <block id="696c660ff8d9323e55146a6dbd4e4088" category="cell">Sistema operacional</block>
+  <block id="2e5d14f7919ff3c6138e7845aec4f915" category="cell">Versões suportadas</block>
+  <block id="f592a2e060abc83e0626259e25824b4e" category="cell">Software cliente necessário</block>
+  <block id="aea23489ce3aa9b6406ebb28e0cda430" category="paragraph">Windows</block>
+  <block id="74dd40aa9a6635d79204e610e8324c38" category="list-text">Microsoft Windows Server 2016</block>
+  <block id="1ee2c5253c485a81cfff8c8e3e23a23f" category="list-text">Microsoft Windows Server 2019</block>
+  <block id="89ff2866e74db001ea07e0b7fdde9ac5" category="paragraph">As bibliotecas de tempo de execução do Microsoft Visual C 2010 são instaladas automaticamente durante a instalação do SMI-S Provider. Para evitar possíveis problemas relacionados às bibliotecas de tempo de execução, você deve instalar o Microsoft Visual C(pp) 2010 Redistributable Package (x86). A partir do seguinte local:<block ref="b7a41ff45868862feefaef480db2df7e" category="inline-link-rx"></block></block>
+  <block id="dc917e4fa1217c63d38aa1b4aacbe7ba" category="section-title">Requisito SCVMM 2016 UR 2,1</block>
+  <block id="13601f1842a061432974c3d2a9141b74" category="paragraph">O pacote cumulativo de atualizações (UR) 2016 do System Center Virtual Machine Manager (SCVMM) 2,1 é necessário para gerenciar o servidor de arquivos NetApp com o provedor NetApp SMI-S 5.2.4 e posterior.</block>
+  <block id="10d506f406f3b135deaa62f78cfd5476" category="paragraph">Sem este UR, o SCVMM 2016 exibe o valor das<block ref="207e174801113bba5afa048ccd3450bf" prefix=" " category="inline-code"></block> opções<block ref="5406f75e1620d4c00bc95d050311cd8a" prefix=" " category="inline-code"></block> e<block ref="6af63b14f64f6cb255988d8fde2e0437" prefix=" " category="inline-code"></block> quanto aos compartilhamentos de arquivo existentes no servidor de arquivos do NetApp.</block>
+  <block id="05dbd63393cf525e41d034d5de449c98" category="paragraph">Para executar o SMI-S Provider, a máquina host do provedor deve atender às seguintes especificações:</block>
+  <block id="fd72eadfdaeb4e69b5477af765434a93" category="list-text">A máquina host do provedor não pode ser usada para hospedar um nó Hyper-V.</block>
+  <block id="b74c30689c8afa829d128cf3e62d6817" category="list-text">O SCVMM não deve estar em execução na máquina host do provedor.</block>
+  <block id="b821588d84782d0b1d55c19cfdb5b9b4" category="list-text">A máquina host do provedor não deve executar outros programas que tenham uso intenso de memória.</block>
+  <block id="e7a61d9bf7f995d12bec06e5dc826433" category="list-text">A máquina host do provedor não deve executar provedores SMI-S de nenhum outro fornecedor.</block>
+  <block id="9e6a91e446af633c638f982317104862" category="paragraph">Os seguintes hypervisors são compatíveis:</block>
+  <block id="aac0de225be44800bd6bac76c5eb4a63" category="list-text">Microsoft Windows Server 2016 Hyper-V.</block>
+  <block id="be90425df543f66a8660032f3bec11ea" category="list-text">VMware ESX 5,0</block>
+  <block id="ced23abf6261326792853710d17c1e64" category="list-text">VMware ESX 5,1</block>
+  <block id="1c34588d8157e46be3e3ed89163e2d36" category="list-text">VMware ESX 5,5</block>
+  <block id="c3b86f2f3b5685e4fd42669ba402e8d2" category="list-text">VMware ESX 6,0</block>
+  <block id="e14a9944fe8690b0f4a896ee4dd1b1bc" category="summary">O Fornecedor NetApp SMI-S suporta plataformas de cluster que executam o Data ONTAP 8.3,2 e o ONTAP 9 e versões posteriores.</block>
+  <block id="6ac98480cf75c6dae666143ef19e1b44" category="doc">Plataformas de cluster compatíveis</block>
+  <block id="62861fc78ada9051faca6fd4990e1665" category="paragraph">Para que o fornecedor NetApp SMI-S crie clones de volumes de storage (LUNs), você precisa ter instalada uma licença FlexClone no sistema de storage.</block>
+  <block id="39a815a66b6abb4cbca8976fc7695c9e" category="paragraph">O fornecedor NetApp SMI-S suporta as seguintes plataformas:</block>
+  <block id="6b2c2280811e36eb16c24d5aa7a083b0" category="list-text">Sistemas da série FAS</block>
+  <block id="e5c7df601f61f29bd5487de4001b15d8" category="list-text">Sistemas de storage V-Series</block>
+  <block id="9184b8f3aad09d0dfd024d22eb2c70e4" category="doc">Espaço gerenciado total para uma discrepância de pool de armazenamento (volume)</block>
+  <block id="cef45fe00693880d7c9e967f4584427a" category="paragraph">Se você estiver usando outra ferramenta de gerenciamento de armazenamento, como o FilerView, poderá notar um tamanho diferente relatado para o espaço gerenciado total de um pool de armazenamento (volume) do que o tamanho retornado pelo provedor SMI-S.</block>
+  <block id="956ed70b442d136dd2a48113d0e2fa43" category="paragraph">Essa discrepância ocorre porque o tamanho retornado pelo provedor SMI-S inclui o WAFL e reserva de snapshot, enquanto o FilerView e outras ferramentas mostram apenas o espaço utilizável, excluindo WAFL e reserva de snapshot.</block>
+  <block id="027c004b3be4f739c5a453592337c7da" category="paragraph">Este é um comportamento esperado; nenhuma ação corretiva.</block>
+  <block id="f4136acb3cb5d0efffc517c067ddfd6c" category="summary">Você pode especificar os componentes a serem rastreados, o alvo de rastreamento e o nível de rastreamento. Opcionalmente, você pode alterar o nome e a localização do arquivo de rastreamento se não quiser usar o nome e a localização do arquivo de rastreamento padrão.</block>
+  <block id="c56ac5615b54a034084151ae64ce2648" category="doc">Valores de definição do traçado</block>
+  <block id="177643ab3b04ebf5d0c59fd7d5ce1e52" category="paragraph">Pode configurar as seguintes definições de rastreio:</block>
+  <block id="ca31708947b7a9d9d3e205034380e659" category="list-text">*TraceComponents*</block>
+  <block id="dd8d96da95aeda2ea76e411b375aa419" category="paragraph">Especifica os componentes a serem rastreados. Por padrão, todos os componentes são rastreados.</block>
+  <block id="18a9761aec25dba515ae85f826ba45be" category="list-text">*TraceFacility*</block>
+  <block id="c0ed662a462e53ee3dc5e9a3f59072fa" category="paragraph">Especifica o destino para o qual as mensagens de rastreamento são escritas:</block>
+  <block id="0b27918290ff5323bea1e3b78a9cf04e" category="list-text">Ficheiro</block>
+  <block id="91b59054872fd819c6f8a005a9507a52" category="paragraph">Este é o valor padrão, que especifica que as mensagens de rastreamento são gravadas no arquivo especificado pela opção de configuração traceFilePath.</block>
+  <block id="ce0be71e33226e4c1db2bcea5959f16b" category="list-text">Registo</block>
+  <block id="99f369be41de16f4b1457018698a0e87" category="paragraph">Especifica que as mensagens de rastreamento são gravadas no arquivo de log cimserver_standard.</block>
+  <block id="dc47307dece74cd322e998a57978a883" category="list-text">*TraceFilePath*</block>
+  <block id="eca98d7b844a9964bf8aa81d75cf8c39" category="paragraph">Especifica a localização do arquivo de rastreamento. Por padrão, o arquivo de rastreamento é chamado<block ref="fa9f592613ea31a5e10e9623bb5fb444" prefix=" " category="inline-code"></block> e está localizado no<block ref="29d5f56fb4447d05677b6226b698efe5" prefix=" " category="inline-code"></block> diretório.</block>
+  <block id="65b3bdf4bded79705083dd0a5e442bec" category="list-text">*TraceLevel*</block>
+  <block id="2678809354815b115b9512e885316712" category="paragraph">Especifica o nível de rastreamento. Por padrão, o rastreamento é desativado.</block>
+  <block id="412d3edf40f0c308f135062e22bad182" category="cell">Nível do traçado</block>
+  <block id="c1645ee98e4d773b5771954889751442" category="cell">Rastrear mensagens escritas</block>
+  <block id="cfcd208495d565ef66e7dff9f98764da" category="paragraph">0</block>
+  <block id="f032b99bdb9615b56db1f4c47adcc7dc" category="paragraph">O rastreamento está desativado.</block>
+  <block id="c4ca4238a0b923820dcc509a6f75849b" category="paragraph">1</block>
+  <block id="d431b26f03a69fefba310058f556e828" category="paragraph">Mensagens graves e de registo.</block>
+  <block id="c81e728d9d4c2f636f067f89cc14862c" category="paragraph">2</block>
+  <block id="15570c8bdd6b5da683835309706ca4fe" category="paragraph">Mensagens básicas de rastreamento de fluxo (detalhes de dados baixos)</block>
+  <block id="eccbc87e4b5ce2fe28308fd9f2a7baf3" category="paragraph">3</block>
+  <block id="ee70015bab4c58cf0f3881a21b665ff8" category="paragraph">Fluxo lógico inter-função (detalhe de dados médios)</block>
+  <block id="a87ff679a2f3e71d9181a67b7542122c" category="paragraph">4</block>
+  <block id="252a5d2c10241ca715834e346795020e" category="paragraph">Alto detalhe de dados</block>
+  <block id="e4da3b7fbbce2345d7772b0674a318d5" category="paragraph">5</block>
+  <block id="3760243c0ec28bcb0e1a0c201dd5d0db" category="paragraph">Detalhes de dados elevados e método de entrada e saída</block>
+  <block id="1484fccf8d24a7bab66c738879eeadcc" category="summary">Ao utilizar o Fornecedor SMI-S, existem vários tipos de utilizador que pode atribuir a um utilizador para controlar o respetivo acesso ao servidor CIM.</block>
+  <block id="641d6548d34af78dcc255faad011c29d" category="doc">Tipos de utilizadores CIM e operações associadas</block>
+  <block id="6ed2645b4c43488812455affa1c466b3" category="paragraph">A partir desta versão, o utilizador do domínio tem permissão para modificar a base de dados de utilizadores do Fornecedor SMI-S e outras definições de configuração como utilizador de domínio do grupo Administradores locais.</block>
+  <block id="ad783d2f4a2eb67767aaf7a10faf1c8b" category="paragraph">A tabela a seguir lista os usuários suportados do servidor CIM e as operações que cada tipo pode executar.</block>
+  <block id="1335f6b6c0aef682a48880c2170a7b41" category="cell">Tipo de usuário</block>
+  <block id="456d0deba6a86c9585590550c797502d" category="cell">Operações</block>
+  <block id="d5b0bbcde4af8bf8600fb80e53cf57eb" category="paragraph">Administrador de domínio do grupo Administradores</block>
+  <block id="7295dd4b89381e8f7a3983c3db4a5450" category="paragraph">Configuração do provedor SMI-S e gerenciamento de usuários usando<block ref="95cdbdc16fcdaafb435475409dea8c94" prefix=" " category="inline-code"></block> comandos e<block ref="b07eb8a32f2cf3bb81c70d37e7d0aaba" prefix=" " category="inline-code"></block>. Por exemplo:</block>
+  <block id="76089b277d7c4637af557c363316ed6c" category="list-text">Adicione ou remova um usuário a ou do armazenamento confiável do SMI-S Provider.</block>
+  <block id="befb009797d0d6459c03cb3c572a650c" category="list-text">Ative, desative ou altere o nível de log e a configuração de rastreamento.</block>
+  <block id="28b3fd7b22a3433ee086df4989550e35" category="list-text">Ative ou desative o mecanismo de autenticação no SMI-S Provider.</block>
+  <block id="356d3eb9e42345f0df80e3a290016e44" category="paragraph">Gerenciamento e verificação de storage usando<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comandos e<block ref="1dada79604b4da9c86704cf68645dee9" prefix=" " category="inline-code"></block>. Por exemplo:</block>
+  <block id="b8ca31c01cc1a6d0446db847d321d69c" category="list-text">Adicione ou remova controladores de armazenamento ou SVMs a ou de um repositório ou banco de dados ou cache do SMI-S Provider.</block>
+  <block id="9eebce0fe03ad70a0bd38b7bf717aa4c" category="list-text">Atualizar controladores de armazenamento ou SVMs no cache do SMI-S Provider.</block>
+  <block id="c7d2575a0531ec33051a023bfcb528cf" category="list-text">Verificar o gerenciamento do SVM ou do controlador de storage.</block>
+  <block id="121aa0de0e266ad9a4f71cea2ba24acf" category="paragraph">Operações de descoberta SCVMM usando a GUI SCVMM.</block>
+  <block id="1bb62e6dbd0bcfe63e855c7bb68036cc" category="paragraph">Usuário de domínio do grupo Administradores local</block>
+  <block id="4bdbe6703036d4c9363434dad6b08903" category="paragraph">Usuário local do grupo Administradores local</block>
+  <block id="2e09e7802834c77d27ce8920437facd6" category="paragraph">Usuário de administrador de domínio incorporado</block>
+  <block id="90bebd40a6b0aeac280c5fadbedc23a5" category="paragraph">Utilizador Administrador local incorporado</block>
+  <block id="737b21fcc807855c6e50bf70f766a2a0" category="paragraph">Usuário de domínio do grupo usuários</block>
+  <block id="6d45eff2b4537ef85ec9601c26eedfd0" category="paragraph">Utilizador local do grupo utilizadores</block>
+  <block id="471dfba4af2601f46dd9de136cc68c1e" category="paragraph">Se você tiver o Fornecedor SMI-S em um host Windows e tiver alterado qualquer nome de usuário "'Administrador'", você deve fazer logout do sistema e, em seguida, fazer login novamente. O Serviço SMI-S Windows herda autenticação durante esse tempo; como resultado, qualquer alteração nas credenciais não será reconhecida até que o administrador faça logout e, em seguida, faça login novamente.</block>
+  <block id="db348a1845bc8863a15226d1296f5943" category="summary">O fornecedor NetApp SMI-S facilita o gerenciamento e o monitoramento de sistemas de storage e o gerenciamento de LUNs e volumes de sistemas de storage.</block>
+  <block id="a6a30f6fc1ea5086f1f6a22630def76e" category="doc">Usos do Fornecedor NetApp SMI-S.</block>
+  <block id="df0ce33f18f070a6ddb1ef19fb303e98" category="paragraph">Você pode usar o Fornecedor NetApp SMI-S para gerenciar controladores de armazenamento usando o Centro de sistema 2016 - Gerenciador de máquinas virtuais ou Centro de sistema 2016 - Gerenciador de máquinas virtuais.</block>
+  <block id="d6bea59fb7c3e2297074e152f32b36f6" category="doc">Existem recursos do sistema insuficientes para concluir o serviço solicitado</block>
+  <block id="1b2080b95253a31b0613cac1d0668d19" category="paragraph"><block ref="d6bea59fb7c3e2297074e152f32b36f6" prefix="" category="inline-code"></block></block>
+  <block id="cacae407bef798b0ffb4a0aaf4589632" category="paragraph">Esta mensagem ocorre quando o limite máximo de sessões de usuário do mesmo usuário por conexão foi atingido ao provisionar um grande número de VMs em um único compartilhamento de arquivos no SCVMM.</block>
+  <block id="0fcdaa0a55ef934e3b57b5a56bf3ad77" category="paragraph">O SCVMM cria uma conexão TCP por host Hyper-V, e cada conexão cria muitas sessões com dois usuários: O nome do computador do host Hyper-V e o SCVMM "Executar como conta". O número de sessões com O COMPUTADOR é exatamente mais do que o número de discos rígidos virtuais implantados nesse host do Hyper-V.</block>
+  <block id="944631318e78936297a14bd8d2370d37" category="paragraph">O valor padrão de<block ref="faae3f575cdbd80c7faf4555ffd52239" prefix=" " category="inline-code"></block> é 50. Esse limite bloqueia uma implantação de VM em grande escala com o SCVMM. Se você implantar mais de 50 VMs por host Hyper-V, então você encontrará esse problema.</block>
+  <block id="186e5f3f14e60a14d11887c54d58b891" category="paragraph">Aumente o contador que controla o número máximo de sessões na mesma ligação para o protocolo CIFS. Por exemplo, o comando a seguir altera o máximo de sessões de usuário na mesma conexão do padrão 50 para 100:</block>
+  <block id="09f22fe040ed35c7bad3a8c149131588" category="paragraph"><block ref="ae5548f5f9b0106876049051f3dc9c34" prefix="" category="inline-code"></block></block>
+  <block id="6aa0506cbda045baaac42a33adf154bc" category="doc">Aviso 26130</block>
+  <block id="43314f297d1319987ae0a70ecfd97c2a" category="paragraph"><block ref="ae5003a6cf3e7e6357408457b4b755cb" prefix="" category="inline-code"></block></block>
+  <block id="7730b695d01e614f5ca99b68c96b377e" category="paragraph">Esse erro ocorre quando você aloca a capacidade de armazenamento e concede acesso a uma matriz aos hosts que estão em um grupo de hosts. Com este aviso, é impossível colocar máquinas virtuais nos sistemas de armazenamento.</block>
+  <block id="4937a7033ec39bd8589c2df73c921a89" category="list-text">Em cada máquina host, adicione o endereço IP de cada sistema de armazenamento à aplicação iSCSI Initiator.</block>
+  <block id="7d36242dbaa9912fc085b5ff7c002458" category="list-text">Se necessário, em cada sistema de armazenamento, para cada máquina host, crie um iggroup exclusivo vinculado ao nome de nó iSCSI adequado da máquina host correspondente.</block>
+  <block id="f4a55e7cbbe39eb8f955afd704ea726a" category="list-text">Para cada máquina host conetada ao Data ONTAP, abra o aplicativo MPIO e adicione o seguinte ID de hardware:</block>
+  <block id="25c100de8cdfff7216dbf6a699030071" category="list-text">Para Clustered Data ONTAP, digite<block ref="ade191b1004522550d83e818f2d7139d" prefix=" " category="inline-code"></block>.</block>
+  <block id="ffd73db9cb7d1dec7d0b41031a0865f5" category="list-text">Reinicie as máquinas host.</block>
+  <block id="96ee3206e5a288b7c11d4de582d14ec9" category="list-text">Remova o fornecedor.</block>
+  <block id="0bc3df559d8caef1f69d55ee3c5b77e1" category="list-text">Defina o pool de armazenamento novamente.</block>
+  <block id="591f96ef7fe1cdb42aa58f385466c717" category="summary">Fornece informações sobre os recursos, limitações e problemas conhecidos do software NetApp SMI-S Provider 5.2.6.</block>
+  <block id="336d68bc1f4a7a4dd4d6826a8c11877e" category="doc">Notas de lançamento do fornecedor NetApp SMI-S</block>
+  <block id="6e3b9e20f7f45cc7004fb8412900830e" category="paragraph">A<block ref="b5aeaaea80149eaf6be32e7995332412" category="inline-link-rx"></block> descreve novos recursos, notas de atualização, problemas corrigidos, limitações conhecidas e problemas conhecidos.</block>
+  <block id="ecbbc7fd5d4edead7344ce7d3e700f9d" category="summary">Antes de poder validar o sistema de armazenamento, tem de adicionar um utilizador CIM autorizado para utilizar o servidor CIM.</block>
+  <block id="02f7d5953ada54fa94eba6972733b55b" category="doc">Adicionar um utilizador do servidor CIM</block>
+  <block id="135b308ed83c53f1516b7c754566d1c4" category="list-title">Antes de começar</block>
+  <block id="e52a780420ec86f52f5ede036dc0863b" category="list-text">Você já deve ter feito login como Administrador.</block>
+  <block id="704fb07605281ded06af349fa2c6a42e" category="list-text">Você já deve ter acessado SMI-S Provider.</block>
+  <block id="f3a29486bed19a90f2da6d007818b427" category="list-title">Passos</block>
+  <block id="aed9b77a9a67fc43c87c9ca0c42c9428" category="list-text">Crie uma conta de usuário local.</block>
+  <block id="3ca235b5f2673c57408f7e128d006783" category="list-text">Adicione o usuário ao grupo Administradores.</block>
+  <block id="7b43cd03e1de1085a4fc8332e21b48da" category="paragraph">Para obter mais informações, consulte _Documentação do sistema_.</block>
+  <block id="86f2d37730c5ca8c974df95b4ae767a1" category="list-text">Adicionar um utilizador do servidor CIM:</block>
+  <block id="b05c53b2d5c68261a900383863bdb0b4" category="paragraph"><block ref="80208e9bc82756572defc8d54b3ca03b" prefix="" category="inline-code"></block></block>
+  <block id="992f99e76d782026d10813b89cf90cdc" category="paragraph">Por exemplo, para adicionar um usuário do servidor CIM chamado "chris":</block>
+  <block id="c506910979386a24184c6dbf0c3e93da" category="paragraph"><block ref="20bd298095cb09536cfea87699417fe5" prefix="" category="inline-code"></block></block>
+  <block id="dcca715816190ebf9dcab8ec1989cd39" category="list-text">Quando solicitado, digite e insira novamente a senha.</block>
+  <block id="46e0d6cd9511768516cffae18f3cb5bc" category="summary">Por padrão, todas as mensagens do sistema são registradas. Além disso, por padrão, os logs de mensagens do sistema estão localizados no diretório de logs no diretório no qual o provedor NetApp SMI-S está instalado. Pode alterar a localização e o nível das mensagens do sistema gravadas no registo do servidor CIM. Por exemplo, você pode optar por ter logs armazenados em um diretório que você especificar e ter apenas mensagens fatais do sistema gravadas no log do servidor CIM.</block>
+  <block id="2a6456b036bc8393c319f1d0851d9f9e" category="doc">Configure as definições de registo</block>
+  <block id="d634faa051c67370dd5de1d5ef4225c4" category="paragraph">Por padrão, todas as mensagens do sistema são registradas. Além disso, por padrão, os logs de mensagens do sistema estão localizados no<block ref="2165e4fa5bddb65a31f6a0c495c2fa37" prefix=" " category="inline-code"></block> diretório no qual o provedor NetApp SMI-S está instalado. Pode alterar a localização e o nível das mensagens do sistema gravadas no registo do servidor CIM. Por exemplo, você pode optar por ter logs armazenados em um diretório que você especificar e ter apenas mensagens fatais do sistema gravadas no log do servidor CIM.</block>
+  <block id="994bc0ff42c205594c4814030a17efe0" category="list-text">Você já deve ter credenciais de login como Administrador.</block>
+  <block id="26773937c2e2d4c88812921132664b11" category="list-text">Você já deve ter feito login no sistema host como Administrador.</block>
+  <block id="56b362d7bdbaa18e1b3561d819b06f58" category="list-text">Acesse o provedor NetApp SMI-S.</block>
+  <block id="55c56e656fc1262386c75014fc91126a" category="list-text">Execute uma das seguintes ações:</block>
+  <block id="004bf6c9a40003140292e97330236c53" category="cell">Ação</block>
+  <block id="ee97be03cb04119af45014d815621ce1" category="cell">Comando</block>
+  <block id="0f68b904e33d9ac04605aecc958bcf52" category="cell">Informações adicionais</block>
+  <block id="b92c67c0f4c56bc1e4db299b1e051b4b" category="paragraph">Altere o nível de registo de mensagens do sistema</block>
+  <block id="c4afd30587ca8f49404c77204b2d133f" category="paragraph"><block ref="c2f842895a5ff0a8bdabb21963b7e2ba" prefix="" category="inline-code"></block></block>
+  <block id="c38aefb099fb15d8787010ba78216358" category="paragraph">Se você quiser alterar o nível de log para "INFORMAÇÕES", por exemplo, você digitaria este comando <block ref="308c645aa2e68fd84a58e4339f98ad73" prefix=" " category="inline-code"></block></block>
+  <block id="0bab75a61937b38c1a7acc2ff1841e00" category="paragraph">Altere o diretório de log de mensagens do sistema</block>
+  <block id="651259a98991e0b35e4f51aa4d4a4319" category="paragraph"><block ref="1a362c5bfed5a3528b8870a38fba1c87" prefix="" category="inline-code"></block> Se o<block ref="8dac7655dfe09848966d79178b2a2dd1" prefix=" " category="inline-code"></block> contiver espaço, você deve inseri-lo entre aspas <block ref="a02c916180f1221daa82607ec582cf22" prefix="(" category="inline-code"></block>).</block>
+  <block id="6f37785193648cc0fab41c9b222a7a2f" category="paragraph">Se você quiser alterar o diretório de log para "sherverlogs", por exemplo, você digitaria este comando:</block>
+  <block id="882d7437047d18007764dd5615ed4aba" category="paragraph"><block ref="98405c6974d9981455ab271b3bca85d6" prefix="" category="inline-code"></block></block>
+  <block id="303b50921b53d3609d0e06a97d955426" category="list-text">Reinicie o servidor CIM:</block>
+  <block id="127244f141478553012a969bb50d8169" category="paragraph"><block ref="47ebda37dde3de0ad5bf2c9c816287c8" prefix="" category="inline-code"></block></block>
+  <block id="475d549be2964d0228a25ed173ba7b08" category="summary">Antes de instalar o fornecedor NetApp SMI-S, tem de transferir o pacote de software a partir do site de suporte da NetApp.</block>
+  <block id="f2efbfa9469f6b1841c97b04674b1de4" category="doc">Transfira o pacote de software do fornecedor NetApp SMI-S</block>
+  <block id="09ea0908fbfc4cde85bf416e35dc55c8" category="inline-link">Suporte à NetApp</block>
+  <block id="e94fec40412aa1b4fcd813ed2df33d2b" category="paragraph">Você deve ter criado uma conta do site de suporte da NetApp<block ref="eb2c61027d5e6c8b35692c1e74187026" category="inline-link-rx"></block> no .</block>
+  <block id="3216e7de5d3f564ce249ad07b5cb6fbd" category="list-text">Vá para a página *Downloads* &gt; *Software* no site de suporte da NetApp.</block>
+  <block id="fddaf38eab11f354a96b9bcf234fd609" category="list-text">Localize o Fornecedor SMI-S (antigo Agente SMI-S da Data ONTAP) e selecione o sistema operativo Windows e, em seguida, clique em *Go!*.</block>
+  <block id="0b680d2d590fdfd0519ad3a20f11a7cb" category="list-text">Selecione a versão a transferir clicando em *Ver e Transferir*.</block>
+  <block id="e4d1a86ba6339b10a2f0742efd1a8880" category="list-text">Na seção *Download de software*, clique em *CONTINUAR*.</block>
+  <block id="cc82620cbb43c7f8476563c901f49e8b" category="list-text">Leia e aceite o Contrato de Licença de Usuário final.</block>
+  <block id="f202f2d520c5b69c8a949f516b8f9faf" category="list-text">Selecione o arquivo do pacote de software e salve-o no local desejado.</block>
+  <block id="035209d5aa4411b244c45d329ab7709c" category="summary">As indicações de alerta, cota de sistema de arquivos e ciclo de vida estão desativadas por padrão. Você pode ativar essas indicações definindo a variável de ambiente PEGASUS_DISABLE_INDICATIONS como false.</block>
+  <block id="0c3f164f1b784b68c85112aee98dcfe7" category="doc">Ativar indicações no SMI-S Provider</block>
+  <block id="1e8acbda82c541bb421787ed83b44b61" category="paragraph">As indicações de alerta, cota de sistema de arquivos e ciclo de vida estão desativadas por padrão. Pode ativar estas indicações definindo a variável de ambiente<block ref="e7253abb8cc28abbec3f8ebc3db98147" prefix=" " category="inline-code"></block> como<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>.</block>
+  <block id="bbe48fb854ea022537208eeeff822f91" category="paragraph-title">Sobre esta tarefa</block>
+  <block id="2c490b3eac6005d8eb9fbc14dbe36f9c" category="paragraph"><block ref="e7253abb8cc28abbec3f8ebc3db98147" prefix=" " category="inline-code"></block>Quando está definido como<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>, em seguida, alerta <block ref="e272614033db05774da33f4cd90b17ef" prefix="(" category="inline-code"></block>), cota de sistema de arquivos <block ref="bffefb3a7065d28b8059d29ee554b40c" prefix="(" category="inline-code"></block>) e as indicações de ciclo de vida estão ativadas no Fornecedor NetApp SMI-S.</block>
+  <block id="ccf6fa61cfac4827cab18b713647f22c" category="list-text">Defina a<block ref="e7253abb8cc28abbec3f8ebc3db98147" prefix=" " category="inline-code"></block> variável de ambiente como<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>.</block>
+  <block id="473ab4388e8df55d75c3b31f2ec1ef00" category="summary">Todos os comandos SMI-S recebidos são registrados em arquivos de log de auditoria, o que permite que os auditores rastreiem as atividades das operações do cliente WBEM e do uso do provedor. Você pode ativar ou desativar o Registro desses comandos de entrada definindo uma propriedade de configuração dinâmica.</block>
+  <block id="0129ab79a515722f48b24df8938bed7f" category="doc">Ativar ou desativar o log de auditoria para comandos SMI-S.</block>
+  <block id="285029cea7cf6db90d61ed15fdfbcb4d" category="paragraph">Os dados do log de auditoria podem fornecer um Registro de acesso, atividade e alteração de configuração para um servidor CIM. O conteúdo do arquivo de auditoria inclui qual comando foi emitido, por quem o comando foi emitido e a que horas o comando foi emitido.</block>
+  <block id="d69a4eb5ea05d141fe9e8d1a929e983a" category="paragraph">A propriedade de configuração dinâmica<block ref="9590fb0661c7cb71f734602aaae68b6f" prefix=" " category="inline-code"></block> ativa ou desativa o log de auditoria no tempo de execução. Por padrão, enableAuditLog é definido como true.</block>
+  <block id="3a1c45941ab5d753a927b9fcf7e597d8" category="paragraph">A prática comum é deixar o registo de auditoria ativado.</block>
+  <block id="e2bcb9268b8957b2c5eba66b5eb8f90a" category="paragraph">O ficheiro de registo de auditoria <block ref="7004a1776e3e845772ef2d5760ae4635" prefix="(" category="inline-code"></block>) é armazenado no diretório de registo pegasus <block ref="aaeb1e0636bc44c7906f5bb0e1dcbb4c" prefix="(" category="inline-code"></block>).</block>
+  <block id="3cd4ca28842e0a47bcadc6562454f097" category="paragraph">O tamanho máximo do ficheiro de registo de auditoria é de 10 MB. Depois de atingir o limite máximo, o arquivo é renomeado<block ref="022c7b6a6940c665c466f14831e7b9fb" prefix=" " category="inline-code"></block> e um novo<block ref="52c3b924f7a952df6638498b24fa7c2e" prefix=" " category="inline-code"></block> arquivo é criado para coletar as informações de Registro de auditoria mais recentes.</block>
+  <block id="afea46fce2cf62caf4a83255652fe519" category="paragraph">O provedor NetApp SMI-S mantém os seis arquivos de log de auditoria mais recentes:<block ref="022c7b6a6940c665c466f14831e7b9fb" prefix=" " category="inline-code"></block> Através<block ref="3d13af512e13b292999a3d337c10dbd3" prefix=" " category="inline-code"></block>do .</block>
+  <block id="29c5eb80d8d4774289d69253a8df1a2f" category="list-text">Defina o log de auditoria dos comandos SMI-S em tempo de execução:</block>
+  <block id="9928b3502fa328f5816ec89397731f30" category="paragraph">* Ativar o registo de auditoria SMI-S*</block>
+  <block id="79ac7012d3f9251ff1fd9e56306e1b37" category="paragraph"><block ref="3bc1a0247b3de51b593f34c952c4285c" prefix="" category="inline-code"></block></block>
+  <block id="0aeb9f4ab3a6152506a2c906fafe7412" category="paragraph">* Desativar o log de auditoria SMI-S*</block>
+  <block id="3434f57b0eae0c97485e9a92c949bab6" category="paragraph"><block ref="002f572515f0a8b4110b052a8ebee439" prefix="" category="inline-code"></block></block>
+  <block id="a7387d599b27b31a0efcb181897773ea" category="summary">Por padrão, a autenticação está ativada para o Fornecedor SMI-S. Se a autenticação causar erros no seu sistema, você pode desativá-la opcionalmente. Se a autenticação tiver sido desativada e pretender reativá-la, pode fazê-lo.</block>
+  <block id="3bdc3404174f074f29da198dfe0c3458" category="doc">Ativar ou desativar a autenticação para o Fornecedor NetApp SMI-S.</block>
+  <block id="273604a153d57c4352780e584d9492ba" category="list-text">Qualquer cliente, incluindo o System Center Virtual Machine Manager (SCVMM), deve ser conetado ao provedor usando cimuser e cimpassword.</block>
+  <block id="96069ac79fff99505f55b19d291dc1a5" category="list-text">Defina a autenticação para SMI-S Provider:</block>
+  <block id="26cc88432e85743edadd4fb6124388c5" category="paragraph">*Ativar autenticação se anteriormente desativada*</block>
+  <block id="c0b1f07637b1f3d1efbbe5b0b5b5931f" category="paragraph"><block ref="5ee9eff0c3ffef59c28f89bb140203d6" prefix="" category="inline-code"></block></block>
+  <block id="6369b05ecce0b23d441c6ad55c3c7107" category="paragraph">*Desativar autenticação*</block>
+  <block id="b37f8506075e54bd0ae03877d2850cd1" category="paragraph"><block ref="e1cffc315d72bc8ec034b2a5f87474e6" prefix="" category="inline-code"></block></block>
+  <block id="c880addc662009ce18b1b48f14772dae" category="paragraph">O CIMOM não usa autenticação do Windows.</block>
+  <block id="ac11777a55a2c2d51a742766d5985b84" category="list-text">Reinicie o fornecedor NetApp SMI-S:</block>
+  <block id="5df91904e284b02eadf3bef23d5a41d4" category="summary">Por predefinição, a autenticação SSL está ativada para o servidor CIM. Durante a instalação do Fornecedor SMI-S, um certificado auto-assinado para o servidor CIM é instalado no diretório pegasus. Você pode gerar seu próprio certificado autoassinado e usá-lo em vez do certificado padrão.</block>
+  <block id="706bd7f5dc0fd11f32957fcfe95a1d86" category="doc">Gere um certificado auto-assinado para o servidor CIM</block>
+  <block id="ddf96c0ef94c04177aac4c565af47742" category="paragraph">Por predefinição, a autenticação SSL está ativada para o servidor CIM. Durante a instalação do Fornecedor SMI-S, um certificado auto-assinado para o servidor CIM é instalado<block ref="3015ca4f270b6938b27c95863174a8db" prefix=" " category="inline-code"></block> no diretório. Você pode gerar seu próprio certificado autoassinado e usá-lo em vez do certificado padrão.</block>
+  <block id="89eb3b2b1c7ee55693e8de7ba82e5ba4" category="inline-link-macro"><block ref="89eb3b2b1c7ee55693e8de7ba82e5ba4" category="inline-link-rx"></block></block>
+  <block id="4ddf9c5810fe4ae35f51468822c93f0c" category="list-text">Transfira o<block ref="4bd6c476c5b1e91f1c5d5e856487a8d8" prefix=" " category="inline-code"></block> ficheiro a partir da seguinte localização: <block ref="00e6c9d6bfee51757d5adaf602913f5e" category="inline-link-macro-rx"></block></block>
+  <block id="3ff2de46a7ece27a30e661ad1988c771" category="list-text">Mova o<block ref="4bd6c476c5b1e91f1c5d5e856487a8d8" prefix=" " category="inline-code"></block> arquivo para o diretório bin:</block>
+  <block id="7ae46c19e55ff9fda2e83b7aa2f37cfd" category="paragraph"><block ref="e79d8293df85193c0ee44bf19eeef913" prefix="" category="inline-code"></block></block>
+  <block id="6d6d95d710fafdcc96679d6a097b8aa2" category="list-text">Defina a<block ref="301205747f130a819164fb49d391c084" prefix=" " category="inline-code"></block> variável ambiental para a localização<block ref="4bd6c476c5b1e91f1c5d5e856487a8d8" prefix=" " category="inline-code"></block> do arquivo:</block>
+  <block id="9ab83c2678d2d7ec7c82f6059b6c243f" category="paragraph"><block ref="239f106b6730f6e4049528822b40b2f2" prefix="" category="inline-code"></block></block>
+  <block id="a70427dd387d91471ce1de93827b4166" category="paragraph">Isso só define a variável de ambiente para a duração da sessão atual do prompt de comando. Se você quiser definir permanentemente a variável de ambiente, você pode usar uma das seguintes opções:</block>
+  <block id="0f42925200380f73e8af02ef03ac37f7" category="list-text">Navegue até *Propriedades &gt; variáveis ambientais* e atualize a variável em *sistema*.</block>
+  <block id="1f3b7d1decea3abd87b7cca70fb2504a" category="list-text">Use o prompt de comando para definir permanentemente a variável:</block>
+  <block id="00dc48c3880b7c2bd0337d8b3bef7a25" category="paragraph"><block ref="55fe4eb88b475075b1f715a663e5d475" prefix="" category="inline-code"></block>.</block>
+  <block id="5940103c9703f3197b9db75e060cdcbc" category="paragraph">A variável é definida quando você abre uma nova sessão do prompt de comando.</block>
+  <block id="5d46f0ef9c5d5b1b112b901048bd8b85" category="list-text">Navegue até o<block ref="0a36b8ad7af6adf0c1d5daa0a3240994" prefix=" " category="inline-code"></block> diretório:</block>
+  <block id="82e1f4ca9abf9652748d9a698fc051c7" category="paragraph"><block ref="a9bf600e3f42bfde86bd479b9fcaec63" prefix="" category="inline-code"></block></block>
+  <block id="ce1605c578adffb355881da427936cf6" category="list-text">Gerar uma chave privada:</block>
+  <block id="ee01244ad0458fc0bceca3ca21a19bcf" category="paragraph"><block ref="c006705f2d47a577957e222501294ddd" prefix="" category="inline-code"></block></block>
+  <block id="d1cc3793bab6382471940558e1237709" category="list-text">Gerar uma solicitação de certificado:</block>
+  <block id="ba777a1ebf7a5d9ce1cca956ee4926bb" category="paragraph"><block ref="64123fcbdbaa5bc05596159a507187c2" prefix="" category="inline-code"></block></block>
+  <block id="854ca9ad8b9606a4ced8f8f325760049" category="list-text">Insira as informações para a solicitação de certificado quando solicitado.</block>
+  <block id="07fcc01ed277fcbb9f299bc089599ef6" category="list-text">Gerar o certificado autoassinado:</block>
+  <block id="408e6c1ad2bfdc436dcaf7eca6bff555" category="paragraph"><block ref="ec4c523465d8e7022c60de642c23ed6b" prefix="" category="inline-code"></block></block>
+  <block id="e20a939355820d858108eeabb6d3c69a" category="paragraph">Você pode fornecer um número diferente de dias para os quais o certificado é válido.</block>
+  <block id="cdad05d7e587588dab5f4295a9f45d9a" category="list-text">Copie os<block ref="7d86d5bfe1101b57eb772deea9c8d898" prefix=" " category="inline-code"></block> ficheiros e<block ref="159959e3c84f8f2f650393c7ce863940" prefix=" " category="inline-code"></block> para o<block ref="3015ca4f270b6938b27c95863174a8db" prefix=" " category="inline-code"></block> diretório (Windows:<block ref="e93eb95a4a6d54999769913bf79a69c9" prefix=" " category="inline-code"></block>).</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="section-title">Resultado</block>
+  <block id="5e22e2207ecdd0a04ad8b25271bfdc17" category="paragraph">O intervalo de datas do certificado começa na data atual e é executado pelo número de dias especificados.</block>
+  <block id="36bc4391121621ccbd43a1d20890bbfb" category="summary">Você pode instalar o software fornecedor NetApp SMI-S para gerenciar sistemas de storage que executam o Data ONTAP. Por padrão, o software NetApp SMI-S Provider é instalado no diretório C: Arquivos de programas (x86) NetApp.</block>
+  <block id="b7ceff6488201ada2adc1183d4779baa" category="doc">Instale o provedor NetApp SMI-S em um host Windows</block>
+  <block id="b7c334318e075f9c3e093acfe23e8a85" category="paragraph">Você pode instalar o software fornecedor NetApp SMI-S para gerenciar sistemas de storage que executam o Data ONTAP. No entanto, você não pode reverter ou fazer o downgrade para uma versão anterior. Por padrão, o software NetApp SMI-S Provider é instalado<block ref="e93eb95a4a6d54999769913bf79a69c9" prefix=" " category="inline-code"></block> no diretório.</block>
+  <block id="e9c2e2fe706f7cb451b683459ed09ff9" category="paragraph">Você já deve ter as seguintes credenciais e software:</block>
+  <block id="b08dc0dbe07b37cce50f2429165603b4" category="list-text">Credenciais de login para a conta de Administrador do Windows</block>
+  <block id="99b057df2c522b2a7b89ebfdd2f864f4" category="list-text">Pacote de software NetApp SMI-S Provider</block>
+  <block id="7b32869ae0948e84609377dc61f066f5" category="paragraph">Como resultado do processo de instalação, o serviço CIMOM (denominado "NetApp SMI-S Provider" no Gerenciador de Controle de Serviço) e o daemon SLP (denominado "Service Location Protocol" no Gerenciador de Controle de Serviço) são executados como serviços automáticos que serão iniciados automaticamente mesmo após a reinicialização do host.</block>
+  <block id="919ab370119d447ad299b22fa2119901" category="paragraph">Este procedimento de instalação reflete uma nova instalação.</block>
+  <block id="7e2a994657c3cb1b74140df49210abda" category="list-text">Inicie sessão como Administrador.</block>
+  <block id="042d82ccad1ac2c11a524e73165165b9" category="list-text">Navegue até o diretório que contém o pacote de software do fornecedor NetApp SMI-S <block ref="1e6fc1793c6596d3348b4129bb3d28e0" prefix="(" category="inline-code"></block>) e, em seguida, faça duplo clique no nome do pacote.</block>
+  <block id="d4dc98bad1971071a05d9ff3f05d06f5" category="list-text">Conclua as etapas no assistente de configuração.</block>
+  <block id="28db71e92fe511a4f3a1c7ed3aa46bf5" category="paragraph">O provedor NetApp SMI-S é iniciado automaticamente no final do processo de instalação.</block>
+  <block id="e65f5d35820fbe9f192146e7ff748f73" category="summary">Pode utilizar o Fornecedor SMI-S para adicionar e remover utilizadores CIM autorizados a utilizar o servidor CIM. Você também pode listar todos os usuários atuais do CIM e modificar suas senhas.</block>
+  <block id="fd80aa72b01980a364a235774524abe7" category="paragraph">Depois de introduzir o comando, introduza e volte a introduzir a palavra-passe quando solicitado.</block>
+  <block id="633f8729597919152468792a57812e5b" category="paragraph">Liste os usuários atuais autorizados a usar o servidor CIM</block>
+  <block id="b3975567b3a00145d083012b3ebd6862" category="paragraph"><block ref="ab3a88841b3ead932caee07ec474a348" prefix="" category="inline-code"></block></block>
+  <block id="d4cd0dabcf4caa22ad92fab40844c786" category="paragraph">NA</block>
+  <block id="d83ea15db4245c8ec9d005939d2c44fd" category="paragraph">Altere a palavra-passe de um utilizador do servidor CIM</block>
+  <block id="6882933cb2e39e9a9c51bf4e291f7fe0" category="paragraph"><block ref="b04aa3f3750cfc56aebad073e892d40b" prefix="" category="inline-code"></block></block>
+  <block id="d0d3da0bfe81cf41faa253bed53f77bf" category="paragraph">Depois de introduzir o comando, introduza e volte a introduzir a palavra-passe nova e antiga quando solicitado.</block>
+  <block id="fe23c5d73b81ce01111fcebd092a273b" category="paragraph">Remover um utilizador do servidor CIM não autorizado a utilizar o servidor CIM</block>
+  <block id="7835aa7d3bbc0bcc39ce2fd1e83071c4" category="paragraph"><block ref="3f1ec8b0fa4b3b83dc8914269c537e19" prefix="" category="inline-code"></block></block>
+  <block id="6b0fd0a659080ed97cfc94fb21d6fc96" category="summary">Você pode usar o SMI-S Provider para gerenciar a configuração do CIMOM, como habilitar ou desabilitar conexões HTTP e HTTPS e alterar números de portas HTTP e HTTPS. Por padrão, as conexões HTTP são ativadas, permitindo que os clientes se conetem ao servidor CIM sem usar criptografia SSL.</block>
+  <block id="16d818bdfd52f3614e92671e0206fa1b" category="doc">Gerir as definições de configuração do CIMOM</block>
+  <block id="7d6b3d18bec2ce6be3374ea0a9815106" category="paragraph">Se o seu ambiente necessitar de tráfego encriptado de e para o servidor CIM, tem de desativar primeiro as ligações HTTP e, em seguida, verificar se as ligações HTTPS para o servidor CIM estão ativadas.</block>
+  <block id="b307ea9422b5dae5cf2fd6ec3ea015d5" category="paragraph">Ative a conexão HTTP</block>
+  <block id="3b6593154fba535b06482c0db1cc8054" category="paragraph"><block ref="9cefef692e4532a5213153fd0e7e9c7a" prefix="" category="inline-code"></block></block>
+  <block id="895d8d369254f940a4ddaf2468995697" category="paragraph">Desative a conexão HTTP</block>
+  <block id="70b1caebdb7847b1009459e31d55fb48" category="paragraph"><block ref="3dd88756a5912a494d45f1cdde5c43b3" prefix="" category="inline-code"></block></block>
+  <block id="17d5471eeaa6165fa51a91e11a966cce" category="paragraph">Ative a ligação HTTPS</block>
+  <block id="5536aaa29736c81d197b42aace111279" category="paragraph"><block ref="c610d86a0212c3d2a5353c06f33a22d0" prefix="" category="inline-code"></block></block>
+  <block id="f77bdc0e1e1bf0471dfe0f770eb6626d" category="paragraph">Desative a conexão HTTPS</block>
+  <block id="0b3ee0d6b6e9221d924f8aece81f97b0" category="paragraph"><block ref="c994cbdd4c0545060af643ab2b156de6" prefix="" category="inline-code"></block></block>
+  <block id="a2b94489ad6b32120a328eec86854d63" category="paragraph">Modifique o número da porta HTTP</block>
+  <block id="40f5296c4e2d5bd8a49e9f4572b53dce" category="paragraph"><block ref="8e51c63c7f1398ab4b2a9982a0852bcd" prefix="" category="inline-code"></block></block>
+  <block id="829a8aee66a41170874965d9e691c04e" category="paragraph">Por padrão, o número da porta HTTP é 5988. Se você quiser alterá-lo para 5555, por exemplo, você digitaria este comando:</block>
+  <block id="5048fd5a308e67e37d331e393f3eee8c" category="paragraph"><block ref="19ff58c400d6ce5aadaa31da02bd55aa" prefix="" category="inline-code"></block></block>
+  <block id="06a0613012b6debabc4eabfde639529d" category="paragraph">Modifique o número da porta HTTPS</block>
+  <block id="03604fdc09e6487a20bbfc88a271734f" category="paragraph"><block ref="6f21d0e177bd155ad872999ab7b86eb3" prefix="" category="inline-code"></block></block>
+  <block id="90898c193396dd9a264c9451c9d788d8" category="paragraph">Por padrão, o número da porta HTTP é 5989. Se você quiser alterá-lo para 5556, por exemplo, você digitaria este comando:</block>
+  <block id="86bb67cb5a15d1e42ce1716ea8249d24" category="paragraph"><block ref="217292cb9df9bdeb383961565ef55410" prefix="" category="inline-code"></block></block>
+  <block id="44fc5eb40e0278cb133788f5469fbeec" category="summary">Você pode usar os comandos NetApp SMI-S Provider para adicionar, excluir e listar sistemas de armazenamento no repositório CIMOM. Também é possível listar as exportações de NFS e CIFS e LUNs exportadas para sistemas de storage.</block>
+  <block id="09b43df06bca0a261e4635991d6c8575" category="doc">Gerenciar sistemas de storage</block>
+  <block id="daa8304b1e5a9998369fb0061bbc76ab" category="paragraph">No ONTAP, você deve especificar um endereço IP de gerenciamento para um SVM, e não um endereço IP de cluster, e fornecer as credenciais para um usuário vsadmin. O SMI-S Provider não oferece suporte a endereços IP de cluster ou endereços IP de gerenciamento de nós, nem oferece suporte a SVMs de nó admin ou nó.</block>
+  <block id="ba6ecff2eef9a730af73909b60860b22" category="paragraph">Você deve definir o valor do protocolo de dados como<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block> para o LIF de gerenciamento quando o adicionar ao provedor SMI-S.</block>
+  <block id="54f5714f71cdb7caea1dc20456fc6738" category="paragraph">Adicione um sistema de armazenamento com uma conexão HTTP entre o provedor e o sistema de armazenamento</block>
+  <block id="50c7a9afe0967760d10de128338cc183" category="paragraph"><block ref="25070d92a0653fca85daddf3c968080b" prefix="" category="inline-code"></block></block>
+  <block id="f26914cdcb94f2fe1b7c417cf626e088" category="paragraph">O comando aguarda até 15 minutos para que o provedor atualize o cache e responda.</block>
+  <block id="89ccad88ba064cc88cf2ab134997a5dc" category="paragraph">Adicione um sistema de armazenamento com uma ligação HTTPS entre o fornecedor e o sistema de armazenamento</block>
+  <block id="bee1cab1cf6efe6528bd95ea0052cb3e" category="paragraph"><block ref="1a7b9a263dc19b4a16d1599a60601331" prefix="" category="inline-code"></block></block>
+  <block id="1055041e911f7f81e1160cad7d6df87a" category="paragraph">Listar as exportações de NFS e CIFS para um sistema de storage</block>
+  <block id="0b6849eeabb5662b0910994843c568dd" category="paragraph"><block ref="e8a4423ef642221bb3e9aa7db50425ce" prefix="" category="inline-code"></block></block>
+  <block id="6adf97f83acf6453d4a6a4b1070f3754" category="paragraph">Nenhum</block>
+  <block id="0a2006cacb27cbdbeb32987483a1a84d" category="paragraph">Listar os sistemas de armazenamento para o repositório CIMOM</block>
+  <block id="6880c6a422f6270812bc038fa51514c5" category="paragraph"><block ref="e0c1dde979d75c2687bbc96d27a7883d" prefix="" category="inline-code"></block></block>
+  <block id="12461db74e50f15fc71fe964e70c1c99" category="paragraph">Você pode executar este comando para verificar os sistemas de armazenamento no repositório CIMOM antes de adicionar ou excluir sistemas de armazenamento.</block>
+  <block id="c6d5949ed7adf68861b2ceb4687571bf" category="paragraph">Listar LUNs exportados para um sistema de storage</block>
+  <block id="18b578423744ef72802c13af961042a9" category="paragraph"><block ref="7dc0adf83bc14c42248a6421151efaa6" prefix="" category="inline-code"></block></block>
+  <block id="ca50f0102029c7874cbb4ed0b7e7eb50" category="paragraph">Exclua um sistema de armazenamento do repositório CIMOM</block>
+  <block id="d657fd401bd6ebe4d06082361f65af09" category="paragraph"><block ref="c20ea922f35f22b883fdaed2a4ec3573" prefix="" category="inline-code"></block></block>
+  <block id="822ff5cd301b3a58d645b47d8a73841f" category="paragraph">Se você não precisar mais gerenciar um sistema de armazenamento, poderá excluí-lo do repositório CIMOM.</block>
+  <block id="534b0391ec7ed02248d1f853510cf018" category="paragraph">Como o SMI-S Provider coleta informações de todos os sistemas de armazenamento no repositório CIMOM, você deve excluir um sistema de armazenamento não utilizado do repositório para manter o desempenho ideal.</block>
+  <block id="61aee31a29e1845c59f60239e23fed18" category="paragraph">Listar as informações de configuração atuais do servidor CIM</block>
+  <block id="1a808d992fed9941455493ad0022017d" category="paragraph"><block ref="149340aa4b3ba8741368d214820d72f2" prefix="" category="inline-code"></block></block>
+  <block id="0ab763755587d142352bf7691e4791e4" category="paragraph">Listar as informações de portas FC e iSCSI para o sistema de storage</block>
+  <block id="96754da91a2648d4efd11d34e86a4b7e" category="paragraph"><block ref="1937246035ee04f04c441275fece97f6" prefix="" category="inline-code"></block></block>
+  <block id="9a0da4fee3a57e231afbe9aa492ab02f" category="paragraph">Listar os pools de armazenamento do sistema de armazenamento</block>
+  <block id="dade3a1676c438edc6bc2f2ae34d5bba" category="paragraph"><block ref="fc960def290c4127f209b3297e343329" prefix="" category="inline-code"></block></block>
+  <block id="0ee29e1d52006a0075140e7aa5ae9ceb" category="paragraph">Listar os volumes tradicionais e flexíveis do sistema de storage</block>
+  <block id="4e5aaa43ceec1507a8708c8e88e4c214" category="paragraph"><block ref="27269185d8968c496fbf3d378c841a9a" prefix="" category="inline-code"></block></block>
+  <block id="8b8f7a3fe80ec6809a6d7650b0c7c24d" category="summary">Pode utilizar o Fornecedor SMI-S para iniciar, parar e reiniciar o servidor CIM e rever o respetivo estado.</block>
+  <block id="43f62f4fcd25e84fe3c71ae26b3895e8" category="doc">Gerencie o servidor CIM</block>
+  <block id="e7f5bbb3cb7dc49bcf9ed09a2435962b" category="paragraph">Inicie o servidor CIM</block>
+  <block id="5d722f7333fadffef8f0041288f4cf16" category="paragraph"><block ref="812184ce8ff8076cd4fd2771fae19841" prefix="" category="inline-code"></block></block>
+  <block id="ef00631749cee8b26ab2ea7b9d141dc5" category="paragraph">Depois de introduzir o comando, é apresentada uma mensagem de estado a cada três minutos. Se uma tentativa de alcançar o servidor CIM falhar, mais cinco tentativas são feitas para entrar em Contato com o servidor.</block>
+  <block id="4fcf80c62f9d0bd2a896099093b4fdd4" category="paragraph">Pare o servidor CIM</block>
+  <block id="52a8b399a084de299d36d25c33d2d385" category="paragraph"><block ref="93811c6f8edbd8eb1aa7c18f1461ad09" prefix="" category="inline-code"></block></block>
+  <block id="11b0836ed815207757dccb62e2b8583f" category="paragraph">Reinicie o servidor CIM</block>
+  <block id="b1f04ce13ca7549919bf754db3d289d0" category="paragraph">Ver o estado do servidor CIM</block>
+  <block id="d7742d75613ee225270c8eb9150e81b8" category="paragraph"><block ref="7033c8afb6e62d4a70e342e9ad965fd9" prefix="" category="inline-code"></block></block>
+  <block id="b63859616bf4963acbb60c0cabb4528f" category="summary">SMI-S Provider rastreia o progresso das operações assíncronas criando empregos concretos. Você pode aumentar a vida útil do trabalho concreto do padrão de 60 minutos (3600 segundos) para um valor de 86400 segundos (24 horas).</block>
+  <block id="ea3d70e9595d4ee05b280a184ac5c0d0" category="doc">Especifique o valor de vida útil do trabalho concreto</block>
+  <block id="623fa90bf914edcce9c18224c813f24b" category="paragraph">SMI-S Provider rastreia o progresso das operações assíncronas criando _concrete jobs_. Você pode aumentar a vida útil do trabalho concreto do padrão de 60 minutos (3600 segundos) para um valor de 86400 segundos (24 horas).</block>
+  <block id="48c7c41b72e1d678923ce3571aa65b2d" category="list-title">Passo</block>
+  <block id="34b088d8aaeb78497d2307819db65f09" category="list-text">Crie uma variável de ambiente de sistema ou usuário nomeada com<block ref="9de97012d336f58e07ccc37849226cdd" prefix=" " category="inline-code"></block> o novo valor vitalício (em segundos).</block>
+  <block id="aad463b23b363623e052a9e7fa57eb28" category="paragraph">Para obter informações sobre como criar variáveis de ambiente, consulte a documentação do Windows.</block>
+  <block id="90ea26a5dffb6c8ff46feb3c93850548" category="summary">Por padrão, o Fornecedor SMI-S permite 80 threads por fila de serviço de mensagens. Você pode especificar o valor máximo de thread como 1 a 5000. Aumentar o número máximo de threads pode afetar o desempenho da máquina SMI-S Provider, portanto, considere cuidadosamente se você precisa aumentar esse valor.</block>
+  <block id="d55eae07e248eb9322a596dd90d407c2" category="doc">Especifique o número máximo de threads por fila de serviço de mensagens</block>
+  <block id="6592a678a898e48d050a94c96e27ebe0" category="paragraph">Por padrão, o Fornecedor SMI-S permite 80 threads por fila de serviço de mensagens. Você pode especificar o valor máximo de thread como 1 a 5000. Aumentar o número máximo de threads pode afetar o desempenho da máquina SMI-S Provider, portanto, considere cuidadosamente se você precisa aumentar esse valor.</block>
+  <block id="2193868d521a35a0a4589af5ed55c943" category="paragraph">Se o seu arquivo de rastreamento mostrar muitas linhas<block ref="831c705a3064b146541a84cebc22272d" prefix=" " category="inline-code"></block> de saída, você deve aumentar o número de threads em incrementos de 500.</block>
+  <block id="eb193834564df8c3b7bc536be0693bbe" category="paragraph">Se você definir o número máximo de threads para menos de 20, usando o<block ref="0dbc4345ddfa83b683a9aa35d82b1fbf" prefix=" " category="inline-code"></block> comando, o provedor ficará sem resposta e retornará a<block ref="c6b6e1471abd5a9c345e1b94d1236e72" prefix=" " category="inline-code"></block> mensagem no arquivo de rastreamento. Se isso ocorrer, você deve aumentar o número de threads em incrementos de 500 e, em seguida, reiniciar o provedor.</block>
+  <block id="a7e26385d9486e52af1a9bc2ff989ea4" category="list-text">Crie uma variável de ambiente de sistema ou usuário nomeada com<block ref="6c01366b4fed925c71ffbe9163438a06" prefix=" " category="inline-code"></block> o novo valor máximo de thread.</block>
+  <block id="cacc10f2bbbb96e6d2a0d9b4aef02b69" category="summary">Se o rastreamento estiver ativado, sete arquivos de rastreamento serão salvos por padrão. Se você precisar de mais arquivos de rastreamento salvos, você pode aumentar o número máximo de arquivos de rastreamento salvos definindo a variável de ambiente PEGASUS_TRACE_FILE_num. Se aumentar o número máximo de arquivos de rastreamento salvos, você deve garantir que o sistema tenha espaço suficiente em seu disco rígido para acomodar os arquivos de rastreamento.</block>
+  <block id="28b9df3d45d41cf4deb33c545836d2a7" category="doc">Especifique o número de arquivos de rastreamento salvos</block>
+  <block id="03ef8ba810aaf28989881c22a0a0d0b4" category="paragraph">Se o rastreamento estiver ativado, sete arquivos de rastreamento serão salvos por padrão. Se precisar de mais ficheiros de rastreio guardados, pode aumentar o número máximo de ficheiros de rastreio guardados através da definição da variável de<block ref="dc60c6d5318477708e7d97295ac7de59" prefix=" " category="inline-code"></block> ambiente . Se aumentar o número máximo de arquivos de rastreamento salvos, você deve garantir que o sistema tenha espaço suficiente em seu disco rígido para acomodar os arquivos de rastreamento.</block>
+  <block id="cbef04286048616acf9addb6a24f4812" category="paragraph">Se o rastreamento estiver ativado, as informações de rastreamento serão gravadas no<block ref="fa9f592613ea31a5e10e9623bb5fb444" prefix=" " category="inline-code"></block> arquivo. Os arquivos de rastreamento são girados. <block ref="fa9f592613ea31a5e10e9623bb5fb444" prefix=" " category="inline-code"></block>Quando atinge o tamanho máximo do arquivo de rastreamento, seu conteúdo é movido para o<block ref="1921b61929219aef25538b99f931a7b2" prefix=" " category="inline-code"></block> arquivo. Por padrão,<block ref="7b8b965ad4bca0e41ab51de7b31363a1" prefix=" " category="inline-code"></block> é um valor de 0 a 5. Se necessitar de mais ficheiros de rastreio guardados, aumenta o valor de<block ref="b34672e49a34e1653202f1d550159fa9" prefix=" " category="inline-code"></block>.</block>
+  <block id="c471bf926d3a641ea8147672e9dd849f" category="list-text">Crie uma variável de ambiente de sistema ou usuário nomeada com<block ref="dc60c6d5318477708e7d97295ac7de59" prefix=" " category="inline-code"></block> o novo número de arquivos de rastreamento salvos.</block>
+  <block id="b4832e1f800ff884553b38f2524e32dd" category="paragraph">_Documentação do Windows_ tem mais informações sobre a criação de variáveis de ambiente.</block>
+  <block id="4dd620f035497b4c26fd3db7a737531e" category="summary">O fornecedor SMI-S faz chamadas à API ONTAP (ONTAPI) para sistemas de armazenamento. Por padrão, o tempo limite da ONTAPI é de 300 segundos. Você pode definir o tempo limite para um valor de 60 a 300 segundos.</block>
+  <block id="2968f0fa1a0d4ef15b62ef7173cea84f" category="doc">Especifique o valor de tempo limite ONTAPI</block>
+  <block id="c23ac41b72372a7f3c20cb975800351a" category="list-text">Crie uma variável de ambiente de sistema ou usuário nomeada com<block ref="5ecfd3e48a727110bc36d7f3790545a9" prefix=" " category="inline-code"></block> o novo valor de tempo limite (em segundos).</block>
+  <block id="a3d25add89b8980f0ab7eb839ce0c21c" category="summary">Por padrão, o SMI-S Provider recupera automaticamente as informações dos sistemas de armazenamento a cada cinco minutos (300 segundos). Você pode definir o intervalo de atualização automática de cache (variável de ambiente CACHE_REFRESH_SEC) para um valor de 300 a 86400 segundos (24 horas).</block>
+  <block id="cb133ba4694b5daaf3efb667d2e4f11e" category="doc">Especifique o intervalo de atualização automática de cache do provedor SMI-S</block>
+  <block id="59ebdf80b065afdee9fe6b7b1dd2163a" category="paragraph">Por padrão, o SMI-S Provider recupera automaticamente as informações dos sistemas de armazenamento a cada cinco minutos (300 segundos). Você pode definir a variável de ambiente de intervalo de atualização de cache automático<block ref="0cb9337fd517d0fb0211695d6b2cff1c" prefix="(" category="inline-code"></block>) para um valor de 300 a 86400 segundos (24 horas).</block>
+  <block id="6c233061bc3fcebe40737b3922df01fc" category="paragraph">Se você quiser atualizar manualmente o estado do sistema de armazenamento a qualquer momento, você pode usar o<block ref="7503a9cf231b36274482a1a1cb7865aa" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="52d24ea635523b1c941f31f4a8c111e2" category="list-text">Crie uma variável de ambiente de sistema ou usuário nomeada com<block ref="0cb9337fd517d0fb0211695d6b2cff1c" prefix=" " category="inline-code"></block> o novo valor de intervalo de atualização (em segundos).</block>
+  <block id="6c3b97a71e1400ae3b3467be3cac370f" category="summary">Se o rastreamento estiver ativado, o tamanho máximo do arquivo de rastreamento será de 100 MB por padrão. Você pode aumentar ou diminuir o tamanho máximo do arquivo de rastreamento definindo a variável de ambiente PEGASUS_TRACE_FILE_SIZE. O valor do tamanho do arquivo de rastreamento pode ser de 10 MB a 2 GB.</block>
+  <block id="9f1963dfe2dc39ab67d177a1091ce4fd" category="doc">Especifique o tamanho do arquivo de rastreamento</block>
+  <block id="7de0f9996cd3a1414618bcd879f4ad6a" category="paragraph">Se o rastreamento estiver ativado, o tamanho máximo do arquivo de rastreamento será de 100 MB por padrão. Você pode aumentar ou diminuir o tamanho máximo do arquivo de rastreamento definindo a variável de<block ref="b33d46a520ce24b9ff8565d24e01fb90" prefix=" " category="inline-code"></block> ambiente . O valor do tamanho do arquivo de rastreamento pode ser de 10 MB a 2 GB.</block>
+  <block id="ab2e0ea406258cacfcd0b914a05e1f05" category="list-text">Crie uma variável de ambiente de sistema ou usuário nomeada com<block ref="b33d46a520ce24b9ff8565d24e01fb90" prefix=" " category="inline-code"></block> o novo tamanho de arquivo de rastreamento em bytes.</block>
+  <block id="b71369c2ed824034280dcb480153b41a" category="summary">Ter o rastreamento ativado é importante para coletar informações para solução de problemas. No entanto, ter o rastreamento ativado pode afetar o desempenho, portanto, considere cuidadosamente o que deve ser rastreado e por quanto tempo você precisa ativar o rastreamento.</block>
+  <block id="53af5324cc8ef40b65085e6267c7de4e" category="doc">Especificar definições de traçado</block>
+  <block id="214b2ac7f49d473e4ea319a71f712e51" category="list-text">Especifique várias definições de rastreio, conforme aplicável:</block>
+  <block id="f1da07ca6432396ea2971c8f6398fc30" category="paragraph">Especifique os componentes a serem rastreados</block>
+  <block id="849f8dae21d2b62a8dfa5d45d8ccc2c0" category="paragraph"><block ref="d1fe1f2dfbd092e2908e7d6aa056f996" prefix="" category="inline-code"></block></block>
+  <block id="d582392eadc397a588b31a2f38cc8b46" category="paragraph">Especifique a facilidade de rastreio</block>
+  <block id="55740e969f74c0b03b2a7da365274ef5" category="paragraph"><block ref="23a8f0e72c98157186169c77b3c20d38" prefix="" category="inline-code"></block></block>
+  <block id="4775231bef508af32ec6486ac135bd52" category="paragraph">Especifique a localização do arquivo de rastreamento</block>
+  <block id="5e08cdbde654caf3bd2f2a44804504f0" category="paragraph"><block ref="6c12b93948b4c1709ebc8cb8e286b2f6" prefix="" category="inline-code"></block></block>
+  <block id="2400ec1d446b474fb9789a8fb4e85990" category="paragraph">Especifique o nível do traçado</block>
+  <block id="e314fdf016e34edd80f4c12690e6ef42" category="paragraph"><block ref="29ccd9847d0661a2fa51e2283c1a97f7" prefix="" category="inline-code"></block></block>
+  <block id="cd8b1d5e9b71ac8ad5a91871792b628e" category="summary">Você pode desinstalar SMI-S Provider conforme necessário. Por exemplo, dependendo da versão da instalação existente, talvez seja necessário desinstalar a instalação existente do SMI-S Provider antes de instalar a versão mais recente.</block>
+  <block id="cb47c060d13b844bbad88867706d53e9" category="doc">Desinstalar o NetApp SMI-S Provider de um host Windows</block>
+  <block id="761c55faa74d365f19b35d0246718c76" category="paragraph">Se você pretende desinstalar o SMI-S Provider e deseja uma reinstalação limpa, você deve excluir manualmente todo o conteúdo do servidor CIM.</block>
+  <block id="738fec68f2c0323ebece5138b2290be2" category="paragraph">Se você não quiser uma reinstalação limpa, o SMI-S Provider mantém a configuração, o usuário e outros arquivos de banco de dados após a desinstalação.</block>
+  <block id="4de0a229b09daf73d106e4499b5eab63" category="list-text">Desinstale o provedor NetApp SMI-S de um host Windows usando o utilitário Adicionar/remover programas do Windows.</block>
+  <block id="9ac41c88ece6b96843a1b79c4d90e485" category="summary">Antes que o Fornecedor SMI-S possa ser configurado, você deve adicionar pelo menos um sistema de armazenamento ao repositório CIMOM e, em seguida, verificar se o sistema de armazenamento está funcionando corretamente.</block>
+  <block id="bd53ec5cd43766d7fb689c1a791c5cf4" category="doc">Verifique se o sistema de armazenamento está funcionando corretamente</block>
+  <block id="178a83ef87ae379b593fe5d535c2408d" category="list-text">Adicione pelo menos um sistema de armazenamento ao repositório CIMOM:</block>
+  <block id="13f4b66abe59fdd7c2ae2f2cc038140e" category="cell">Para adicionar um sistema de armazenamento com...</block>
+  <block id="aad95273f4e1ccb563059e89127b7019" category="cell">Digite este comando...</block>
+  <block id="44c460b31e2379511ec9316d2f7dae1f" category="paragraph">Conexão HTTP entre o provedor e o sistema de armazenamento</block>
+  <block id="21e085eda3a6ce6d2ee15663cd7a6e15" category="paragraph">Ligação HTTPS entre o fornecedor e o sistema de armazenamento</block>
+  <block id="ab917ed1621e00b0ef3b3b92e8263840" category="list-text">Verifique a saída para os seguintes comandos:</block>
+  <block id="7c95a1437ab1b741ae454d68a17469a2" category="cell">Para este comando...</block>
+  <block id="c6e117c59a31d82cacc4fe50361a2535" category="cell">Verifique se...</block>
+  <block id="f7529153df2f5d15ed8b4487207eee8f" category="paragraph">O número de itens corresponde ao número de sistemas de armazenamento que estão sendo gerenciados.</block>
+  <block id="58357c37cc78c70c07e8c5863f03916e" category="paragraph"><block ref="001e1f541b1e42bd39ea2ea40c19ea63" prefix="" category="inline-code"></block></block>
+  <block id="80ee4c619fb95a9a45de8aba9471b13e" category="paragraph">O número de discos corresponde ao número total de discos em todos os sistemas de armazenamento.</block>
+  <block id="98100d818063c0b408a160edd4ada15c" category="paragraph"><block ref="ecb4091a0d7fe12a01800c4c519c074d" prefix="" category="inline-code"></block></block>
+  <block id="3df0dcf43356ca981e055ea44ce890bb" category="paragraph">O número de LUNs corresponde ao número total de LUNs em todos os sistemas de storage.</block>
+  <block id="9d3252d8eb7b2dda525b61eaa4b4b280" category="paragraph">O número de ONTAP_ConcretePools corresponde ao número total de agregados em todos os sistemas de storage.</block>
+  <block id="692fc4e2c1fc79807c8600f51a03ed82" category="paragraph">O número de volumes corresponde ao número total de volumes em todos os sistemas de storage.</block>
+  <block id="ab5f12da21733b0c908a54fc6c8afeab" category="summary">Depois de instalar o provedor NetApp SMI-S, você deve verificar se o servidor CIM foi iniciado automaticamente depois de acessar o provedor SMI-S.</block>
+  <block id="26578636423c50e0cbadb8e4def77602" category="doc">Verifique o status do servidor CIM</block>
+  <block id="8dd21edf6c559186c42e2f5ef8509060" category="list-text">Acesse o provedor NetApp SMI-S navegando até o diretório onde residem os executáveis:</block>
+  <block id="7fc17decf9554a362d80ff8052528439" category="cell">Se você estiver usando...</block>
+  <block id="9792a4eebc59c44369f1f98f9d27237a" category="cell">Então faça isso...</block>
+  <block id="9f402a26d9bfb7dca9aac07fc73ebc0d" category="paragraph">Prompt de comando (com Privileges administrativo elevado)</block>
+  <block id="50c032414fa21328d8fdb4023722b56c" category="paragraph">Navegue para<block ref="fb994b3598c5992113148fe767cdc573" prefix=" " category="inline-code"></block></block>
+  <block id="caf73c044721486cfa86f1634881d532" category="paragraph">*Iniciar* &gt; *programas* menu</block>
+  <block id="5cbd8aecf01f5364affe082b2eef475a" category="paragraph">Clique com o botão direito do rato *Fornecedor NetApp SMI-S* e<block ref="fd08cf88ba06f0d8fb8dcdf16d521019" prefix=" " category="inline-code"></block> selecione .</block>
+  <block id="c4a83ee5991dce0b4555c474d32679c5" category="list-text">Ver o estado do servidor CIM:</block>
+  <block id="3ad2edd8ea9cf578e52754d637befd85" category="paragraph">Se o servidor CIM tiver sido iniciado, é apresentada a seguinte mensagem:</block>
+  <block id="cd0961a3af19616ad066d6455a90f4f9" category="paragraph"><block ref="a3a4ebff3fa21ac628bdb97448670c29" prefix="" category="inline-code"></block></block>
+  <block id="111bb0fad8beadbe3d12694d63ed1d33" category="sidebar">NetApp SMI-S Provider docs</block>
+  <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">Notas de lançamento</block>
+  <block id="72f7ffffe5d6a7aaa530f33b20be146d" category="sidebar">Visão geral do fornecedor NetApp SMI-S.</block>
+  <block id="27677c533249219197c5933410713055" category="sidebar">Prepare-se para a implantação</block>
+  <block id="f212745ed87111d0afe9888395028611" category="sidebar">Instale o Fornecedor NetApp SMI-S.</block>
+  <block id="2e0159cabf1d9d05d9cd06544df6da2c" category="sidebar">Desinstale o Fornecedor NetApp SMI-S.</block>
+  <block id="10060a4df357cacb148a72137b446457" category="sidebar">Validação da pré-configuração</block>
+  <block id="f51fe4d0964c954ad5985711bf99725b" category="sidebar">Gerenciar usuários do servidor CIM</block>
+  <block id="9e0aba46893674ba3cb911499d0aa445" category="sidebar">Gerenciar logs e rastreamento</block>
+  <block id="f16f70c449d9f0048b9a3659fcb12389" category="sidebar">Especifique as definições do traçado</block>
+  <block id="64dcf446a7778f30264ca7a94586a6e1" category="sidebar">Gerenciar configurações avançadas do SMI-S Provider</block>
+  <block id="a4e7df51fcc906ed686e7249a8c9dbf6" category="sidebar">Gerenciar SLP</block>
+  <block id="6a38d5667ddfdd47d4e489f85f431cd1" category="sidebar">Comandos CIMOM</block>
+  <block id="36368c8058877b609a51ba50239f980e" category="sidebar">Comandos SMI-S Provider</block>
+  <block id="f367b7dd9d33500bed829af817d25418" category="sidebar">Comandos SLP</block>
+  <block id="ce7b7453e7d182fcfcfa37f70a3827c2" category="sidebar">Solucionar problemas do provedor SMI-S.</block>
+</blocks>

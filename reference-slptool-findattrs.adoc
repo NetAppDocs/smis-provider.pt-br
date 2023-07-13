@@ -1,0 +1,39 @@
+---
+permalink: reference-slptool-findattrs.html 
+sidebar: sidebar 
+keywords: slptool, findattrs, command, wbem attributes, run, network 
+summary: O comando slptool findattrs encontra atributos WBEM que são executados em uma rede. 
+---
+= slptool findattrs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+O `slptool findattrs` comando localiza atributos WBEM que são executados em uma rede.
+
+.Sintaxe
+`slptool findattrs _service_`
+
+.Localização
+`C:\Program Files (x86)\NetApp\smis\pegasus\bin`
+
+.Nível de privilégio
+Um utilizador com um nome de utilizador e uma palavra-passe válidos
+
+.Parâmetros
+* `*_service_*`
++
+Especifica o tipo de serviço.
+
+
+
+.Exemplo
+O `slptool findattrs` comando e sua saída abreviada:
+
+[listing]
+----
+slptool findattrs service:wbem
+(template-url-syntax=http://10.229.90.227:5988),(service-id=PG:10-229-90-227),(service-hi-name=Pegasus),(service-hi-description=Pegasus CIM Server Version 2.12.0),(template-type=wbem),(template-version=1.0),(template-description=This template describes the attributes used for advertising Pegasus CIM Servers.),(InteropSchemaNamespace=interop),(FunctionalProfilesSupported=Basic Read,Basic Write,Schema Manipulation,Instance Manipulation,Association Traversal,Qualifier Declaration,Indications),(MultipleOperationsSupported=TRUE),(AuthenticationMechanismsSupported=Basic),(AuthenticationMechanismDescriptions=Basic),(CommunicationMechanism=CIM-XML),(ProtocolVersion=1.0),(Namespace=root/PG_Internal,interop,root/ontap,root),(RegisteredProfilesSupported=SNIA:Server,SNIA:Array,SNIA:NAS Head,SNIA:Software,SNIA:Profile Registration,SNIA:SCNAS,SNIA:Storage Virtualizer,SNIA:Indication)
+----

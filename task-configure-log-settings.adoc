@@ -1,0 +1,53 @@
+---
+permalink: task-configure-log-settings.html 
+sidebar: sidebar 
+keywords: system message, directory, netapp si-s provider, cim server log 
+summary: Por padrão, todas as mensagens do sistema são registradas. Além disso, por padrão, os logs de mensagens do sistema estão localizados no diretório de logs no diretório no qual o provedor NetApp SMI-S está instalado. Pode alterar a localização e o nível das mensagens do sistema gravadas no registo do servidor CIM. Por exemplo, você pode optar por ter logs armazenados em um diretório que você especificar e ter apenas mensagens fatais do sistema gravadas no log do servidor CIM. 
+---
+= Configure as definições de registo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Por padrão, todas as mensagens do sistema são registradas. Além disso, por padrão, os logs de mensagens do sistema estão localizados no `logs` diretório no qual o provedor NetApp SMI-S está instalado. Pode alterar a localização e o nível das mensagens do sistema gravadas no registo do servidor CIM. Por exemplo, você pode optar por ter logs armazenados em um diretório que você especificar e ter apenas mensagens fatais do sistema gravadas no log do servidor CIM.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Passos
+. Acesse o provedor NetApp SMI-S.
+. Execute uma das seguintes ações:
++
+[cols="3*"]
+|===
+| Ação | Comando | Informações adicionais 
+
+
+ a| 
+Altere o nível de registo de mensagens do sistema
+ a| 
+`*cimconfig -s logLevel=_new_log_level_ -p*`
+ a| 
+Se você quiser alterar o nível de log para "INFORMAÇÕES", por exemplo, você digitaria este comando  `*cimconfig -s logLevel=INFORMATION -p*`
+
+
+
+ a| 
+Altere o diretório de log de mensagens do sistema
+ a| 
+`*cimconfig -s logdir=new_log_directory -p*` Se o `_new_log_directory_` contiver espaço, você deve inseri-lo entre aspas (`"_new log directory_"`).
+ a| 
+Se você quiser alterar o diretório de log para "sherverlogs", por exemplo, você digitaria este comando:
+
+`*cimconfig -s logdir=serverlogs -p*`
+
+|===
+. Reinicie o servidor CIM:
++
+`*smis cimserver restart*`
+
+

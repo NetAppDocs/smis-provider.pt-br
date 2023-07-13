@@ -1,0 +1,36 @@
+---
+permalink: task-specify-the-maximum-number-of-threads-per-message-service-queue.html 
+sidebar: sidebar 
+keywords: default, smi-s provider, 80 threads, per message, service queue, machine performance 
+summary: Por padrão, o Fornecedor SMI-S permite 80 threads por fila de serviço de mensagens. Você pode especificar o valor máximo de thread como 1 a 5000. Aumentar o número máximo de threads pode afetar o desempenho da máquina SMI-S Provider, portanto, considere cuidadosamente se você precisa aumentar esse valor. 
+---
+= Especifique o número máximo de threads por fila de serviço de mensagens
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Por padrão, o Fornecedor SMI-S permite 80 threads por fila de serviço de mensagens. Você pode especificar o valor máximo de thread como 1 a 5000. Aumentar o número máximo de threads pode afetar o desempenho da máquina SMI-S Provider, portanto, considere cuidadosamente se você precisa aumentar esse valor.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Sobre esta tarefa
+Se o seu arquivo de rastreamento mostrar muitas linhas `insufficient resources` de saída, você deve aumentar o número de threads em incrementos de 500.
+
+Se você definir o número máximo de threads para menos de 20, usando o `*cimcli -n root/ontap niall*` comando, o provedor ficará sem resposta e retornará a `Insufficient threadpool` mensagem no arquivo de rastreamento. Se isso ocorrer, você deve aumentar o número de threads em incrementos de 500 e, em seguida, reiniciar o provedor.
+
+.Passos
+. Acesse o provedor NetApp SMI-S.
+. Crie uma variável de ambiente de sistema ou usuário nomeada com `PEGASUS_MAX_THREADS_PER_SVC_QUEUE` o novo valor máximo de thread.
++
+Para obter informações sobre como criar variáveis de ambiente, consulte a documentação do Windows.
+
+. Reinicie o servidor CIM:
++
+`*smis cimserver restart*`
+
+

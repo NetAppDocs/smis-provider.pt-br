@@ -1,0 +1,31 @@
+---
+permalink: task-specify-trace-file-size.html 
+sidebar: sidebar 
+keywords: trace, enable, trace, file, size, environment, variable, 10 mb 
+summary: Se o rastreamento estiver ativado, o tamanho máximo do arquivo de rastreamento será de 100 MB por padrão. Você pode aumentar ou diminuir o tamanho máximo do arquivo de rastreamento definindo a variável de ambiente PEGASUS_TRACE_FILE_SIZE. O valor do tamanho do arquivo de rastreamento pode ser de 10 MB a 2 GB. 
+---
+= Especifique o tamanho do arquivo de rastreamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se o rastreamento estiver ativado, o tamanho máximo do arquivo de rastreamento será de 100 MB por padrão. Você pode aumentar ou diminuir o tamanho máximo do arquivo de rastreamento definindo a variável de `PEGASUS_TRACE_FILE_SIZE` ambiente . O valor do tamanho do arquivo de rastreamento pode ser de 10 MB a 2 GB.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Passos
+. Acesse o provedor NetApp SMI-S.
+. Crie uma variável de ambiente de sistema ou usuário nomeada com `PEGASUS_TRACE_FILE_SIZE` o novo tamanho de arquivo de rastreamento em bytes.
++
+_Documentação do Windows_ tem mais informações sobre a criação de variáveis de ambiente.
+
+. Reinicie o servidor CIM:
++
+`*smis cimserver restart*`
+
+

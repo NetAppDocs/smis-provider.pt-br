@@ -1,0 +1,34 @@
+---
+permalink: task-specify-the-number-of-trace-files-saved.html 
+sidebar: sidebar 
+keywords: trace, enable, seven trace file, pegasus trace file num, system, space 
+summary: Se o rastreamento estiver ativado, sete arquivos de rastreamento serão salvos por padrão. Se você precisar de mais arquivos de rastreamento salvos, você pode aumentar o número máximo de arquivos de rastreamento salvos definindo a variável de ambiente PEGASUS_TRACE_FILE_num. Se aumentar o número máximo de arquivos de rastreamento salvos, você deve garantir que o sistema tenha espaço suficiente em seu disco rígido para acomodar os arquivos de rastreamento. 
+---
+= Especifique o número de arquivos de rastreamento salvos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se o rastreamento estiver ativado, sete arquivos de rastreamento serão salvos por padrão. Se precisar de mais ficheiros de rastreio guardados, pode aumentar o número máximo de ficheiros de rastreio guardados através da definição da variável de `PEGASUS_TRACE_FILE_NUM` ambiente . Se aumentar o número máximo de arquivos de rastreamento salvos, você deve garantir que o sistema tenha espaço suficiente em seu disco rígido para acomodar os arquivos de rastreamento.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Sobre esta tarefa
+Se o rastreamento estiver ativado, as informações de rastreamento serão gravadas no `cimserver.trc` arquivo. Os arquivos de rastreamento são girados.  `cimserver.trc`Quando atinge o tamanho máximo do arquivo de rastreamento, seu conteúdo é movido para o `cimserver.trc._n_` arquivo. Por padrão, `n` é um valor de 0 a 5. Se necessitar de mais ficheiros de rastreio guardados, aumenta o valor de `_n_`.
+
+.Passos
+. Acesse o provedor NetApp SMI-S.
+. Crie uma variável de ambiente de sistema ou usuário nomeada com `PEGASUS_TRACE_FILE_NUM` o novo número de arquivos de rastreamento salvos.
++
+_Documentação do Windows_ tem mais informações sobre a criação de variáveis de ambiente.
+
+. Reinicie o servidor CIM:
++
+`*smis cimserver restart*`
+
+

@@ -1,0 +1,92 @@
+---
+permalink: reference-trace-setting-values.html 
+sidebar: sidebar 
+keywords: specify, comments, trace, target, change, location 
+summary: Você pode especificar os componentes a serem rastreados, o alvo de rastreamento e o nível de rastreamento. Opcionalmente, você pode alterar o nome e a localização do arquivo de rastreamento se não quiser usar o nome e a localização do arquivo de rastreamento padrão. 
+---
+= Valores de definição do traçado
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode especificar os componentes a serem rastreados, o alvo de rastreamento e o nível de rastreamento. Opcionalmente, você pode alterar o nome e a localização do arquivo de rastreamento se não quiser usar o nome e a localização do arquivo de rastreamento padrão.
+
+Pode configurar as seguintes definições de rastreio:
+
+* *TraceComponents*
++
+Especifica os componentes a serem rastreados. Por padrão, todos os componentes são rastreados.
+
+* *TraceFacility*
++
+Especifica o destino para o qual as mensagens de rastreamento são escritas:
+
++
+** Ficheiro
++
+Este é o valor padrão, que especifica que as mensagens de rastreamento são gravadas no arquivo especificado pela opção de configuração traceFilePath.
+
+** Registo
++
+Especifica que as mensagens de rastreamento são gravadas no arquivo de log cimserver_standard.
+
+
+
+* *TraceFilePath*
++
+Especifica a localização do arquivo de rastreamento. Por padrão, o arquivo de rastreamento é chamado `cimserver.trc` e está localizado no `traces` diretório.
+
+* *TraceLevel*
++
+Especifica o nível de rastreamento. Por padrão, o rastreamento é desativado.
+
++
+[cols="2*"]
+|===
+| Nível do traçado | Rastrear mensagens escritas 
+
+
+ a| 
+0
+ a| 
+O rastreamento está desativado.
+
+
+
+ a| 
+1
+ a| 
+Mensagens graves e de registo.
+
+
+
+ a| 
+2
+ a| 
+Mensagens básicas de rastreamento de fluxo (detalhes de dados baixos)
+
+
+
+ a| 
+3
+ a| 
+Fluxo lógico inter-função (detalhe de dados médios)
+
+
+
+ a| 
+4
+ a| 
+Alto detalhe de dados
+
+
+
+ a| 
+5
+ a| 
+Detalhes de dados elevados e método de entrada e saída
+
+|===
+

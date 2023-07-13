@@ -1,0 +1,75 @@
+---
+permalink: reference-editing-the-slp-conf-file.html 
+sidebar: sidebar 
+keywords: 'slp.conf, configuration, additional options, manage, service location,daemon (SLPD) server' 
+summary: 'O arquivo de configuração slp.conf fornece opções adicionais que permitem gerenciar um servidor SLPD (Service location Protocol daemon).' 
+---
+= gerenciamento de arquivos slp.conf
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+O `slp.conf` arquivo de configuração fornece opções adicionais que permitem gerenciar um servidor SLPD (Service location Protocol daemon).
+
+.Localização
+`C:\Program Files (x86)\NetApp\smis\pegasus\cfg`
+
+.Nível de privilégio
+Um utilizador com um nome de utilizador e uma palavra-passe válidos
+
+
+
+== Descrição
+
+O `slp.conf` arquivo de configuração permite alterar o número de interfaces que um host escuta para solicitações SLP e o número de endereços IP que um host usa para multicast.
+
+Use um editor de texto para abrir o `slp.conf`.
+
+.Parâmetros
+* *`interfaces`*
++
+Especifica o número máximo de endereços IP que um host pode ouvir para solicitações SLP.
+
+* *`multicast`*
++
+Especifica o número máximo de endereços IP que um host pode usar para multicast. Use este parâmetro ao configurar interfaces para tráfego multicast SLP em sistemas multihomed.
+
+* *`BroadcastOnly`*
++
+Força o uso da opção broadcast, em vez de usar a opção multicast, ao enviar mensagens por SLP.
+
+* *`securityEnabled`*
++
+Ativa a segurança para URLs e listas de atributos recebidos.
+
+
+
+.Exemplo
+O seguinte é um exemplo abreviado do `slp.conf` arquivo de configuração:
+
+[listing]
+----
+
+################################################################
+# OpenSLP configuration file
+# Format and contents conform to specification in IETF RFC 2614 so
+the comments use the language of the RFC. In OpenSLP, SLPD
+operates as an SA and a DA. The SLP UA functionality is
+encapsulated by SLPLIB.
+################################################################
+
+#-----------------------------------------------------------------
+# Static Scope and DA Configuration
+#-----------------------------------------------------------------
+# This option is a comma delimited list of strings indicating the
+only scopes a UA or SA is allowed when making requests or
+registering or the scopes a DA must support. (default value is
+"DEFAULT");net.slp.useScopes = myScope1, myScope2, myScope3
+
+# Allows administrator to force UA and SA agents to use specific
+DAs. If this setting is not used dynamic DA discovery will be used
+to determine which DAs to use. (Default is to use dynamic DA
+discovery)
+----

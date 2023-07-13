@@ -1,0 +1,26 @@
+---
+permalink: task-specify-the-concrete-job-lifetime-value.html 
+sidebar: sidebar 
+keywords: smi-s provider, asynchronous, operation, concrete job, increase, lifetime, 60 minutes, 24 hours 
+summary: 'SMI-S Provider rastreia o progresso das operações assíncronas criando empregos concretos. Você pode aumentar a vida útil do trabalho concreto do padrão de 60 minutos (3600 segundos) para um valor de 86400 segundos (24 horas).' 
+---
+= Especifique o valor de vida útil do trabalho concreto
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+SMI-S Provider rastreia o progresso das operações assíncronas criando _concrete jobs_. Você pode aumentar a vida útil do trabalho concreto do padrão de 60 minutos (3600 segundos) para um valor de 86400 segundos (24 horas).
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Passo
+. Crie uma variável de ambiente de sistema ou usuário nomeada com `JOB_LIFETIME_SEC` o novo valor vitalício (em segundos).
++
+Para obter informações sobre como criar variáveis de ambiente, consulte a documentação do Windows.
+
+

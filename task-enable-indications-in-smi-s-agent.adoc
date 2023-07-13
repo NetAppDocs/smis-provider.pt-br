@@ -1,0 +1,31 @@
+---
+permalink: task-enable-indications-in-smi-s-agent.html 
+sidebar: sidebar 
+keywords: netApp smi-s provider, lifecycle, disable, default, indication 
+summary: As indicações de alerta, cota de sistema de arquivos e ciclo de vida estão desativadas por padrão. Você pode ativar essas indicações definindo a variável de ambiente PEGASUS_DISABLE_INDICATIONS como false. 
+---
+= Ativar indicações no SMI-S Provider
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+As indicações de alerta, cota de sistema de arquivos e ciclo de vida estão desativadas por padrão. Pode ativar estas indicações definindo a variável de ambiente `PEGASUS_DISABLE_INDICATIONS` como `false`.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Sobre esta tarefa
+ `PEGASUS_DISABLE_INDICATIONS`Quando está definido como `false`, em seguida, alerta (`ONTAP_AlertIndication`), cota de sistema de arquivos (`ONTAP_FSQuotaIndication`) e as indicações de ciclo de vida estão ativadas no Fornecedor NetApp SMI-S.
+
+.Passos
+. Acesse o provedor NetApp SMI-S.
+. Defina a `PEGASUS_DISABLE_INDICATIONS` variável de ambiente como `false`.
+. Reinicie o servidor CIM:
++
+`*smis cimserver restart*`
+
+

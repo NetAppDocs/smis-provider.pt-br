@@ -1,0 +1,51 @@
+---
+permalink: task-verify-the-cim-server-status.html 
+sidebar: sidebar 
+keywords: install, netapp smi-s provider, verify, cim server, automatic, access 
+summary: Depois de instalar o provedor NetApp SMI-S, você deve verificar se o servidor CIM foi iniciado automaticamente depois de acessar o provedor SMI-S. 
+---
+= Verifique o status do servidor CIM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Depois de instalar o provedor NetApp SMI-S, você deve verificar se o servidor CIM foi iniciado automaticamente depois de acessar o provedor SMI-S.
+
+.Antes de começar
+Você já deve ter credenciais de login como Administrador.
+
+.Passos
+. Inicie sessão como Administrador.
+. Acesse o provedor NetApp SMI-S navegando até o diretório onde residem os executáveis:
++
+[cols="2*"]
+|===
+| Se você estiver usando... | Então faça isso... 
+
+
+ a| 
+Prompt de comando (com Privileges administrativo elevado)
+ a| 
+Navegue para `C:\Program Files (x86)\NetApp\smis\pegasus\bin`
+
+
+
+ a| 
+*Iniciar* > *programas* menu
+ a| 
+Clique com o botão direito do rato *Fornecedor NetApp SMI-S* e `Run as Administrator` selecione .
+
+|===
+. Ver o estado do servidor CIM:
++
+`*smis cimserver status*`
+
++
+Se o servidor CIM tiver sido iniciado, é apresentada a seguinte mensagem:
+
++
+`NetApp SMI-S Provider is running.`
+
+

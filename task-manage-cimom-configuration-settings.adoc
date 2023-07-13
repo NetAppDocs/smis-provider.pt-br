@@ -1,0 +1,94 @@
+---
+permalink: task-manage-cimom-configuration-settings.html 
+sidebar: sidebar 
+keywords: smi-s provider, to manage, cimom configuration, enable, disable, http, https, port numbers 
+summary: Você pode usar o SMI-S Provider para gerenciar a configuração do CIMOM, como habilitar ou desabilitar conexões HTTP e HTTPS e alterar números de portas HTTP e HTTPS. Por padrão, as conexões HTTP são ativadas, permitindo que os clientes se conetem ao servidor CIM sem usar criptografia SSL. 
+---
+= Gerir as definições de configuração do CIMOM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode usar o SMI-S Provider para gerenciar a configuração do CIMOM, como habilitar ou desabilitar conexões HTTP e HTTPS e alterar números de portas HTTP e HTTPS. Por padrão, as conexões HTTP são ativadas, permitindo que os clientes se conetem ao servidor CIM sem usar criptografia SSL.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Sobre esta tarefa
+Se o seu ambiente necessitar de tráfego encriptado de e para o servidor CIM, tem de desativar primeiro as ligações HTTP e, em seguida, verificar se as ligações HTTPS para o servidor CIM estão ativadas.
+
+.Passos
+. Acesse o provedor NetApp SMI-S.
+. Execute uma das seguintes ações:
++
+[cols="3*"]
+|===
+| Ação | Comando | Informações adicionais 
+
+
+ a| 
+Ative a conexão HTTP
+ a| 
+`*cimconfig -s enableHttpConnection=true -p*`
+ a| 
+NA
+
+
+
+ a| 
+Desative a conexão HTTP
+ a| 
+`*cimconfig -s enableHttpConnection=false -p*`
+ a| 
+NA
+
+
+
+ a| 
+Ative a ligação HTTPS
+ a| 
+`*cimconfig -s enableHttpsConnection=true -p*`
+ a| 
+NA
+
+
+
+ a| 
+Desative a conexão HTTPS
+ a| 
+`*cimconfig -s enableHttpsConnection=false -p*`
+ a| 
+NA
+
+
+
+ a| 
+Modifique o número da porta HTTP
+ a| 
+`*cimconfig -s httpPort=_new_port_number_ -p*`
+ a| 
+Por padrão, o número da porta HTTP é 5988. Se você quiser alterá-lo para 5555, por exemplo, você digitaria este comando:
+
+`*cimconfig -s httpPort=5555 -p*`
+
+
+
+ a| 
+Modifique o número da porta HTTPS
+ a| 
+`*cimconfig -s httpsPort=_new_port_number_ -p*`
+ a| 
+Por padrão, o número da porta HTTP é 5989. Se você quiser alterá-lo para 5556, por exemplo, você digitaria este comando:
+
+`*cimconfig -s httpsPort=5556 -p*`
+
+|===
+. Reinicie o servidor CIM:
++
+`*smis cimserver restart*`
+
+

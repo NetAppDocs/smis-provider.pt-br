@@ -1,0 +1,20 @@
+---
+permalink: reference-smi-s-agent-takes-a-long-time-to-start.html 
+sidebar: sidebar 
+keywords: netapp smi-s provider 
+summary: Problemas encontrados com o provedor NetApp SMI-S. 
+---
+= O provedor NetApp SMI-S leva muito tempo para começar
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+* *Descrição*
++
+Em sistemas Windows, com sistemas de armazenamento que já estão sob gerenciamento, quando você inicia o NetApp SMI-S Provider usando o `smis cimserver` comando, o comando não retorna até que o cache local do provedor seja preenchido. Ele espera um máximo de 15 minutos enquanto o cache é preenchido, e você não pode usar o NetApp SMI-S Provider até que ele retorne.
+
++
+Usar o `smis cimserver` comando é o método recomendado para iniciar o NetApp SMI-S Provider.
+
+

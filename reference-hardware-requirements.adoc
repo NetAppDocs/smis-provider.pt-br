@@ -1,0 +1,50 @@
+---
+permalink: reference-hardware-requirements.html 
+sidebar: sidebar 
+keywords: smi-s provider, smi-s agent 
+summary: Você deve verificar se o host do Windows atende aos requisitos mínimos de hardware antes de instalar o provedor NetApp SMI-S. 
+---
+= Requisitos de hardware
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você deve verificar se o host do Windows atende aos requisitos mínimos de hardware antes de instalar o provedor NetApp SMI-S.
+
+[cols="2*"]
+|===
+| Hardware | Requisitos 
+
+
+ a| 
+Memória
+ a| 
+* 4 GB de RAM (mínimo)
+* 8 GB de RAM (recomendado)
+
+
+
+
+ a| 
+Espaço em disco
+ a| 
+* 1 GB (mínimo)
+* 4 GB (recomendado)
+
+
+A ativação do registo e do rastreio requer espaço adicional em disco de até 1 GB, dependendo das definições de rotação do ficheiro de registo e rastreio.
+
+Você deve ter 100 MB de espaço em disco temporário disponível para instalação.
+
+
+
+ a| 
+CPU
+ a| 
+* Dual-core de 2,0 GHz (mínimo)
+* Quad-core de 2,0 GHz (recomendado)
+
+
+|===

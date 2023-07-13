@@ -1,0 +1,32 @@
+---
+permalink: concept-smi-s-provider-commands-overview.html 
+sidebar: sidebar 
+keywords: smis, commands, manage, storage, system, display, cim object manager 
+summary: Você pode usar os comandos smis para gerenciar sistemas de armazenamento e exibir informações sobre o gerenciador de objetos CIM. 
+---
+= Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Pode utilizar os `smis` comandos para gerir sistemas de armazenamento e para apresentar informações sobre o gestor de objetos CIM.
+
+A ajuda está disponível para o `smis` comando usando a `-help` opção.
+
+* * smis `-help`*
++
+Exibe um resumo do comando.
+
+* *exemplos de smis `-help`*
++
+Apresenta exemplos de utilização.
+
+* * smis `-help _subcommand_`*
++
+Exibe a ajuda para o subcomando especificado.
+
+
+
+O valor de tempo limite padrão para a ferramenta smis é de 180 segundos.

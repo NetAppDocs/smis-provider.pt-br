@@ -1,0 +1,72 @@
+---
+permalink: task-generate-a-self-signed-certificate-for-the-cim-server-windows.html 
+sidebar: sidebar 
+keywords: ssl authentication, enable, cim server, installation, self-signed certificate 
+summary: Por predefinição, a autenticação SSL está ativada para o servidor CIM. Durante a instalação do Fornecedor SMI-S, um certificado auto-assinado para o servidor CIM é instalado no diretório pegasus. Você pode gerar seu próprio certificado autoassinado e usá-lo em vez do certificado padrão. 
+---
+= Gere um certificado auto-assinado para o servidor CIM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Por predefinição, a autenticação SSL está ativada para o servidor CIM. Durante a instalação do Fornecedor SMI-S, um certificado auto-assinado para o servidor CIM é instalado `pegasus` no diretório. Você pode gerar seu próprio certificado autoassinado e usá-lo em vez do certificado padrão.
+
+.Antes de começar
+* Você já deve ter feito login como Administrador.
+* Você já deve ter acessado SMI-S Provider.
+
+
+.Passos
+. Transfira o `openssl.cnf` ficheiro a partir da seguinte localização: link:http://web.mit.edu/crypto/openssl.cnf["http://web.mit.edu/crypto/openssl.cnf"^]
+. Mova o `openssl.cnf` arquivo para o diretório bin:
++
+`*%PEGASUS_HOME%\bin\openssl.cnf*`
+
+. Defina a `OPENSSL_CONF` variável ambiental para a localização `openssl.cnf` do arquivo:
++
+`*C:\ >set OPENSSL_CONF=%PEGASUS_HOME%\bin\openssl.cnf*`
+
++
+Isso só define a variável de ambiente para a duração da sessão atual do prompt de comando. Se você quiser definir permanentemente a variável de ambiente, você pode usar uma das seguintes opções:
+
++
+** Navegue até *Propriedades > variáveis ambientais* e atualize a variável em *sistema*.
+** Use o prompt de comando para definir permanentemente a variável:
++
+`*setx OPENSSL_CONF “%PEGASUS_HOME%\bin\openssl.cnf*`.
+
++
+A variável é definida quando você abre uma nova sessão do prompt de comando.
+
+
+
+. Navegue até o `%PEGASUS_HOME%\bin` diretório:
++
+`*C:\cd %pegasus_home%\bin*`
+
+. Gerar uma chave privada:
++
+`*openssl genrsa -out cimom.key 2048*`
+
+. Gerar uma solicitação de certificado:
++
+`*openssl req -new -key cimom.key -out cimom.csr*`
+
+. Insira as informações para a solicitação de certificado quando solicitado.
+. Gerar o certificado autoassinado:
++
+`*openssl x509 -in cimom.csr -out cimom.cert -req -signkey cimom.key -days 1095*`
+
++
+Você pode fornecer um número diferente de dias para os quais o certificado é válido.
+
+. Copie os `cimom.key` ficheiros e `cimom.cert` para o `pegasus` diretório (Windows: `C:\Program Files (x86)\NetApp\smis\pegasus`).
+
+
+
+
+== Resultado
+
+O intervalo de datas do certificado começa na data atual e é executado pelo número de dias especificados.

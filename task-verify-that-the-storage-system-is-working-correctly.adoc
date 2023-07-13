@@ -1,0 +1,86 @@
+---
+permalink: task-verify-that-the-storage-system-is-working-correctly.html 
+sidebar: sidebar 
+keywords: smi-s provider, configure, least storage, cimom repository storage, working, correctly 
+summary: Antes que o Fornecedor SMI-S possa ser configurado, você deve adicionar pelo menos um sistema de armazenamento ao repositório CIMOM e, em seguida, verificar se o sistema de armazenamento está funcionando corretamente. 
+---
+= Verifique se o sistema de armazenamento está funcionando corretamente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Antes que o Fornecedor SMI-S possa ser configurado, você deve adicionar pelo menos um sistema de armazenamento ao repositório CIMOM e, em seguida, verificar se o sistema de armazenamento está funcionando corretamente.
+
+.Antes de começar
+* Você já deve ter feito login como Administrador.
+* Você já deve ter acessado SMI-S Provider.
+
+
+.Passos
+. Adicione pelo menos um sistema de armazenamento ao repositório CIMOM:
++
+[cols="2*"]
+|===
+| Para adicionar um sistema de armazenamento com... | Digite este comando... 
+
+
+ a| 
+Conexão HTTP entre o provedor e o sistema de armazenamento
+ a| 
+`*smis add _storage_sys storage_sys_user_*`
+
+
+
+ a| 
+Ligação HTTPS entre o fornecedor e o sistema de armazenamento
+ a| 
+`*smis addsecure _storage_sys storage_sys_user_*`
+
+|===
++
+O comando aguarda até 15 minutos para que o provedor atualize o cache e responda.
+
+. Verifique a saída para os seguintes comandos:
++
+[cols="2*"]
+|===
+| Para este comando... | Verifique se... 
+
+
+ a| 
+`smis list`
+ a| 
+O número de itens corresponde ao número de sistemas de armazenamento que estão sendo gerenciados.
+
+
+
+ a| 
+`smis disks`
+ a| 
+O número de discos corresponde ao número total de discos em todos os sistemas de armazenamento.
+
+
+
+ a| 
+`smis luns`
+ a| 
+O número de LUNs corresponde ao número total de LUNs em todos os sistemas de storage.
+
+
+
+ a| 
+`smis pools`
+ a| 
+O número de ONTAP_ConcretePools corresponde ao número total de agregados em todos os sistemas de storage.
+
+
+
+ a| 
+`smis volumes`
+ a| 
+O número de volumes corresponde ao número total de volumes em todos os sistemas de storage.
+
+|===
+

@@ -1,0 +1,26 @@
+---
+permalink: task-specify-the-ontapi-timeout-value.html 
+sidebar: sidebar 
+keywords: smi-s provider, ontap api, calls, storage systems, ontapi, default, 300 sec 
+summary: 'O fornecedor SMI-S faz chamadas à API ONTAP (ONTAPI) para sistemas de armazenamento. Por padrão, o tempo limite da ONTAPI é de 300 segundos. Você pode definir o tempo limite para um valor de 60 a 300 segundos.' 
+---
+= Especifique o valor de tempo limite ONTAPI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+O fornecedor SMI-S faz chamadas à API ONTAP (ONTAPI) para sistemas de armazenamento. Por padrão, o tempo limite da ONTAPI é de 300 segundos. Você pode definir o tempo limite para um valor de 60 a 300 segundos.
+
+.Antes de começar
+* Você já deve ter credenciais de login como Administrador.
+* Você já deve ter feito login no sistema host como Administrador.
+
+
+.Passo
+. Crie uma variável de ambiente de sistema ou usuário nomeada com `ONTAPI_TIMEOUT_SEC` o novo valor de tempo limite (em segundos).
++
+Para obter informações sobre como criar variáveis de ambiente, consulte a documentação do Windows.
+
+

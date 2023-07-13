@@ -1,0 +1,46 @@
+---
+permalink: reference-slptool-command-options.html 
+sidebar: sidebar 
+keywords: slptool, command 
+summary: Você pode usar essas opções com o comando slptool. 
+---
+= ferramenta de corte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode usar o `slptool` comando para exibir informações sobre os serviços WBEM.
+
+.Sintaxe
+`slptool [options] _subcommand_`
+
+.Localização
+`C:\Program Files (x86)\NetApp\smis\pegasus\bin`
+
+.Nível de privilégio
+Administrador (Windows)
+
+.Opções
+* *-i*
++
+Especifica uma ou mais interfaces.
+
+* *-l*
++
+Especifica uma etiqueta de idioma.
+
+* *-s*
++
+Especifica uma lista de escopos (separados por vírgulas).
+
+* *-u*
++
+Especifica uma interface.
+
+* *-v*
++
+Exibe a versão do `slptool` e do OpenSLP.
+
+

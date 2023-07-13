@@ -1,0 +1,26 @@
+---
+permalink: task-download-smi-s-provider.html 
+sidebar: sidebar 
+keywords: netapp smi-s provider, installing, download 
+summary: Antes de instalar o fornecedor NetApp SMI-S, tem de transferir o pacote de software a partir do site de suporte da NetApp. 
+---
+= Transfira o pacote de software do fornecedor NetApp SMI-S
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Antes de instalar o fornecedor NetApp SMI-S, tem de transferir o pacote de software a partir do site de suporte da NetApp.
+
+.Antes de começar
+Você deve ter criado uma conta do site de suporte da NetApp https://mysupport.netapp.com/site/global/dashboard["Suporte à NetApp"] no .
+
+.Passos
+. Vá para a página *Downloads* > *Software* no site de suporte da NetApp.
+. Localize o Fornecedor SMI-S (antigo Agente SMI-S da Data ONTAP) e selecione o sistema operativo Windows e, em seguida, clique em *Go!*.
+. Selecione a versão a transferir clicando em *Ver e Transferir*.
+. Na seção *Download de software*, clique em *CONTINUAR*.
+. Leia e aceite o Contrato de Licença de Usuário final.
+. Selecione o arquivo do pacote de software e salve-o no local desejado.
+

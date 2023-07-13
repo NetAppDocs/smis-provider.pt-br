@@ -1,0 +1,34 @@
+---
+permalink: reference-no-response-from-the-server.html 
+sidebar: sidebar 
+keywords: troubleshooting, issue, encounter 
+summary: Problemas encontrados com o provedor NetApp SMI-S. 
+---
+= Nenhuma resposta do servidor
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+* *Emissão*
++
+O servidor não responde quando consultado.
+
+* *Causa*
++
+Esse problema ocorre quando não há nenhum sistema de armazenamento adicionado ao repositório CIMOM.
+
+* *Ações corretivas*
++
+Digite o seguinte comando para verificar se um sistema de armazenamento foi adicionado:
+
++
+`smis list`
+
++
+Se não houver nenhum sistema de armazenamento listado, adicione um sistema de armazenamento digitando o seguinte comando:
+
++
+`smis add _storage_sys storage_sys_user storage_sys_pwd_`
+
+

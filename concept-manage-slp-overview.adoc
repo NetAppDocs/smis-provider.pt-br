@@ -1,0 +1,16 @@
+---
+permalink: concept-manage-slp-overview.html 
+sidebar: sidebar 
+keywords: slp, service broadcasts, wbem services, slp, ebable, client, application, discover, cimom, configuration, settings 
+summary: O serviço SLP transmite os serviços WBEM. Quando o serviço SLP está ativado, os aplicativos clientes podem descobrir o servidor CIMOM. Você também pode especificar as configurações SLP usando o arquivo slp.conf. 
+---
+= Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+O serviço SLP transmite os serviços WBEM. Quando o serviço SLP está ativado, os aplicativos clientes podem descobrir o servidor CIMOM. Você também pode especificar as configurações SLP usando o `slp.conf` arquivo.
+
+Se o serviço SLP ainda não estiver ativado, você poderá iniciar o serviço SLP usando o `smis slpd start` comando. Para parar o serviço SLP, use o `smis slpd stop` comando.

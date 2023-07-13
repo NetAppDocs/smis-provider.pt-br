@@ -1,0 +1,25 @@
+---
+permalink: reference-clone-snapshot-operations-are-not-allowed.html 
+sidebar: sidebar 
+keywords: troubleshooting, issue, encounter 
+summary: Problemas encontrados com o provedor NetApp SMI-S. 
+---
+= Operações de clone/Snapshot não são permitidas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+* *Mensagem*
++
+`Clone/Snapshot operations are not allowed while LUN clone split operations are going on in the volume. Please wait for some time and try again.`
+
+* *Descrição*
++
+Esse erro ocorre se você tentar executar operações de Snapshot durante uma divisão de clone de LUN. Você não pode executar operações de Snapshot em um volume em que um LUN está sendo dividido, se esse divisão de clone de LUN estiver sendo executado em segundo plano.
+
+* *Ações corretivas*
++
+Tente suas operações de snapshot após o LUN ser dividido.
+
+

@@ -1,0 +1,52 @@
+---
+permalink: reference-cannot-connect-to-localhost-5989-error.html 
+sidebar: sidebar 
+keywords: troubleshooting, issue, encounter 
+summary: Problemas encontrados com o provedor NetApp SMI-S. 
+---
+= Não é possível ligar ao localhost:5989
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+* *Mensagem*
++
+`Cannot connect to localhost:5989. Connection failed. Trying to connect to localhost:5989`
+
+* *Descrição*
++
+Esta mensagem ocorre quando as ligações HTTPS estão desativadas ou a porta HTTPS não está definida como 5989, ou se o fornecedor parou de funcionar e permanece num estado de suspensão.
+
+* *Ações corretivas*
++
+Verifique se os valores de `enableHttpsConnection` e `httpsPort` estão corretos:
+
++
+`cimconfig -g enableHttpsConnection`
+
++
+`cimconfig -g httpsPort`
+
++
+Se `enableHttpsConnection` não estiver definido como "'true'", digite os seguintes comandos:
+
++
+`cimconfig -s enableHttpsConnection -p`
+
++
+`smis cimserver restart`
+
++
+Se `httpsPort` não estiver definido como 5989, introduza os seguintes comandos:
+
++
+`cimconfig -s httpsPort=5989 -p`
+
++
+`smis cimserver restart`
+
++
+Se o provedor parou de funcionar e permanecer em um estado suspenso, abra o Gerenciador de tarefas e termine o processo e reinicie o provedor.
+
+

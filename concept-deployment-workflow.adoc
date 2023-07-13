@@ -1,0 +1,16 @@
+---
+permalink: concept-deployment-workflow.html 
+sidebar: sidebar 
+keywords: manage, monitor, storage, systems, smi-s provider, software, validate, preliminary, configuration 
+summary: Antes de gerenciar e monitorar seus sistemas de storage usando o SMI-S Provider, você deve instalar o software SMI-S Provider e validar sua configuração preliminar. 
+---
+= Fluxo de trabalho de implantação
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Antes de gerenciar e monitorar seus sistemas de storage usando o SMI-S Provider, você deve instalar o software SMI-S Provider e validar sua configuração preliminar.
+
+image::../media/smi_s_provider_workflow.gif[fluxo de trabalho do fornecedor smi]

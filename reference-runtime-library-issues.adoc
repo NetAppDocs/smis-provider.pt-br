@@ -1,0 +1,22 @@
+---
+permalink: reference-runtime-library-issues.html 
+sidebar: sidebar 
+keywords: troubleshooting, issue, encounter 
+summary: Problemas encontrados com o provedor NetApp SMI-S. 
+---
+= Problemas na biblioteca de tempo de execução
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+:pp: &#43;&#43;
+
+
+* *Emissão*
++
+Você encontra problemas de biblioteca de tempo de execução.
+
+* *Ações corretivas*
++
+Instale o Microsoft Visual C [pp] 2010 Redistributable Package (x86) a partir de www.microsoft.com.
+
+

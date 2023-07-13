@@ -1,0 +1,38 @@
+---
+permalink: reference-logging-levels.html 
+sidebar: sidebar 
+keywords: messages, specify, logged 
+summary: 'Você pode especificar os tipos de mensagens registradas (por exemplo, deseja que apenas as mensagens fatais do sistema sejam registradas).' 
+---
+= Níveis de registo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode especificar os tipos de mensagens registradas (por exemplo, deseja que apenas as mensagens fatais do sistema sejam registradas).
+
+Pode configurar o nível de registo para uma das seguintes opções:
+
+* *TRACE*
++
+Salva mensagens de rastreamento no log cimserver_standard.
+
+* *INFORMAÇÕES*
++
+Regista todas as mensagens do sistema (informativas, de aviso, graves e fatais).
+
+* *AVISO*
++
+Regista mensagens de aviso, graves e fatais do sistema.
+
+* *GRAVE*
++
+Regista mensagens graves e fatais do sistema
+
+* *FATAL*
++
+Regista apenas mensagens fatais do sistema.
+
+

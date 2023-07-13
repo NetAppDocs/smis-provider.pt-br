@@ -1,0 +1,72 @@
+---
+permalink: reference-cimconfig-command-options.html 
+sidebar: sidebar 
+keywords: cimconfig, command, cimom configuration, settings, variable, mis cimserver restart command 
+summary: Você pode usar o comando cimconfig para gerenciar as configurações do CIMOM. Depois de inserir o comando cimconfig ou criar uma variável de ambiente para o valor de configuração do provedor NetApp SMI-S, você deve reiniciar o servidor CIM usando o comando smis cimserver restart. 
+---
+= cimconfig
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode usar o `cimconfig` comando para configurar as configurações do CIMOM, como ativar e desativar HTTP e HTTPS e alterar os números de portas HTTP e HTTPS. Depois de inserir o `cimconfig` comando ou criar uma variável de ambiente para o valor de configuração do provedor NetApp SMI-S, você deve reiniciar o servidor CIM usando o `smis cimserver restart` comando.
+
+.Sintaxe
+`cimconfig _options_`
+
+.Localização
+`C:\Program Files (x86)\NetApp\smis\pegasus\bin`
+
+.Nível de privilégio
+Administrador (Windows)
+
+.Opções
+* *-c*
++
+Especifica que a configuração se aplica à configuração CIMOM atual.
+
+* *-d*
++
+Especifica que a configuração se aplica à configuração padrão do CIMOM.
+
+* *-g*
++
+Obtém o valor de uma propriedade de configuração especificada.
+
+* *-h, --help*
++
+Exibe a ajuda para o `cimconfig` comando.
+
+* *-l*
++
+Lista todas as propriedades de configuração do CIMOM.
+
+* *-p*
++
+Especifica que a configuração é aplicada quando o servidor CIM é iniciado pela próxima vez.
+
+* *-s*
++
+Define o valor da propriedade de configuração especificado.
+
+* *-u*
++
+Redefine a propriedade de configuração para seu valor padrão.
+
+* *--versão*
++
+Apresenta a versão do servidor CIM.
+
+
+
+.Exemplo
+Altere o tamanho máximo do arquivo de log para 15000 KB:
+
+[listing]
+----
+cimconfig -s maxLogFileSizeKBytes=15000
+Current value for the property maxLogFileSizeKBytes is set to "15000" in CIMServer.
+smis cimserver restart
+----
