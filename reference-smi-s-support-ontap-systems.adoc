@@ -1,5 +1,5 @@
 ---
-permalink: reference-supported-platforms.html 
+permalink: reference-smi-s-support-ontap-systems.html 
 sidebar: sidebar 
 keywords: netApp smi-s provider, cluster, platforms, support for ONTAP systems 
 summary: O Fornecedor NetApp SMI-S suporta plataformas de cluster que executam o ONTAP 9 e posterior. 
