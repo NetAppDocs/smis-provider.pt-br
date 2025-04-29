@@ -6,7 +6,7 @@ settings:
   prod:
     pdf_enabled: true
     harmony_enabled: false
-  langs: pt-br,us-en,ja-jp,ko-kr,zh-cn,zh-tw,de-de,es-es,fr-fr,it-it
+  langs: pt-br,us-en,de-de,es-es,fr-fr,it-it,ja-jp,ko-kr,zh-cn,zh-tw
 sidebar:
   entries:
   - title: NetApp SMI-S Provider docs
@@ -20,13 +20,13 @@ sidebar:
     - title: Novidades nesta versão
       url: "/reference-new-in-this-release-smis.html"
     - title: Usos do Fornecedor NetApp SMI-S.
-      url: "/reference-uses-of-data-ontap-smi-s-agent.html"
+      url: "/reference-uses-of-ontap-smi-s-agent.html"
     - title: Dimensionamento e desempenho do fornecedor NetApp SMI-S
       url: "/reference-smi-s-agent-sizing-and-performance-information.html"
     - title: Componentes do Fornecedor NetApp SMI-S.
-      url: "/reference-data-ontap-smi-s-agent-components.html"
+      url: "/reference-ontap-smi-s-agent-components.html"
     - title: Protocolos do Fornecedor NetApp SMI-S.
-      url: "/reference-data-ontap-smi-s-agent-protocols.html"
+      url: "/reference-ontap-smi-s-agent-protocols.html"
     - title: Como o provedor NetApp SMI-S interage com um host
       url: "/concept-how-smi-s-provider-interacts-with-a-host.html"
     - title: Perfis SMI-S.
@@ -43,8 +43,8 @@ sidebar:
       url: "/reference-hardware-requirements.html"
     - title: Licenças necessárias
       url: "/reference-required-licenses.html"
-    - title: Plataformas de cluster compatíveis
-      url: "/reference-supported-platforms.html"
+    - title: Suporte do fornecedor NetApp SMI-S para sistemas ONTAP
+      url: "/reference-smi-s-support-ontap-systems.html"
     - title: Transfira o pacote de software do fornecedor NetApp SMI-S
       url: "/task-download-smi-s-provider.html"
   - title: Instale o Fornecedor NetApp SMI-S.
@@ -111,8 +111,8 @@ sidebar:
       url: "/task-specify-the-smi-s-agent-cache-refresh-interval.html"
     - title: Especifique o valor de vida útil do trabalho concreto
       url: "/task-specify-the-concrete-job-lifetime-value.html"
-    - title: Especifique o valor de tempo limite ONTAPI
-      url: "/task-specify-the-ontapi-timeout-value.html"
+    - title: Especifique o valor de tempo limite de chamada da API ONTAP
+      url: "/task-specify-the-ontap-api-call-timeout-value.html"
     - title: Especifique o número máximo de threads por fila de serviço de mensagens
       url: "/task-specify-the-maximum-number-of-threads-per-message-service-queue.html"
     - title: Ativar ou desativar a autenticação para o Fornecedor NetApp SMI-S.
@@ -246,4 +246,4 @@ sidebar:
         com o Fornecedor SMI-S.
       url: "/reference-scvmm-rescan-operation-failed-to-locate-or-communicate-with-smi-s-provider.html"
   - title: Avisos legais
-    url: "/reference-legal-notices.html"
+    url: "/legal-notices.html"

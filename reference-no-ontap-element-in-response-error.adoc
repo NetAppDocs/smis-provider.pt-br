@@ -16,10 +16,10 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 
 * *Descrição*
 +
-Esta mensagem ocorre quando a API ONTAPI expira. O tempo limite padrão da API ONTAPI é de 60 segundos, o que pode ser muito curto em alguns cenários.
+Esta mensagem ocorre quando a chamada da API ONTAP expira. O tempo limite de chamada padrão da API ONTAP é de 60 segundos, o que pode ser muito curto em alguns cenários.
 
 * *Ações corretivas*
 +
-Altere o tempo limite da API ONTAPI para um valor superior a 60 segundos definindo a variável de ambiente `ONTAPI_TIMEOUT_SEC` e reinicie o provedor SMI-S.
+Altere o tempo limite de chamada da API ONTAP para um valor maior que 60 segundos definindo a variável de ambiente `ONTAPI_TIMEOUT_SEC` e reinicie o provedor SMI-S.
 
 

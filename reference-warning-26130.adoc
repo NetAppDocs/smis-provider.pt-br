@@ -28,9 +28,9 @@ Esse erro ocorre quando você aloca a capacidade de armazenamento e concede aces
 
 . Em cada máquina host, adicione o endereço IP de cada sistema de armazenamento à aplicação iSCSI Initiator.
 . Se necessário, em cada sistema de armazenamento, para cada máquina host, crie um iggroup exclusivo vinculado ao nome de nó iSCSI adequado da máquina host correspondente.
-. Para cada máquina host conetada ao Data ONTAP, abra o aplicativo MPIO e adicione o seguinte ID de hardware:
+. Para cada máquina host conetada ao ONTAP, abra o aplicativo MPIO e adicione o seguinte ID de hardware:
 +
-** Para Clustered Data ONTAP, digite `*NETAPP LUN C-Mode*`.
+** Para ONTAP, introduza `*NETAPP LUN C-Mode*`.
 
 
 . Reinicie as máquinas host.

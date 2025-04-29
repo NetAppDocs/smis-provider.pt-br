@@ -20,7 +20,7 @@ O `smis volumes` comando lista os volumes tradicionais e flexíveis para sistema
 
 [NOTE]
 ====
-Para o Clustered Data ONTAP, você deve usar o `smis pools` comando em vez `smis volumes` do comando.
+Para o ONTAP, você deve usar o `smis pools` comando em vez `smis volumes` do comando.
 
 ====
 .Localização

@@ -1,8 +1,8 @@
 ---
 permalink: concept-manage-smi-s-agent-advanced-settings-overview.html 
 sidebar: sidebar 
-keywords: manage, advance, smi-s provider, smis-s cache, refresh, interval, ontapi, timeout, thread, service, queue 
-summary: Você pode gerenciar configurações avançadas para SMI-S Provider, como especificar o intervalo de atualização do cache SMI-S, tempo limite ONTAPI e número máximo de threads por fila de serviço de mensagens. 
+keywords: manage, advance, smi-s provider, smis-s cache, refresh, interval, ontap API call, timeout, thread, service, queue 
+summary: Você pode gerenciar configurações avançadas para o provedor SMI-S, como especificar o intervalo de atualização do cache SMI-S, o tempo limite de chamada da API ONTAP e o número máximo de threads por fila de serviço de mensagens. 
 ---
 = Visão geral
 :allow-uri-read: 
@@ -11,4 +11,4 @@ summary: Você pode gerenciar configurações avançadas para SMI-S Provider, co
 
 
 [role="lead"]
-Você pode gerenciar configurações avançadas para SMI-S Provider, como especificar o intervalo de atualização do cache SMI-S, tempo limite ONTAPI e número máximo de threads por fila de serviço de mensagens.
+Você pode gerenciar configurações avançadas para o provedor SMI-S, como especificar o intervalo de atualização do cache SMI-S, o tempo limite de chamada da API ONTAP e o número máximo de threads por fila de serviço de mensagens.

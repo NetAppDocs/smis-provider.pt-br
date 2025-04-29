@@ -24,6 +24,8 @@ Windows
  a| 
 * Microsoft Windows Server 2016
 * Microsoft Windows Server 2019
+* Microsoft Windows Server 2022
+* Microsoft Windows Server 2025
 
  a| 
 As bibliotecas de tempo de execução do Microsoft Visual C 2010 são instaladas automaticamente durante a instalação do SMI-S Provider. Para evitar possíveis problemas relacionados às bibliotecas de tempo de execução, você deve instalar o Microsoft Visual C(pp) 2010 Redistributable Package (x86). A partir do seguinte local: http://www.microsoft.com[]
@@ -31,11 +33,11 @@ As bibliotecas de tempo de execução do Microsoft Visual C 2010 são instaladas
 |===
 
 
-== Requisito SCVMM 2016 UR 2,1
+== Requisito SCVMM UR 2,1
 
-O pacote cumulativo de atualizações (UR) 2016 do System Center Virtual Machine Manager (SCVMM) 2,1 é necessário para gerenciar o servidor de arquivos NetApp com o provedor NetApp SMI-S 5.2.4 e posterior.
+O pacote cumulativo de atualizações (UR) 2,1 do Gerenciador de máquinas virtuais do Centro do sistema é necessário para gerenciar o servidor de arquivos do NetApp com o provedor NetApp SMI-S 5.2.7 e posterior.
 
-Sem este UR, o SCVMM 2016 exibe o valor das `Total Capacity` opções `*0 GB*` e `Available Capacity` quanto aos compartilhamentos de arquivo existentes no servidor de arquivos do NetApp.
+Sem este UR, o SCVMM (versão 2016, 2019, 2022 ou 2025) exibe o valor das `Total Capacity` opções e `Available Capacity` quanto `*0 GB*` aos compartilhamentos de arquivo existentes no servidor de arquivos NetApp.
 
 Para executar o SMI-S Provider, a máquina host do provedor deve atender às seguintes especificações:
 

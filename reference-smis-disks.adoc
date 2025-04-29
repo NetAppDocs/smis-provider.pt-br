@@ -2,7 +2,7 @@
 permalink: reference-smis-disks.html 
 sidebar: sidebar 
 keywords: thesmis, disk, command, display, information, storage, systems 
-summary: O comando Thesmis disks exibe informações de disco para sistemas de armazenamento. Os discos smis só funcionam quando usados com controladores Data ONTAP 7-Mode. 
+summary: O comando smis Disks exibe informações de disco para sistemas de armazenamento. Os discos smis só funcionam quando usados com controladores ONTAP 7-Mode. 
 ---
 = discos smis
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: O comando Thesmis disks exibe informações de disco para sistemas de a
 
 
 [role="lead"]
-O `smis disks` comando exibe informações de disco para sistemas de armazenamento. `smis disks` Só funciona quando usado com controladores Data ONTAP 7-Mode.
+O `smis disks` comando exibe informações de disco para sistemas de armazenamento. O `smis disks` comando só é suportado nos controladores ONTAP 7-Mode.
 
 .Sintaxe
 discos smis

@@ -13,4 +13,4 @@ summary: O fornecedor NetApp SMI-S facilita o gerenciamento e o monitoramento de
 [role="lead"]
 O fornecedor NetApp SMI-S facilita o gerenciamento e o monitoramento de sistemas de storage e o gerenciamento de LUNs e volumes de sistemas de storage.
 
-Você pode usar o Fornecedor NetApp SMI-S para gerenciar controladores de armazenamento usando o Centro de sistema 2016 - Gerenciador de máquinas virtuais ou Centro de sistema 2016 - Gerenciador de máquinas virtuais.
+Você pode usar o Fornecedor NetApp SMI-S para gerenciar controladores de storage usando o Centro de sistemas 2016, 2019, 2022 e 2025.

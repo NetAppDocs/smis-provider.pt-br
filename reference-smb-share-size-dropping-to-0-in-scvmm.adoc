@@ -16,7 +16,7 @@ O tamanho de compartilhamento SMB 3,0 novo ou existente pode cair para 0 no Syst
 
 * *Causa*
 +
-Esse problema ocorre quando a reinicialização da cota leva muito tempo no Data ONTAP devido a e/S pesado, o tamanho de compartilhamento SMB 3,0 novo ou existente pode cair para 0 no SCVMM. Devido a isso, novas VMs não podem ser provisionadas nos compartilhamentos SMB 3,0 novos ou existentes.
+Se a reinicialização da cota levar muito tempo no ONTAP devido a e/S pesadas, o tamanho de compartilhamento SMB 3,0 novo ou existente pode cair para 0 no SCVMM. Quando esse problema ocorre, novas VMs não podem ser provisionadas em compartilhamentos SMB 3,0 novos ou existentes.
 
 * *Ações corretivas*
 +
