@@ -33,6 +33,7 @@ Este procedimento de instalação reflete uma nova instalação.
 
 
 
+[[result]]
 == Resultado
 
 O provedor NetApp SMI-S é iniciado automaticamente no final do processo de instalação.

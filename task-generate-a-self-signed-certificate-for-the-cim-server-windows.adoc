@@ -75,6 +75,7 @@ Você pode fornecer um número diferente de dias para os quais o certificado é 
 
 
 
+[[result]]
 == Resultado
 
 O intervalo de datas do certificado começa na data atual e é executado pelo número de dias especificados.

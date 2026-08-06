@@ -12,18 +12,21 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 
 
 
+[[message]]
 == Mensagem
 
 `Warning (26130) Storage pool has been allocated to host group where none of hosts in host group has access to storage array.`
 
 
 
+[[description]]
 == Descrição
 
 Esse erro ocorre quando você aloca a capacidade de armazenamento e concede acesso a uma matriz aos hosts que estão em um grupo de hosts. Com este aviso, é impossível colocar máquinas virtuais nos sistemas de armazenamento.
 
 
 
+[[corrective-action]]
 == Ação corretiva
 
 . Em cada máquina host, adicione o endereço IP de cada sistema de armazenamento à aplicação iSCSI Initiator.

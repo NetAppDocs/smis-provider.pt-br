@@ -35,6 +35,7 @@ As bibliotecas de tempo de execução do Microsoft Visual C++ 2010 são instalad
 |===
 
 
+[[ensure-the-provider-host-machine-meets-the-specifications]]
 == Certifique-se de que a máquina host do provedor atenda às especificações.
 
 Para executar o SMI-S Provider, a máquina host do provedor deve atender às seguintes especificações:
