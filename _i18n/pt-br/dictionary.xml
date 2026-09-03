@@ -12,11 +12,9 @@
   <block id="29539de2349a0b046366e6908d8fa691" category="paragraph">Você pode usar o<block ref="e05dab3c02f28008e9d45ec2a755535d" prefix=" " category="inline-code"></block> comando para ver os objetos que estão no repositório CIMOM do provedor NetApp SMI-S. Por exemplo,<block ref="83d793b4ffc76972ddb8695c302c33bf" prefix=" " category="inline-code"></block> use para exibir sistemas de armazenamento adicionados e use<block ref="ecb4091a0d7fe12a01800c4c519c074d" prefix=" " category="inline-code"></block> para exibir informações de LUN.</block>
   <block id="42c81e79f364b151f80c02c552b5850d" category="summary">Antes de gerenciar e monitorar seus sistemas de storage usando o SMI-S Provider, você deve instalar o software SMI-S Provider e validar sua configuração preliminar.</block>
   <block id="ab3ccb0be518e752d20f706d36d252c9" category="doc">Fluxo de trabalho de implantação</block>
-  <block id="04c2ee750a71bee087a7164fa9418c8b" category="image-alt">fluxo de trabalho do fornecedor smi</block>
   <block id="37735049e65188a885df4388c67153a4" category="summary">Quando um aplicativo cliente em um host descobre o servidor CIMOM usando SLP (codificação CIM-XML em HTTP), o cliente então consulta o CIMOM para objetos compartilhados (objetos modelados na linguagem CIM). O CIMOM carrega objetos compartilhados e consulta o sistema de armazenamento usando APIs específicas do dispositivo para as informações solicitadas.</block>
   <block id="9016abb1e0944872fd232fd72ca5bc80" category="doc">Como o provedor NetApp SMI-S interage com um host</block>
   <block id="14f75c43461428b4df3f6d3980b25d02" category="paragraph">A ilustração a seguir mostra como o provedor NetApp SMI-S interage com um cliente de gerenciamento WBEM quando o provedor SMI-S recebe uma consulta ou comando.</block>
-  <block id="707facb1331bad235d191a85d3686ab2" category="image-alt">interação do agente e do host do smi</block>
   <block id="24eff5a139d4097bd815d006e9a0d9ff" category="summary">Você pode configurar como o SMI-S Provider gerencia arquivos de log e rastreamento, como especificar os níveis de mensagens a serem registradas e o diretório para o qual os logs são salvos. Você também especifica os componentes a serem rastreados, o destino para o qual as mensagens de rastreamento são escritas, o nível de rastreamento e a localização do arquivo de rastreamento.</block>
   <block id="3b878279a04dc47d60932cb294d96259" category="doc">Visão geral</block>
   <block id="4f7eb33e0173b575543f5ee3f5f22d4c" category="summary">O serviço SLP transmite os serviços WBEM. Quando o serviço SLP está ativado, os aplicativos clientes podem descobrir o servidor CIMOM. Você também pode especificar as configurações SLP usando o arquivo slp.conf.</block>
@@ -917,4 +915,6 @@
   <block id="cc2ad876e77ac64c0d4f8e5e89900549" category="list-text">Você deve ter baixado e instalado o OpenSSL em seu computador Windows.</block>
   <block id="c104915e9f0d8e0313edcca7765f005e" category="list-text">Reinicie o serviço do provedor SMI-S:</block>
   <block id="fa623328d311ec4315ab82a9a7303cbe" category="list-text"><block ref="fa623328d311ec4315ab82a9a7303cbe" category="inline-link-rx"></block></block>
+  <block id="f08445df01bad5aee6547cb7953d07d6" category="image-alt">Um diagrama que mostra a implantação do SMI-S Provider, a validação de pré-configuração e os fluxos de trabalho das tarefas de gerenciamento</block>
+  <block id="459eb66f775af707f84ca3f4c3f5f129" category="image-alt">Um diagrama que mostra um host enviando consultas ao provedor SMI-S CIMOM, repositório, DLLs do provedor e sistema de storage</block>
 </blocks>

@@ -15,4 +15,4 @@ Quando um aplicativo cliente em um host descobre o servidor CIMOM usando SLP (co
 
 A ilustração a seguir mostra como o provedor NetApp SMI-S interage com um cliente de gerenciamento WBEM quando o provedor SMI-S recebe uma consulta ou comando.
 
-image::../media/smi_s_agent_and_host_interaction.gif[interação do agente e do host do smi]
+image::../media/smi_s_agent_and_host_interaction.gif[Um diagrama que mostra um host enviando consultas ao provedor SMI-S CIMOM, repositório, DLLs do provedor e sistema de storage]
