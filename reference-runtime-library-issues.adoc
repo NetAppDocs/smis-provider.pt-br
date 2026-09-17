@@ -11,6 +11,9 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 :pp: &#43;&#43;
 
 
+[role="lead"]
+NetApp SMI-S Provider pode apresentar problemas com a biblioteca de tempo de execução no Windows. Instale o pacote redistribuível do Microsoft Visual C{pp} necessário para resolvê-los.
+
 * *Emissão*
 +
 Você encontra problemas de biblioteca de tempo de execução.

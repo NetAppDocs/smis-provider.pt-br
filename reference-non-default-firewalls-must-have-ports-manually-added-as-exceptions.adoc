@@ -10,6 +10,9 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 :imagesdir: ./media/
 
 
+[role="lead"]
+Se você utiliza um firewall diferente do firewall padrão do Windows, o NetApp SMI-S Provider pode não conseguir se comunicar com os clientes ou enviar indicações, a menos que as portas necessárias sejam adicionadas como exceções. Adicione essas portas à configuração do seu firewall para resolver o problema.
+
 * *Emissão*
 +
 Se você estiver usando um firewall diferente do firewall padrão do Windows, poderá ter os seguintes problemas:

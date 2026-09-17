@@ -10,6 +10,9 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 :imagesdir: ./media/
 
 
+[role="lead"]
+NetApp SMI-S Provider pode ocasionalmente apresentar falhas em um ambiente Windows. Colete os arquivos de despejo, log e rastreamento gerados no momento da falha e envie-os ao suporte técnico para análise posterior.
+
 * *Emissão*
 +
 SMI-S Provider falha no Windows.

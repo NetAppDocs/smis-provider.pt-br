@@ -10,6 +10,9 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 :imagesdir: ./media/
 
 
+[role="lead"]
+O tamanho de um compartilhamento SMB 3.0 pode cair para 0 no System Center Virtual Machine Manager (SCVMM) quando a reinicialização da cota demora muito no ONTAP devido à alta atividade de E/S, impedindo o provisionamento de novas VMs. Resolva esse problema ajustando as configurações de cota.
+
 * *Emissão*
 +
 O tamanho de compartilhamento SMB 3,0 novo ou existente pode cair para 0 no System Center Virtual Machine Manager (SCVMM).

@@ -10,6 +10,9 @@ summary: Problemas encontrados com o provedor NetApp SMI-S.
 :imagesdir: ./media/
 
 
+[role="lead"]
+A  `Insufficient system resources exist to complete the requested service`mensagem aparece quando o limite máximo de sessões de usuário por conexão é atingido durante o provisionamento de um grande número de VMs em um único compartilhamento de arquivos no System Center Virtual Machine Manager (SCVMM). Aumente esse limite para suportar implantações de VMs maiores.
+
 * *Mensagem*
 +
 `Insufficient system resources exist to complete the requested service`
