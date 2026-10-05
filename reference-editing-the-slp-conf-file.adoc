@@ -1,7 +1,7 @@
 ---
 permalink: reference-editing-the-slp-conf-file.html 
 sidebar: sidebar 
-keywords: 'slp.conf, configuration, additional options, manage, service location,daemon (SLPD) server' 
+keywords: slp.conf, configuration, additional options, manage, service location, daemon, SLPD, server 
 summary: 'O arquivo de configuração slp.conf fornece opções adicionais que permitem gerenciar um servidor SLPD (Service location Protocol daemon).' 
 ---
 = gerenciamento de arquivos slp.conf

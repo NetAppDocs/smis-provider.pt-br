@@ -85,17 +85,14 @@ sidebar:
       url: "/concept-manage-logging-and-tracing-overview.html"
     - title: Configure as definições de registo
       url: "/task-configure-log-settings.html"
-      entries:
-      - title: Níveis de registo
-        url: "/reference-logging-levels.html"
+    - title: Níveis de registo
+      url: "/reference-logging-levels.html"
     - title: Gerenciar rastreamento
-      url: "/concept-manage-tracing.html"
       entries:
       - title: Especifique as definições do traçado
         url: "/task-specify-trace-settings.html"
-        entries:
-        - title: Valores de definição do traçado
-          url: "/reference-trace-setting-values.html"
+      - title: Valores de definição do traçado
+        url: "/reference-trace-setting-values.html"
       - title: Especifique o tamanho do arquivo de rastreamento
         url: "/task-specify-trace-file-size.html"
       - title: Especifique o número de arquivos de rastreamento salvos
@@ -123,11 +120,8 @@ sidebar:
     entries:
     - title: Visão geral
       url: "/concept-manage-slp-overview.html"
-    - title: Especifique as opções de configuração SLP
-      url: "/concept-specify-slp-configuration-options.html"
-      entries:
-      - title: gerenciamento de arquivos slp.conf
-        url: "/reference-editing-the-slp-conf-file.html"
+    - title: gerenciamento de arquivos slp.conf
+      url: "/reference-editing-the-slp-conf-file.html"
   - title: Comandos CIMOM
     entries:
     - title: cimconfig
